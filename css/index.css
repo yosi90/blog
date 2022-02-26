@@ -1,0 +1,145 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@300&family=Redressed&display=swap');
+
+body {
+  font-family: 'Montserrat Alternates', sans-serif;
+}
+
+#sakura {
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.rosa {
+  background-color: rgb(206, 143, 153);
+}
+
+.text-pink {
+  color: rgb(206, 143, 153);
+}
+
+.text-pink:hover {
+  color: rgb(180, 151, 156);
+}
+
+.jumbo {
+  font-family: 'Redressed', cursive;
+  font-size: 8vh;
+}
+
+.pater {
+  position: relative;
+}
+
+.row>.card {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.card {
+  border: none;
+  opacity: 0.75;
+}
+
+.btn-primary {
+  border-color: transparent !important;
+}
+
+.piePagina {
+  position: fixed;
+  bottom: 0;
+
+  flex-flow: column;
+  flex: 0 1 50px;
+  margin-top: 10px;
+  padding: 0.5em;
+  color: whitesmoke;
+  font-weight: bold;
+  border-radius: 10px;
+  background-color: black;
+  opacity: 96%;
+}
+
+.piePagina .social-icons {
+  text-align: right;
+  margin-top: 6px;
+}
+
+.piePagina .copyrightText {
+  text-align: left;
+  margin-top: 14px;
+  margin-left: 15px;
+}
+
+.social-icons {
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
+  margin-right: 5px;
+}
+
+.social-icons li {
+  display: inline-block;
+  margin-bottom: 4px;
+}
+
+.social-icons li.title {
+  margin-right: 15px;
+  text-transform: uppercase;
+  color: #96a2b2;
+  font-weight: 700;
+  font-size: 13px
+}
+
+.social-icons a {
+  background-color: #eceeef;
+  color: #818a91;
+  font-size: 16px;
+  display: inline-block;
+  line-height: 44px;
+  width: 44px;
+  height: 44px;
+  text-align: center;
+  margin-right: 8px;
+  border-radius: 100%;
+  -webkit-transition: all .2s linear;
+  -o-transition: all .2s linear;
+  transition: all .2s linear;
+  opacity: 100%;
+}
+
+.social-icons a:active,
+.social-icons a:focus,
+.social-icons a:hover {
+  color: #fff;
+  background-color: #29aafe
+}
+
+.social-icons.size-sm a {
+  line-height: 34px;
+  height: 34px;
+  width: 34px;
+  font-size: 14px
+}
+
+.social-icons a.facebook:hover {
+  background-color: #3b5998
+}
+
+.social-icons a.twitter:hover {
+  background-color: #00aced
+}
+
+.social-icons a.trello:hover {
+  background-color: #0079BF
+}
+
+.social-icons a.linkedin:hover {
+  background-color: #007bb6
+}
+
+.fa {
+  margin-top: 13px;
+}
