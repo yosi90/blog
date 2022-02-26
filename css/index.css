@@ -15,6 +15,14 @@ body {
   margin: 0;
 }
 
+.menu{
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1000;
+}
+
 .rosa {
   background-color: rgb(206, 143, 153);
 }
@@ -34,7 +42,9 @@ body {
 
 .pater {
   position: relative;
-  min-height: 100vh;
+  min-height: calc(100vh - 142px); /*72px navbar + 70px footer*/
+  margin-top: 72px;
+  z-index: 10;
 }
 
 .row>.card {

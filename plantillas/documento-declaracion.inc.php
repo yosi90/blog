@@ -29,7 +29,7 @@
 
 <body>
     <canvas id="sakura"></canvas>
-    <div class="pater">
-        <?php
+    <?php
         include_once 'navbar.inc.php';
-        ?>
+    ?>
+    <div class="pater">

@@ -30,7 +30,7 @@ include_once 'plantillas/documento-declaracion.inc.php';
                     <li class="list-group-item">
                         <div class="card-body">
                             <h5 class="card-title">Breaking good</h5>
-                            <p class="card-text">Unos tios venden tremendas clenchas y tienen cancer.
+                            <p class="card-text">Un calvo con cancer vende tremendas clenchas.
                             </p>
                             <a href="#" class="btn btn-primary bg-dark text-white">Ver completa</a>
                         </div>

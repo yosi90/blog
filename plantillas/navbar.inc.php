@@ -1,4 +1,4 @@
-<header class="p-3 bg-dark text-white">
+<header class="menu p-3 bg-dark text-white">
     <div class="container">
         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
             <a href="<?php echo INDEX; ?>" class="d-flex align-items-center px-2  mb-lg-0 text-pink text-decoration-none">
