@@ -6,7 +6,7 @@ include_once 'plantillas/documento-declaracion.inc.php';
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <div /*class="jumbotron" */ class="my-5 d-flex justify-content-center p-5 rounded bg-dark bg-opacity-75 text-white jumbo">Troubles time</div>
+            <div class="my-5 d-flex justify-content-center p-5 rounded bg-dark bg-opacity-75 text-white jumbo">Troubles time</div>
         </div>
     </div>
     <div class="row">
@@ -46,7 +46,7 @@ include_once 'plantillas/documento-declaracion.inc.php';
                 </ul>
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 mb-5">
             <div class="row">
                 <div class="col-12">
                     <div class="card">

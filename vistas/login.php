@@ -1,9 +1,8 @@
 <?php
     $titulo = "Login";
-    include_once 'plantillas/base.inc.php';
-    include_once 'app/config.inc.php';
-    include_once 'app/validadorLogin.inc.php';
-    include_once 'app/controlsesion.inc.php';
+    include_once '../plantillas/documento-declaracion.inc.php';
+    include_once '../app/validadorLogin.inc.php';
+    include_once '../app/controlsesion.inc.php';
     
     if(controlsesion::sesion_iniciada())
     {
@@ -67,4 +66,4 @@
     </div>
 </div>
 <?php
-include_once 'plantillas/footer.inc.php';
+include_once '../plantillas/documento-cierre.inc.php';

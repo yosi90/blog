@@ -22,8 +22,5 @@ class conexion
             self::$conexion = null;
         }
     }
-    public static function obtener_conexion()
-    {
-        return self::$conexion;
-    }
+    public static function obtener_conexion() { return self::$conexion; }
 }

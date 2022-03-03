@@ -1,31 +1,18 @@
-<div class="form-group">
-    <label class=""><span class="glyphicon glyphicon-user" aria-hidden="true"></span>  Nombre de usuario</label>
-    <input type="text" class="form-control" placeholder="Usuario" required="true" name="nombre" <?php $validador -> mostrar_nombre() ?>>
-    <?php
-        $validador -> mostrar_error_nombre();
-    ?>
-</div>
-<div class="form-group">
-    <label class=""><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>  Correo electrónico</label>
-    <input type="email" class="form-control" placeholder="Correo electrónico" required="true" name="email" <?php $validador -> mostrar_email() ?>>
-    <?php
-        $validador -> mostrar_error_email();
-    ?>
-</div>
-<div class="form-group">
-    <label class=""><span class="glyphicon glyphicon-lock" aria-hidden="true"></span>  Contraseña</label>
-    <input type="password" class="form-control" placeholder="Contraseña" required="true" name="clave1">
-    <?php
-        $validador -> mostrar_error_clave1();
-    ?>
-</div>
-<div class="form-group">
-    <label class=""><span class="glyphicon glyphicon-lock" aria-hidden="true"></span>  Repita la contraseña</label>
-    <input type="password" class="form-control" placeholder="Repita la contraseña" required="true" name="clave2">
-    <?php
-        $validador -> mostrar_error_clave2();
-    ?>
-</div>
-<br>
-<button type="submit" class="btn btn-primary" name="submit">Aceptar</button>
-<button type="reset" class="btn btn-default">Limpiar formulario</button>
+<input class="textbox" type="text" class="form-control" placeholder="Nombre de usuario" maxlength="20" required="true" name="nombre" title="Este será el nombre que se muestre a los demás usuarios. Debe ser único" <?php $validador->mostrar_nombre() ?>>
+<?php
+$validador->mostrar_error_nombre();
+?>
+<input class="textbox mt-1" type="email" class="form-control" placeholder="Email" maxlength="30" required="true" name="email" <?php $validador->mostrar_email() ?>>
+<?php
+$validador->mostrar_error_email();
+?>
+<input class="textbox mt-1" type="password" class="form-control" placeholder="Contraseña" maxlength="25" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Debe contener al menos un número, una letra minúscula, una letra mayúscula y al menos 8 caracteres." required="true" name="clave1">
+<?php
+$validador->mostrar_error_clave1();
+?>
+<input class="textbox mt-1" type="password" class="form-control" placeholder="Repite la contraseña" maxlength="25" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Debe contener al menos un número, una letra minúscula, una letra mayúscula y al menos 8 caracteres." required="true" name="clave2">
+<?php
+$validador->mostrar_error_clave2();
+?>
+<button type="submit" class="btn btn-outline-light me-2 mt-3 flex-fill" name="submit">Aceptar</button>
+<button type="reset" class="btn btn-outline-light rosa mt-3">Limpiar formulario</button>

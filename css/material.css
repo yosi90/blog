@@ -1,0 +1,14 @@
+.textbox{
+    padding: 2vh .8vh .8vh 2vh;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-width: 3px;
+    width: 100%;
+}
+
+.textbox:focus{
+    outline: none;
+    background-color: rgb(241, 238, 233);
+    border-color: rgb(206, 143, 153);
+}

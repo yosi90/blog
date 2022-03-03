@@ -10,9 +10,9 @@
             </a>
 
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="#" class="nav-link px-2 text-white">Entradas</a></li>
-                <li><a href="#" class="nav-link px-2 text-white">Favoritos</a></li>
-                <li><a href="#" class="nav-link px-2 text-white">Autores</a></li>
+                <li><a href="<?php echo RUTA_ENTRADAS ?>" class="nav-link px-2 text-white">Entradas</a></li>
+                <li><a href="<?php echo RUTA_FAVORITOS ?>" class="nav-link px-2 text-white">Favoritos</a></li>
+                <li><a href="<?php echo RUTA_AUTORES ?>" class="nav-link px-2 text-white">Autores</a></li>
             </ul>
 
             <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
@@ -20,8 +20,8 @@
             </form>
 
             <div class="text-end">
-                <a href="#" class="btn btn-outline-light me-2">Login</a>
-                <a href="vistas/registro.php" class="btn btn-outline-light rosa">Registro</a>
+                <a href="<?php echo RUTA_LOGIN ?>" class="btn btn-outline-light me-2">Login</a>
+                <a href="<?php echo RUTA_REGISTRO; ?>.php" class="btn btn-outline-light rosa">Registro</a>
             </div>
         </div>
     </div>

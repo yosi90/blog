@@ -1,15 +1,15 @@
 <?php
 class Usuario {
-    private $id;
+    private $id_usuario;
     private $nombre;
-    private $email;
+    private $correo;
     private $password;
-    private $fecha_registro;
+    private $registro;
     private $activo;
     
 
     public function getId() {
-        return $this -> id;
+        return $this -> id_usuario;
     }
 
     public function getNombre() {  /*Tengo que controlar que no se cause un overflow y que no se inyecte código sql*/
@@ -20,10 +20,10 @@ class Usuario {
     }
 
     public function getEmail() {
-        return $this-> email;
+        return $this-> correo;
     }
-    public function setEmail($email) {
-        $this -> email = $email;
+    public function setEmail($correo) {
+        $this -> correo = $correo;
     }
 
     public function getPassword() {
@@ -34,7 +34,7 @@ class Usuario {
     }
 
     public function getFecha_ingreso() {
-        return $this-> fecha_registro;
+        return $this-> registro;
     }
 
     public function getActivo() {
@@ -45,12 +45,12 @@ class Usuario {
     }
 
 
-    public function __construct($id, $nombre, $email, $password, $fecha_registro, $activo) {
-        $this -> id = $id;
+    public function __construct($id_usuario, $nombre, $correo, $password, $registro, $activo) {
+        $this -> id_usuario = $id_usuario;
         $this -> nombre = $nombre;
-        $this -> email = $email;
+        $this -> correo = $correo;
         $this -> password = $password;
-        $this -> fecha_registro = $fecha_registro;
+        $this -> registro = $registro;
         $this -> activo = $activo;
     }
 }
