@@ -24,15 +24,15 @@
                 if (controlSesion::sesion_iniciada()) {
                 ?>
                     <div class="d-flex align-items-center col-12 col-lg-auto me-lg-auto">
-                        <a href="#" class="btn btn-outline-light d-block me-2">
+                        <div class="dropdown text-end">
+                            <a href="#" class="btn link-pink text-decoration-none dropdown-toggle" id="ddu" data-bs-toggle="dropdown" aria-expanded="false">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-bounding-box" viewBox="0 0 16 16">
                                 <path d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1h-3zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5zM.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5z" />
                                 <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
                             </svg>
                             <?php echo ' ' . $_SESSION['nombre_usuario'] ?>
                         </a>
-                        <div class="dropdown text-end">
-                            <ul class="dropdown-menu text-small" aria-labelledby="ddu">
+                            <ul class="dropdown-menu dropdown-menu-dark text-small mt-3" aria-labelledby="ddu">
                                 <li><a class="dropdown-item" href="#">Perfil</a></li>
                                 <li><a class="dropdown-item" href="#">Opciones</a></li>
                                 <li>
@@ -45,9 +45,6 @@
                                 <li><a class="dropdown-item" href="<?php echo RUTA_LOGOUT ?>">Cerrar sesión</a></li>
                             </ul>
                         </div>
-                        <a href="#" class="link-pink text-decoration-none dropdown-toggle" id="ddu" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="https://github.com/mdo.png" alt="mdo" class="rounded-circle" width="32" height="32">
-                        </a>
                     </div>
                 <?php
                 } else {
