@@ -1,6 +1,5 @@
 <?php
-include_once '../plantillas/base_apps.inc.php';
-
+include_once 'Conexion.inc.php';
 class RepositorioUsuario
 {
     public static function obtener_numero_usuarios($conexion)
@@ -91,13 +90,14 @@ class RepositorioUsuario
         $usuario = null;
         if (isset($conexion)) {
             try {
+                include_once 'usuario.inc.php';
                 $sql = "SELECT * FROM usuarios WHERE correo = :correo";
                 $sentencia = $conexion->prepare($sql);
                 $sentencia->bindParam(':correo', $correo, PDO::PARAM_STR);
                 $sentencia->execute();
                 $resultado = $sentencia->fetch();
                 if (!empty($resultado)) {
-                    $usuario = new usuario($resultado['id_usuario'], $resultado['nombre'], $resultado['correo'], $resultado['password'], $resultado['registro'], $resultado['activo']);
+                    $usuario = new usuario($resultado['id_usuario'], $resultado['nombre'], $resultado['correo'], $resultado['PASSWORD'], $resultado['registro'], $resultado['activo']);
                 }
             } catch (PDOException $ex) {
                 print 'ERROR' . $ex->getMessage();
@@ -111,13 +111,14 @@ class RepositorioUsuario
         $usuario = null;
         if (isset($conexion)) {
             try {
+                include_once 'usuario.inc.php';
                 $sql = "SELECT * FROM usuarios WHERE id_usuario = :id_usuario";
                 $sentencia = $conexion->prepare($sql);
                 $sentencia->bindParam(':id_usuario', $id_usuario, PDO::PARAM_STR);
                 $sentencia->execute();
                 $resultado = $sentencia->fetch();
                 if (!empty($resultado)) {
-                    $usuario = new usuario($resultado['id_usuario'], $resultado['nombre'], $resultado['correo'], $resultado['password'], $resultado['registro'], $resultado['activo']);
+                    $usuario = new usuario($resultado['id_usuario'], $resultado['nombre'], $resultado['correo'], $resultado['PASSWORD'], $resultado['registro'], $resultado['activo']);
                 }
             } catch (PDOException $ex) {
                 print 'ERROR' . $ex->getMessage();

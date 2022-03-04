@@ -20,7 +20,7 @@ body {
   top: 0;
   right: 0;
   left: 0;
-  z-index: 1000;
+  z-index: 100;
 }
 
 .rosa {
@@ -33,6 +33,14 @@ body {
 
 .text-pink:hover {
   color: rgb(180, 151, 156);
+}
+
+.link-pink {
+  color: rgb(206, 143, 153) !important;
+}
+
+.link-pink:hover {
+  color: rgb(180, 151, 156) !important;
 }
 
 .jumbo {

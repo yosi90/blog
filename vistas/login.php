@@ -1,63 +1,45 @@
 <?php
-    $titulo = "Login";
-    include_once '../plantillas/documento-declaracion.inc.php';
-    include_once '../app/validadorLogin.inc.php';
-    include_once '../app/controlsesion.inc.php';
-    
-    if(controlsesion::sesion_iniciada())
-    {
+$titulo = "Login";
+include_once '../plantillas/documento-declaracion.inc.php';
+include_once '../app/validadorLogin.inc.php';
+
+if (controlsesion::sesion_iniciada()) { redireccion::redirigir(SERVIDOR); }
+
+if (isset($_POST['login'])) {
+    conexion::abrir_conexion();
+    $validador = new validadorLogin($_POST['correo'], $_POST['clave'], conexion::obtener_conexion());
+    if ($validador->obtener_error() === '' && !is_null($validador->obtener_usuario())) {
+        controlsesion::iniciar_sesion($validador->obtener_usuario()->getid(), $validador->obtener_usuario()->getnombre());
         redireccion::redirigir(SERVIDOR);
     }
-    
-    if(isset($_POST['login']))
-    {
-        conexion::abrir_conexion();
-        $validador = new validadorLogin($_POST['correo'], $_POST['PASSWORD'], conexion::obtener_conexion());
-        if($validador -> obtener_error() === '' && !is_null($validador -> obtener_usuario()))
-        {
-            controlsesion::iniciar_sesion($validador -> obtener_usuario() -> getid(), $validador -> obtener_usuario() -> getnombre());
-            redireccion::redirigir(SERVIDOR);
-        }
-    }
+    conexion::cerrar_conexion();
+}
 ?>
 <div class="container">
     <div class="row">
-        <div class="col-md-3">
-            
-        </div>
+        <div class="col-md-3"></div>
         <div class="col-md-6">
-            <div class="panel panel-default">
-                <div class="panel-heading text-center">
-                    <h2>Iniciar sesión</h2>
+            <div class="card bg-dark mt-5">
+                <div class="card-header text-white text-center">
+                    <h2>Login</h2>
                 </div>
-                <div class="panel-body">
-                    <form role="form" method="post" action="<?php echo RUTA_LOGIN; ?>">
-                        <h3>Introduce tus datos</h3>
-                        <br>
-                        <label for="email" class="sr-only">Email</label>
-                        <input type="email" name="email" id="email" class="form-control" placeholder="Email" 
-                               <?php 
-                                    if(isset($_POST['login']) && isset($_POST['email']) && !empty($_POST['email']))
-                                    {
-                                        echo 'value="' . $_POST['email'] . '"';
-                                    }
-                               ?>
-                               required="true" autofocus="true">
-                        <br>
-                        <label for="clave" class="sr-only">Contraseña</label>
-                        <input type="password" name="clave" id="clave" class="form-control" placeholder="Contraseña" required="true">
-                        <br>
+                <div class="card-body text-white d-flex flex-row flex-wrap">
+                    <form class="d-flex flex-row flex-wrap" role="form" method="post" action="<?php echo $_SERVER['PHP_SELF'] ?>">
+                        <input type="email" name="correo" id="correo" class="textbox" placeholder="Email" 
+                            <?php 
+                                if (isset($_POST['login']) && isset($_POST['correo']) && !empty($_POST['correo'])) { 
+                                    echo 'value="' . $_POST['correo'] . '"';
+                                }
+                            ?> required="true" autofocus="true">
+                        <input type="password" name="clave" id="clave" class="textbox mt-1" placeholder="Contraseña" required="true">
                         <?php
-                            if(isset($_POST['login']))
-                            {
-                                $validador -> mostrar_error();
+                            if (isset($_POST['login'])) {
+                                $validador->mostrar_error();
                             }
                         ?>
-                        <button type="submit" name="login" id="login" class="btn btn-lg btn-block btn-primary">Iniciar sesión</button>
+                        <button type="submit" name="login" id="login" class="btn btn-outline-light mt-3 flex-fill">Iniciar sesión</button>
                     </form>
-                    <br>
-                    <br>
-                    <div class="text-center">
+                    <div class="d-flex flex-row flex-wrap flex-fill justify-content-center">
                         <a href="#">¿Olvidaste tu contraseña?</a>
                     </div>
                 </div>

@@ -6,9 +6,9 @@ define('NOMBRE_DB', 'blog');
 
 define("SERVIDOR", "http://localhost:8080/blog");
 define("INDEX", SERVIDOR."/index");
-define("RUTA_REGISTRO", SERVIDOR."/vistas/registro");
-define("RUTA_REGISTRO_CORRECTO", SERVIDOR."/vistas/registro-correcto");
-define("RUTA_LOGIN", SERVIDOR."/vistas/login");
+define("RUTA_REGISTRO", SERVIDOR."/vistas/registro.php");
+define("RUTA_REGISTRO_CORRECTO", SERVIDOR."/vistas/registro-correcto.php");
+define("RUTA_LOGIN", SERVIDOR."/vistas/login.php");
 define("RUTA_LOGOUT", SERVIDOR."/logout");
 define("RUTA_ENTRADAS", SERVIDOR."/vistas/entradas");
 define("RUTA_FAVORITOS", SERVIDOR."vistas/favoritos");

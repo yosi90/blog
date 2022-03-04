@@ -9,7 +9,7 @@ if (isset($_POST['submit'])) {
         $usuario = new usuario('', $validador->obtener_nombre(), $validador->obtener_email(), password_hash($validador->obtener_clave(), PASSWORD_DEFAULT), '', '');
         $usuario_insertado = RepositorioUsuario::insertar_usuario(conexion::obtener_conexion(), $usuario);
         if ($usuario_insertado) {
-            redireccion::redirigir(RUTA_REGISTRO_CORRECTO . '.php?nombre=' . $usuario->getNombre());
+            redireccion::redirigir(RUTA_REGISTRO_CORRECTO . '?nombre=' . $usuario->getNombre());
         }
     }
     conexion::cerrar_conexion();
