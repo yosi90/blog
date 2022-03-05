@@ -2,48 +2,35 @@
 <?php
 $titulo = 'Troubles time';
 include_once 'plantillas/documento-declaracion.inc.php';
+include_once 'app/escritorEntradas.inc.php';
 ?>
 <div class="container">
     <div class="row">
-        <div class="col-12">
-            <div class="my-5 d-flex justify-content-center p-5 rounded bg-dark bg-opacity-75 text-white jumbo">Troubles time</div>
+        <div class="col-2"></div>
+        <div class="col-8">
+            <div class="my-5 d-flex justify-content-center p-2 bg-dark bg-opacity-75 text-white jumbo fz-jumbo">Troubles time</div>
         </div>
+        <div class="col-2"></div>
     </div>
     <div class="row">
         <div class="col-md-9 mb-5">
             <div class="card">
-                <div class="card-header bg-dark text-white">
-                    <h3><svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-file-post-fill" viewBox="0 0 18 18">
+                <div class="card-header d-flex align-items-center bg-dark text-white py-2 ps-3 pe-4 fz-titulo">
+                    <p class="flex-fill mb-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-file-post-fill z-titulo" viewBox="0 0 18 18">
                             <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM4.5 3h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1zm0 2h7a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5v-8a.5.5 0 0 1 .5-.5z" />
                         </svg>
-                        Historietas</h3>
+                        Historietas
+                    </p>
+                    <button id="vistas" value="0" class="btn text-white p-1" title="Alternar vistas" onclick="alternarVistaEntradas()"></button>
                 </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">
-                        <div class="card-body">
-                            <h5 class="card-title">Como conocí a vuestra perra</h5>
-                            <p class="card-text">Un perro le narra a sus cachorros como conoció a la perra de su madre.
-                            </p>
-                            <a href="#" class="btn btn-primary bg-dark text-white">Ver completa</a>
-                        </div>
-                    </li>
-                    <li class="list-group-item">
-                        <div class="card-body">
-                            <h5 class="card-title">Breaking good</h5>
-                            <p class="card-text">Un calvo con cancer vende tremendas clenchas.
-                            </p>
-                            <a href="#" class="btn btn-primary bg-dark text-white">Ver completa</a>
-                        </div>
-                    </li>
-                    <li class="list-group-item">
-                        <div class="card-body">
-                            <h5 class="card-title">Unfriends</h5>
-                            <p class="card-text">Un grupo de idiotas hacen como que no se odian.
-                            </p>
-                            <a href="#" class="btn btn-primary bg-dark text-white">Ver completa</a>
-                        </div>
-                    </li>
-                </ul>
+                <div class="card-body d-flex flex-wrap p-0">
+                <?php
+                conexion::abrir_conexion();
+                EscritorEntradas::escribirListaEntradas();
+                conexion::cerrar_conexion();
+                ?>
+                </div>
             </div>
         </div>
         <div class="col-md-3 mb-5">

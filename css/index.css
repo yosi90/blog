@@ -7,6 +7,36 @@ body {
   font-family: 'Montserrat Alternates', sans-serif;
 }
 
+.fz-jumbo{
+  font-size: calc(2vw + 30px);
+}
+
+.fz-titulo{
+  font-size: calc(1vw + 20px);
+}
+
+.fz-subtitulo{
+  font-size: calc(.6vw + 10px);
+}
+
+.fz-texto{
+  font-size: calc(.4vw + 10px);
+}
+
+.fz-sm-texto{
+  font-size: calc(.2vw + 10px);
+}
+
+.z-titulo{
+  width: calc(1.8vw + 20px);
+  height: calc(1.8vw + 20px);
+}
+
+.z-subtitulo{
+  width: calc(.8vw + 15px);
+  height: calc(.8vw + 15px);
+}
+
 #sakura {
   position: fixed;
   top: 0;
@@ -45,7 +75,10 @@ body {
 
 .jumbo {
   font-family: 'Redressed', cursive;
-  font-size: 8vh;
+  border-top-left-radius: 50%;
+  border-top-right-radius: 50%;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 
 .pater {
@@ -162,4 +195,16 @@ body {
 
 .fa {
   margin-top: 13px;
+}
+
+.max-75{
+  max-width: 75%;
+}
+
+.max-50{
+  max-width: 50%;
+}
+
+.max-25{
+  max-width: 25%;
 }

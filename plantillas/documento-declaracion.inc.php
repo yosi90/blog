@@ -15,14 +15,16 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/blog/app/controlsesion.inc.php';
     }
     echo "<title>$titulo</title>";
     ?>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" 
+    integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="<?php echo CSS; ?>/bootstrap.min.css" rel="stylesheet">
     <link href="<?php echo CSS; ?>/index.css" rel="stylesheet">
     <link href="<?php echo CSS; ?>/mediaQueris.css" rel="stylesheet">
     <link href="<?php echo CSS; ?>/material.css" rel="stylesheet">
     <script type="text/javascript" src="<?php echo JS; ?>/jquery.min.js"></script>
     <script type="text/javascript" src="<?php echo JS; ?>/bootstrap.bundle.js"></script>
-    <script type="text/javascript" src="<?php echo JS; ?>/index.js"></script>
+    <script defer type="text/javascript" src="<?php echo JS; ?>/fondo.js"></script>
+    <script defer type="text/javascript" src="<?php echo JS; ?>/alternarVistas.js"></script>
     <!-- <script type="text/javascript">
         $(document).ready(function() {
             $('#txt-content').Editor();

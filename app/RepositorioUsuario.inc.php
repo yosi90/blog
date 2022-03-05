@@ -24,7 +24,7 @@ class RepositorioUsuario
         $usuario_insertado = FALSE;
         if (isset($conexion)) {
             try {
-                $sql = "INSERT INTO usuarios (nombre, correo, password, registro, activo) VALUES (:nombre, :correo, :password, NOW(), 0)";
+                $sql = "INSERT INTO usuarios (nombre, correo, password, fecha_registro, activo) VALUES (:nombre, :correo, :password, NOW(), 0)";
                 $sentencia = $conexion->prepare($sql);
                 $nombreTemp = $usuario->getNombre();
                 $emailTemp = $usuario->getEmail();
@@ -97,7 +97,7 @@ class RepositorioUsuario
                 $sentencia->execute();
                 $resultado = $sentencia->fetch();
                 if (!empty($resultado)) {
-                    $usuario = new usuario($resultado['id_usuario'], $resultado['nombre'], $resultado['correo'], $resultado['PASSWORD'], $resultado['registro'], $resultado['activo']);
+                    $usuario = new usuario($resultado['id_usuario'], $resultado['nombre'], $resultado['correo'], $resultado['PASSWORD'], $resultado['fecha_registro'], $resultado['activo']);
                 }
             } catch (PDOException $ex) {
                 print 'ERROR' . $ex->getMessage();
@@ -118,44 +118,12 @@ class RepositorioUsuario
                 $sentencia->execute();
                 $resultado = $sentencia->fetch();
                 if (!empty($resultado)) {
-                    $usuario = new usuario($resultado['id_usuario'], $resultado['nombre'], $resultado['correo'], $resultado['PASSWORD'], $resultado['registro'], $resultado['activo']);
+                    $usuario = new usuario($resultado['id_usuario'], $resultado['nombre'], $resultado['correo'], $resultado['PASSWORD'], $resultado['fecha_registro'], $resultado['activo']);
                 }
             } catch (PDOException $ex) {
                 print 'ERROR' . $ex->getMessage();
             }
         }
         return $usuario;
-    }
-
-    public static function icon_rand()
-    {
-        $icon = null;
-        $fondo = rand(1, 8);
-        switch ($fondo) {
-            case 1:
-                return '<i class="fas fa-user-ninja fa-lg"></i>';
-                break;
-            case 2:
-                return '<i class="fas fa-user fa-lg"></i>';
-                break;
-            case 3:
-                return '<i class="fas fa-user-astronaut fa-lg"></i>';
-                break;
-            case 4:
-                return '<i class="fas fa-user-graduate fa-lg"></i>';
-                break;
-            case 5:
-                return '<i class="fas fa-user-lock fa-lg"></i>';
-                break;
-            case 6:
-                return '<i class="fas fa-user-md fa-lg"></i>';
-                break;
-            case 7:
-                return '<i class="fas fa-user-secret fa-lg"></i>';
-                break;
-            case 8:
-                return '<i class="fas fa-user-tie fa-lg"></i>';
-                break;
-        }
     }
 }
