@@ -12,3 +12,7 @@
     background-color: rgb(241, 238, 233);
     border-color: rgb(206, 143, 153);
 }
+
+.btn-no-shadow:focus {
+    box-shadow: none !important;
+  }

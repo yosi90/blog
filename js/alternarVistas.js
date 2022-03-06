@@ -1,8 +1,10 @@
 var boton;
 
 window.onload = function () {
-    boton = document.getElementById('vistas');
-    crearSVG();
+    if (document.URL == "http://localhost:8080/blog/") {
+        boton = document.getElementById('vistas');
+        crearSVG();
+    }
 }
 
 function alternarVistaEntradas() {
@@ -34,7 +36,6 @@ function crearSVG() {
         case '1':
             tamaño(document.getElementsByClassName('controlTamaño'), 'max-50', 'max-100');
             boton.setAttribute('value', '2');
-            boton.classList.add('max-50');
             iconSvg.setAttribute('data-icon', 'grid-2');
             iconPath.setAttribute('d', 'M192 176C192 202.5 170.5 224 144 224H48C21.49 224 0 202.5 0 176V80C0 53.49 21.49 32 48 32H144C170.5 32 192 53.49 192 80V176zM192 432C192 458.5 170.5 480 144 480H48C21.49 480 0 458.5 0 432V336C0 309.5 21.49 288 48 288H144C170.5 288 192 309.5 192 336V432zM256 80C256 53.49 277.5 32 304 32H400C426.5 32 448 53.49 448 80V176C448 202.5 426.5 224 400 224H304C277.5 224 256 202.5 256 176V80zM448 432C448 458.5 426.5 480 400 480H304C277.5 480 256 458.5 256 432V336C256 309.5 277.5 288 304 288H400C426.5 288 448 309.5 448 336V432z');
             break;
@@ -53,7 +54,7 @@ function crearSVG() {
  * @param {string} añadir 
  * @param {string} quitar 
  */
-function tamaño(entradas, añadir, quitar){
+function tamaño(entradas, añadir, quitar) {
     for (let index = 0; index < entradas.length; index++) {
         const e = entradas[index];
         e.classList.add(añadir);

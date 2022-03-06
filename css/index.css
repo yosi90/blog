@@ -5,6 +5,7 @@ body {
   flex-flow: column nowrap;
   justify-content: center;
   font-family: 'Montserrat Alternates', sans-serif;
+  overflow: overlay;
 }
 
 .fz-jumbo{
@@ -25,6 +26,30 @@ body {
 
 .fz-sm-texto{
   font-size: calc(.2vw + 10px);
+}
+
+.lt-10{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 10;
+  -webkit-box-orient: vertical;
+}
+
+.lt-3{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.lt-2{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
 .z-titulo{
@@ -95,7 +120,11 @@ body {
 
 .card {
   border: none;
-  opacity: 0.75;
+  opacity: 0.9;
+}
+
+.card-header{
+  word-wrap: anywhere;
 }
 
 .btn-primary {
@@ -193,18 +222,18 @@ body {
   background-color: #007bb6
 }
 
-.fa {
-  margin-top: 13px;
-}
+.fa-brands {
+  line-height: 44px;
+} 
 
 .max-75{
   max-width: 75%;
 }
 
 .max-50{
-  max-width: 50%;
+  max-width: 48%;
 }
 
 .max-25{
-  max-width: 25%;
+  max-width: 23%;
 }

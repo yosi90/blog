@@ -1,68 +1,97 @@
-<!DOCTYPE html>
 <?php
-$titulo = 'Troubles time';
-include_once 'plantillas/documento-declaracion.inc.php';
-include_once 'app/escritorEntradas.inc.php';
-?>
-<div class="container">
-    <div class="row">
-        <div class="col-2"></div>
-        <div class="col-8">
-            <div class="my-5 d-flex justify-content-center p-2 bg-dark bg-opacity-75 text-white jumbo fz-jumbo">Troubles time</div>
-        </div>
-        <div class="col-2"></div>
-    </div>
-    <div class="row">
-        <div class="col-md-9 mb-5">
-            <div class="card">
-                <div class="card-header d-flex align-items-center bg-dark text-white py-2 ps-3 pe-4 fz-titulo">
-                    <p class="flex-fill mb-0">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-file-post-fill z-titulo" viewBox="0 0 18 18">
-                            <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM4.5 3h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1zm0 2h7a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5v-8a.5.5 0 0 1 .5-.5z" />
-                        </svg>
-                        Historietas
-                    </p>
-                    <button id="vistas" value="0" class="btn text-white p-1" title="Alternar vistas" onclick="alternarVistaEntradas()"></button>
-                </div>
-                <div class="card-body d-flex flex-wrap p-0">
-                <?php
-                conexion::abrir_conexion();
-                EscritorEntradas::escribirListaEntradas();
-                conexion::cerrar_conexion();
-                ?>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 mb-5">
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header bg-dark text-white">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-funnel-fill" viewBox="0 0 16 16">
-                                <path d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5v-2z" />
-                            </svg>
-                            Filtrar entradas
-                        </div>
-                        <div class="card-body">Aquí un motor de filtrado aun por crear</div>
-                    </div>
-                </div>
-            </div>
-            <div class="row my-1">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header bg-dark text-white">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-archive-fill" viewBox="0 0 16 16">
-                                <path d="M12.643 15C13.979 15 15 13.845 15 12.5V5H1v7.5C1 13.845 2.021 15 3.357 15h9.286zM5.5 7h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1zM.8 1a.8.8 0 0 0-.8.8V3a.8.8 0 0 0 .8.8h14.4A.8.8 0 0 0 16 3V1.8a.8.8 0 0 0-.8-.8H.8z" />
-                            </svg>
-                            Archivo
-                        </div>
-                        <div class="card-body">Aquí un calendario aun por crear</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<?php
-include_once 'plantillas/documento-cierre.inc.php';
-?>
+include_once 'app/config.inc.php';
+include_once 'app/Conexion.inc.php';
+include_once 'app/usuario.inc.php';
+include_once 'app/entrada.inc.php';
+include_once 'app/comentario.inc.php';
+include_once 'app/RepositorioUsuario.inc.php';
+include_once 'app/RepositorioEntrada.inc.php';
+include_once 'app/RepositorioComentarios.inc.php';
+include_once 'app/controlsesion.inc.php';
+
+$componentes_url = parse_url($_SERVER['REQUEST_URI']);
+$ruta = $componentes_url['path'];
+$partes_ruta = explode('/', $ruta);
+$partes_ruta = array_filter($partes_ruta);
+$partes_ruta = array_slice($partes_ruta, 0);
+$ruta_elegida = 'vistas/404.php';
+if ($partes_ruta[0] == 'blog') {
+    if (count($partes_ruta) == 1) {
+        $ruta_elegida = 'vistas/home.php';
+    } else if (count($partes_ruta) == 2) {
+        switch ($partes_ruta[1]) {
+            case 'login':
+                $ruta_elegida = 'vistas/login.php';
+                break;
+            case 'logout':
+                $ruta_elegida = 'vistas/logout.php';
+                break;
+            case 'registro':
+                $ruta_elegida = 'vistas/registro.php';
+                break;
+            case 'autores':
+                $ruta_elegida = 'vistas/autores.php';
+                break;
+            case 'entradas':
+                $ruta_elegida = 'vistas/entradas.php';
+                break;
+            case 'favoritos':
+                $ruta_elegida = 'vistas/favoritos.php';
+                break;
+            case 'relleno-dev':
+                if (controlsesion::sesion_iniciada() && $_SESSION['nombre_usuario'] == 'Yosi') {
+                    $ruta_elegida = 'vistas/script-relleno.php';
+                } else {
+                    $ruta_elegida = 'vistas/home.php';
+                }
+                break;
+            case 'gestor':
+                if (controlsesion::sesion_iniciada()) {
+                    $ruta_elegida = 'vistas/gestor.php';
+                    $gestor_actual = '';
+                } else {
+                    $ruta_elegida = 'vistas/home.php';
+                }
+                break;
+            case 'nueva-entrada':
+                if (controlsesion::sesion_iniciada()) {
+                    $ruta_elegida = 'vistas/nueva-entrada.php';
+                } else {
+                    $ruta_elegida = 'vistas/home.php';
+                }
+                break;
+        }
+    } else if (count($partes_ruta) == 3) {
+        if ($partes_ruta[1] == 'registro-correcto') {
+            $nombre = $partes_ruta[2];
+            $ruta_elegida = 'vistas/registro-correcto.php';
+        } else if ($partes_ruta[1] == 'entrada') {
+            $url = $partes_ruta[2];
+            conexion::abrir_conexion();
+            $entrada = RepositorioEntrada::entrada_existe(conexion::obtener_conexion(), $url);
+            if ($entrada != null) {
+                $autor = repositoriousuario::obtener_usuario_id(conexion::obtener_conexion(), $entrada->getAutor());
+                $comentarios = RepositorioComentarios::getComments(conexion::obtener_conexion(), $entrada->getId_entrada());
+                $entradas_azar = repositorioentrada::entrada_azar(conexion::obtener_conexion(), 3);
+                $ruta_elegida = 'vistas/entrada.php';
+            }
+        }
+        if ($partes_ruta[1] == 'gestor' && controlsesion::sesion_iniciada()) {
+            switch ($partes_ruta[2]) {
+                case 'entradas':
+                    $gestor_actual = 'entradas';
+                    $ruta_elegida = 'vistas/gestor.php';
+                    break;
+                case 'comentarios':
+                    $gestor_actual = 'comentarios';
+                    $ruta_elegida = 'vistas/gestor.php';
+                    break;
+                case 'favoritos':
+                    $gestor_actual = 'favoritos';
+                    $ruta_elegida = 'vistas/gestor.php';
+                    break;
+            }
+        }
+    }
+}
+include_once $ruta_elegida;

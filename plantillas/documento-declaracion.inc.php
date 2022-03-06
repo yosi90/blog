@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="es">
 <?php
 include_once $_SERVER['DOCUMENT_ROOT'] . '/blog/app/Redireccion.inc.php';
@@ -21,6 +22,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/blog/app/controlsesion.inc.php';
     <link href="<?php echo CSS; ?>/index.css" rel="stylesheet">
     <link href="<?php echo CSS; ?>/mediaQueris.css" rel="stylesheet">
     <link href="<?php echo CSS; ?>/material.css" rel="stylesheet">
+    <link href="<?php echo CSS; ?>/scrollbar.css" rel="stylesheet">
     <script type="text/javascript" src="<?php echo JS; ?>/jquery.min.js"></script>
     <script type="text/javascript" src="<?php echo JS; ?>/bootstrap.bundle.js"></script>
     <script defer type="text/javascript" src="<?php echo JS; ?>/fondo.js"></script>

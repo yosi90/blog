@@ -17,9 +17,11 @@ if (isset($_POST['submit'])) {
 ?>
 <div class="container"> <!-- Jumbotron -->
     <div class="row">
-        <div class="col-12">
-            <div class="my-5 d-flex justify-content-center p-5 rounded bg-dark bg-opacity-75 text-white jumbo">Formulario de registro</div>
+        <div class="col-2"></div>
+        <div class="col-8">
+            <div class="my-5 d-flex justify-content-center p-3 bg-dark bg-opacity-75 text-white jumbo fz-jumbo">Formulario de registro</div>
         </div>
+        <div class="col-2"></div>
     </div>
 </div>
 <div class="container">
