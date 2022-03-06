@@ -1,14 +1,8 @@
 <?php
-include_once '../app/redireccion.inc.php';
-if (isset($_GET['nombre']) && !empty($_GET['nombre'])) {
-    $nombre = $_GET['nombre'];
-} else {
-    redireccion::redirigir(SERVIDOR);
-}
 $titulo = '¡Registro satisfactorio!';
-include_once '../plantillas/documento-declaracion.inc.php';
-include_once '../app/RepositorioUsuario.inc.php';
-include_once '../app/Conexion.inc.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/blog/plantillas/documento-declaracion.inc.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/blog/app/RepositorioUsuario.inc.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/blog/app/Conexion.inc.php';
 ?>
 <div class="container">
     <div class="row">
@@ -30,5 +24,5 @@ include_once '../app/Conexion.inc.php';
     </div>
 </div>
 <?php
-include_once '../plantillas/documento-cierre.inc.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/blog/plantillas/documento-cierre.inc.php';
 ?>

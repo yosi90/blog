@@ -1,20 +1,12 @@
-
 <div class="row">
-    <div class="col-md-12" style="margin-bottom: 2em">
-        <div class="row">
-            <div class="col-md-10">
-            </div>
-            <div class="col-md-2">
-                <button class="btn form-control" data-toggle="collapse" data-target="#coment<?php echo $i ?>">
-                    <i class="fas fa-comment-dots fa-lg"></i>
-                    Responder 
-                </button>
-            </div>
+    <div class="col-md-12">
+        <div class="row card-header d-flex flex-fill bg-transparent border-bottom-0 text-white mx-3">
+            <button class="btn btn-outline-light rosa" data-bs-toggle="collapse" data-bs-target="#coment<?php echo $i ?>">
+                <i class="fas fa-comment-dots fa-lg"></i>&nbsp;Responder</button>
         </div>
-        <br>
-        <div id="coment<?php echo $i ?>" class="collapse">
+        <div id="coment<?php echo $i ?>" class="collapse card-body bg-dark-light rounded mx-4 mb-4">
             <form action="" method="post" enctype="multipart/form-data">
-                <textarea class="ckeditor" name="editor"></textarea>
+                <textarea class="ckeditor size-sm" name="editor"></textarea>
             </form>
         </div>
     </div>

@@ -97,7 +97,7 @@ class RepositorioUsuario
                 $sentencia->execute();
                 $resultado = $sentencia->fetch();
                 if (!empty($resultado)) {
-                    $usuario = new usuario($resultado['id_usuario'], $resultado['nombre'], $resultado['correo'], $resultado['PASSWORD'], $resultado['fecha_registro'], $resultado['activo']);
+                    $usuario = new usuario($resultado['id_usuario'], $resultado['nombre'], $resultado['correo'], $resultado['password'], $resultado['fecha_registro'], $resultado['activo']);
                 }
             } catch (PDOException $ex) {
                 print 'ERROR' . $ex->getMessage();
@@ -118,7 +118,7 @@ class RepositorioUsuario
                 $sentencia->execute();
                 $resultado = $sentencia->fetch();
                 if (!empty($resultado)) {
-                    $usuario = new usuario($resultado['id_usuario'], $resultado['nombre'], $resultado['correo'], $resultado['PASSWORD'], $resultado['fecha_registro'], $resultado['activo']);
+                    $usuario = new usuario($resultado['id_usuario'], $resultado['nombre'], $resultado['correo'], $resultado['password'], $resultado['fecha_registro'], $resultado['activo']);
                 }
             } catch (PDOException $ex) {
                 print 'ERROR' . $ex->getMessage();

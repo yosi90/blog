@@ -1,7 +1,7 @@
 <?php
 $titulo = "Login";
-include_once '../plantillas/documento-declaracion.inc.php';
-include_once '../app/validadorLogin.inc.php';
+include_once 'plantillas/documento-declaracion.inc.php';
+include_once 'app/validadorLogin.inc.php';
 
 if (controlsesion::sesion_iniciada()) { redireccion::redirigir(SERVIDOR); }
 
@@ -24,7 +24,7 @@ if (isset($_POST['login'])) {
                     <h2>Login</h2>
                 </div>
                 <div class="card-body text-white d-flex flex-row flex-wrap">
-                    <form class="d-flex flex-row flex-wrap" role="form" method="post" action="<?php echo $_SERVER['PHP_SELF'] ?>">
+                    <form class="d-flex flex-row flex-wrap" role="form" method="post" action="<?php echo RUTA_LOGIN ?>">
                         <input type="email" name="correo" id="correo" class="textbox" placeholder="Email" 
                             <?php 
                                 if (isset($_POST['login']) && isset($_POST['correo']) && !empty($_POST['correo'])) { 
@@ -39,7 +39,7 @@ if (isset($_POST['login'])) {
                         ?>
                         <button type="submit" name="login" id="login" class="btn btn-outline-light mt-3 flex-fill">Iniciar sesión</button>
                     </form>
-                    <div class="d-flex flex-row flex-wrap flex-fill justify-content-center">
+                    <div class="d-flex flex-row flex-wrap flex-fill justify-content-center mt-2">
                         <a href="#">¿Olvidaste tu contraseña?</a>
                     </div>
                 </div>
@@ -48,4 +48,4 @@ if (isset($_POST['login'])) {
     </div>
 </div>
 <?php
-include_once '../plantillas/documento-cierre.inc.php';
+include_once 'plantillas/documento-cierre.inc.php';

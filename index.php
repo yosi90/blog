@@ -64,6 +64,7 @@ if ($partes_ruta[0] == 'blog') {
     } else if (count($partes_ruta) == 3) {
         if ($partes_ruta[1] == 'registro-correcto') {
             $nombre = $partes_ruta[2];
+            echo $nombre;
             $ruta_elegida = 'vistas/registro-correcto.php';
         } else if ($partes_ruta[1] == 'entrada') {
             $url = $partes_ruta[2];

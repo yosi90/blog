@@ -23,7 +23,7 @@ include_once 'app/escritorEntradas.inc.php';
                     </p>
                     <button id="vistas" value="0" class="btn btn-no-shadow text-white p-1" title="Alternar vistas" onclick="alternarVistaEntradas()"></button>
                 </div>
-                <div class="card-body bg-dark d-flex flex-wrap justify-content-around pt-0 pe-0 ps-0 pb-1">
+                <div class="card-body bg-dark-light d-flex flex-wrap justify-content-around pt-0 pe-0 ps-0 pb-1">
                 <?php
                 conexion::abrir_conexion();
                 EscritorEntradas::escribirListaEntradas();

@@ -1,7 +1,6 @@
 <?php
 include_once 'config.inc.php';
 include_once 'conexion.inc.php';
-include_once 'comentario.inc.php';
 class RepositorioComentarios
 {
     public static function insertar_comentario($conexion, $comentario)
@@ -27,6 +26,7 @@ class RepositorioComentarios
         }
         return $comentario_insertado;
     }
+
     public static function getComments($conexion, $id_entrada)
     {
         $comentarios = array();
@@ -49,6 +49,7 @@ class RepositorioComentarios
         }
         return $comentarios;
     }
+
     public static function usr_comments($conexion, $id_usr)
     {
         $total = 0;

@@ -52,6 +52,15 @@ body {
   -webkit-box-orient: vertical;
 }
 
+.lt-1{
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  -webkit-line-clamp: 2;
+  text-overflow: ellipsis;
+}
+
+
 .z-titulo{
   width: calc(1.8vw + 20px);
   height: calc(1.8vw + 20px);
@@ -234,6 +243,23 @@ body {
   max-width: 48%;
 }
 
+.max-35{
+  max-width: 35%;
+}
+
 .max-25{
   max-width: 23%;
+}
+
+.bg-dark-light {
+  --bs-bg-opacity: 1;
+  background-color: rgba(35, 40, 45, 1) !important;
+}
+
+.bs-s{
+  border-style: solid;
+}
+
+.bc-dark{
+  border-color: #adb5bd;
 }

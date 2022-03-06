@@ -1,7 +1,7 @@
 <?php
-include_once '../plantillas/documento-declaracion.inc.php';
-include_once '../app/validadorRegistro.inc.php';
-include_once '../app/usuario.inc.php';
+include_once 'plantillas/documento-declaracion.inc.php';
+include_once 'app/validadorRegistro.inc.php';
+include_once 'app/usuario.inc.php';
 if (isset($_POST['submit'])) {
     conexion::abrir_conexion();
     $validador = new validadorRegistro($_POST['nombre'], $_POST['email'], $_POST['clave1'], $_POST['clave2'], conexion::obtener_conexion());
@@ -9,7 +9,7 @@ if (isset($_POST['submit'])) {
         $usuario = new usuario('', $validador->obtener_nombre(), $validador->obtener_email(), password_hash($validador->obtener_clave(), PASSWORD_DEFAULT), '', '');
         $usuario_insertado = RepositorioUsuario::insertar_usuario(conexion::obtener_conexion(), $usuario);
         if ($usuario_insertado) {
-            redireccion::redirigir(RUTA_REGISTRO_CORRECTO . '?nombre=' . $usuario->getNombre());
+            redireccion::redirigir(RUTA_REGISTRO_CORRECTO . '/' . $usuario->getNombre());
         }
     }
     conexion::cerrar_conexion();
@@ -44,12 +44,12 @@ if (isset($_POST['submit'])) {
                     <h3>Introduce tus datos</h3>
                 </div>
                 <div class="card-body">
-                    <form class="d-flex flex-row flex-wrap" method="POST" action="<?php echo $_SERVER['PHP_SELF'] ?>">
+                    <form class="d-flex flex-row flex-wrap" method="POST" action="<?php echo RUTA_REGISTRO ?>">
                         <?php
                         if (isset($_POST['submit'])) {
-                            include_once '../plantillas/registro_validado.inc.php';
+                            include_once 'plantillas/registro_validado.inc.php';
                         } else {
-                            include_once '../plantillas/registro_vacio.inc.php';
+                            include_once 'plantillas/registro_vacio.inc.php';
                         }
                         ?>
                     </form>
@@ -59,5 +59,5 @@ if (isset($_POST['submit'])) {
     </div>
 </div>
 <?php
-include_once '../plantillas/documento-cierre.inc.php';
+include_once 'plantillas/documento-cierre.inc.php';
 ?>

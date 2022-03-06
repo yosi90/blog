@@ -43,7 +43,7 @@ class EscritorEntradas
             <div class="card-body p-2">
                 <p class="fz-sm-texto lt-3">
                     <?php
-                    echo ucfirst(nl2br(self::resumir_texto($entrada->getTexto(), 200)));
+                    echo ucfirst(nl2br(self::resumir_texto($entrada->getTexto(), 400)));
                     ?>
                 </p>
                 <a class="btn btn-outline-light rosa fz-sm-texto" role="button" href="<?php echo RUTA_ENTRADA . '/' . $entrada->getUrl() ?>">
@@ -57,9 +57,9 @@ class EscritorEntradas
     public static function resumir_texto($texto, $longitud_maxima)
     {
         $resultado = '';
-        if (strlen($texto) > $longitud_maxima) {
+        if (strlen($texto) > $longitud_maxima && $longitud_maxima > 0) {
             $resultado = substr($texto, 0, $longitud_maxima);
-            $resultado .= '...';
+            // $resultado .= '...';
         } else {
             $resultado = $texto;
         }
