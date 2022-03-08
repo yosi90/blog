@@ -10,6 +10,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/blog/app/controlsesion.inc.php';
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="<?php echo IMG; ?>/ficon.png">
     <?php
     if (!isset($titulo) || empty($titulo)) {
         $titulo = 'Troubles time';
@@ -23,6 +24,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/blog/app/controlsesion.inc.php';
     <link href="<?php echo CSS; ?>/mediaQueris.css" rel="stylesheet">
     <link href="<?php echo CSS; ?>/material.css" rel="stylesheet">
     <link href="<?php echo CSS; ?>/scrollbar.css" rel="stylesheet">
+    <link href="<?php echo CSS; ?>/gestor.css" rel="stylesheet">
     <script type="text/javascript" src="<?php echo JS; ?>/jquery.min.js"></script>
     <script type="text/javascript" src="<?php echo JS; ?>/bootstrap.bundle.js"></script>
     <script defer type="text/javascript" src="<?php echo JS; ?>/fondo.js"></script>

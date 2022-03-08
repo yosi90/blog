@@ -38,7 +38,7 @@
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
-                                <li><a class="dropdown-item" href="#">Panel de control</a></li>
+                                <li><a class="dropdown-item" href="<?php echo RUTA_GESTOR ?>">Panel de control</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>

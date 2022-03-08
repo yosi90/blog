@@ -21,7 +21,7 @@ class EscritorEntradas
             return;
         }
 ?>
-        <div class="card d-flex flex-fill controlTamaño m-1 max-100">
+        <div class="card d-flex flex-fill controlTamaño m-1 mw-100">
             <div class="card-header bg-secondary text-white">
                 <div class="d-flex flex-wrap">
                     <div class="flex-fill fz-subtitulo">

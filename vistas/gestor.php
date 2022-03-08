@@ -1,5 +1,5 @@
 <?php
-include_once 'plantillas/base.inc.php';
+include_once 'plantillas/documento-declaracion.inc.php';
 include_once 'plantillas/pc_declare.inc.php';
 
 switch ($gestor_actual)
@@ -23,4 +23,4 @@ switch ($gestor_actual)
 }
 
 include_once 'plantillas/pc_closing.inc.php';
-include_once 'plantillas/footer.inc.php';
+include_once 'plantillas/documento-cierre.inc.php';

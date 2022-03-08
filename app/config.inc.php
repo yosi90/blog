@@ -24,6 +24,7 @@ define("RUTA_NUEVA_ENTRADA", SERVIDOR."/nueva-entrada");
 define("PLANTILLAS", SERVIDOR . "/plantillas/");
 define("VISTAS", SERVIDOR . "/vistas/");
 define("APP", SERVIDOR . "/app/");
+define("IMG", SERVIDOR . "/img/");
 define("CSS", SERVIDOR . "/css/");
 define("JS", SERVIDOR . "/js/");
 ?>
