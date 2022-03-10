@@ -21,7 +21,7 @@ class EscritorEntradas
             return;
         }
 ?>
-        <div class="card d-flex flex-fill controlTamaño m-1 mw-100">
+        <div class="card flex-fill controlTamaño m-1 mw-100">
             <div class="card-header bg-secondary text-white">
                 <div class="d-flex flex-wrap">
                     <div class="flex-fill fz-subtitulo">
@@ -46,7 +46,9 @@ class EscritorEntradas
                     echo ucfirst(nl2br(self::resumir_texto($entrada->getTexto(), 400)));
                     ?>
                 </p>
-                <a class="btn btn-outline-light rosa fz-sm-texto" role="button" href="<?php echo RUTA_ENTRADA . '/' . $entrada->getUrl() ?>">
+            </div>
+            <div class="d-flex m-2">
+                <a class="btn btn-outline-light flex-grow-0 rosa fz-sm-texto" role="button" href="<?php echo RUTA_ENTRADA . '/' . $entrada->getUrl() ?>">
                     <b>Continuar leyendo</b>
                 </a>
             </div>
@@ -59,7 +61,6 @@ class EscritorEntradas
         $resultado = '';
         if (strlen($texto) > $longitud_maxima && $longitud_maxima > 0) {
             $resultado = substr($texto, 0, $longitud_maxima);
-            // $resultado .= '...';
         } else {
             $resultado = $texto;
         }

@@ -6,6 +6,8 @@ include_once 'app/comentario.inc.php';
 include_once 'app/usuario.inc.php';
 include_once 'app/RepositorioEntrada.inc.php';
 include_once 'app/RepositorioComentarios.inc.php';
+
+if (!controlsesion::sesion_iniciada()) { redireccion::redirigir(SERVIDOR); }
 ?>
 <div class="container py-4">
     <div class="row">

@@ -26,9 +26,7 @@ class controlSesion
     
     public static function sesion_iniciada()
     {
-        if (session_id() == '') {
-            session_start();
-        }
+        if (session_id() == '') { session_start(); }
         if (isset($_SESSION['id_usuario']) && isset($_SESSION['nombre_usuario'])) {
             return TRUE;
         } else {

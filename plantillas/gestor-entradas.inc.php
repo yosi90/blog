@@ -38,7 +38,7 @@
                         <?php
                         for ($i = 0; $i < count($array_entradas); $i++) {
                             $entrada_actual = $array_entradas[$i][0];
-                            $comentarios_entrada_actual = $array_entradas[$i][1];
+                            $cantComentarios = $array_entradas[$i][1];
                         ?>
                             <tr>
                                 <td><?php echo $entrada_actual->getTitulo(); ?></td>
@@ -52,7 +52,7 @@
                                     }
                                     ?>
                                 </td>
-                                <td><?php echo $comentarios_entrada_actual; ?></td>
+                                <td><?php echo $cantComentarios; ?></td>
                                 <td class="d-flex justify-content-center">
                                     <a class="btn btn-outline-light" role="button" href="<?php echo RUTA_ENTRADA . '/' . $entrada_actual->getUrl(); ?>">Visitar entrada</a>
                                     <button type="button" class="btn btn-outline-light mx-2">Editar</button>

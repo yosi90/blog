@@ -5,8 +5,11 @@
                 <i class="fas fa-comment-dots fa-lg"></i>&nbsp;Responder</button>
         </div>
         <div id="coment<?php echo $i ?>" class="collapse card-body bg-dark-light rounded mx-4 mb-4">
-            <form action="" method="post" enctype="multipart/form-data">
-                <textarea class="ckeditor size-sm" name="editor"></textarea>
+            <form action="" method="post" action="#">
+                <script>
+                    CKEDITOR.replace('comentario');
+                </script>
+                <textarea id="comentario" name="comentario"></textarea>
             </form>
         </div>
     </div>

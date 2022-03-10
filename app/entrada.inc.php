@@ -9,7 +9,7 @@ class entrada
     private $fecha;
     private $activa;
     
-    public function __CONSTRUCT($id_entrada, $id_autor, $url, $titulo, $texto, $fecha, $activa)
+    public function __construct($id_entrada, $id_autor, $url, $titulo, $texto, $fecha, $activa)
     {
         $this-> id_entrada = $id_entrada;
         $this-> id_autor = $id_autor;

@@ -7,7 +7,7 @@ class Repositorioentrada
 {
     public static function insertar_entrada($conexion, $entrada)
     {
-        $entrada_insertada = FALSE;
+        $entrada_insertada = false;
         if (isset($conexion)) {
             try {
                 $sql = "INSERT INTO entradas (id_autor, url, titulo, texto, fecha, activa) VALUES (:id_autor, :url, :titulo, :texto, NOW(), 0)";
@@ -155,7 +155,7 @@ class Repositorioentrada
                 $sentencia->execute();
                 $resultado = $sentencia->fetchAll();
                 if (!count($resultado))
-                    $titulo_existe = FALSE;
+                    $titulo_existe = false;
             } catch (PDOException $ex) {
                 print 'ERROR' . $ex->getMessage();
             }

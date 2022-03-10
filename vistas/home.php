@@ -24,15 +24,28 @@ include_once 'app/escritorEntradas.inc.php';
                     <button id="vistas" value="0" class="btn btn-no-shadow text-white p-1" title="Alternar vistas" onclick="alternarVistaEntradas()"></button>
                 </div>
                 <div class="card-body bg-dark-light d-flex flex-wrap justify-content-around pt-0 pe-0 ps-0 pb-1">
-                <?php
-                conexion::abrir_conexion();
-                EscritorEntradas::escribirListaEntradas();
-                conexion::cerrar_conexion();
-                ?>
+                    <?php
+                    conexion::abrir_conexion();
+                    EscritorEntradas::escribirListaEntradas();
+                    conexion::cerrar_conexion();
+                    ?>
                 </div>
             </div>
         </div>
         <div class="col-md-3 mb-5">
+            <?php
+            if (controlSesion::sesion_iniciada()) {
+            ?>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="d-flex bg-dark text-white rounded mb-1">
+                            <a href="<?php echo RUTA_NUEVA_ENTRADA; ?>" class="btn btn-outline-light rosa flex-fill">Nueva entrada</a>
+                        </div>
+                    </div>
+                </div>
+            <?php
+            }
+            ?>
             <div class="row">
                 <div class="col-12">
                     <div class="card">

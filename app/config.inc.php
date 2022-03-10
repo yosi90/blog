@@ -27,4 +27,5 @@ define("APP", SERVIDOR . "/app/");
 define("IMG", SERVIDOR . "/img/");
 define("CSS", SERVIDOR . "/css/");
 define("JS", SERVIDOR . "/js/");
+define("editor", SERVIDOR . "/libraries/ckeditor/");
 ?>

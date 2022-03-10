@@ -5,34 +5,38 @@ include_once 'app/entrada.inc.php';
 include_once 'app/repositorioentrada.inc.php';
 include_once 'app/validadorentrada.inc.php';
 include_once 'app/repositoriousuario.inc.php';
+include_once 'app/Conexion.inc.php';
 $entrada_publica = 1;
-if (isset($_POST['guardar'])) {
+
+if (!controlsesion::sesion_iniciada()) { redireccion::redirigir(SERVIDOR); }
+
+if (isset($_POST['submit'])) {
     conexion::abrir_conexion();
     $partes_url = explode(' ', $_POST['titulo']);
     $url = "";
     if (count($partes_url) > 1) {
-        for ($i = 0; $i < count($partes_url); $i++) {
-            if ($i++ == count($partes_url)) {
-                $url .= $partes_url[$i];
-            } else {
-                $url .= $partes_url[$i] . '-';
-            }
+        for ($cont = 0; $cont < count($partes_url); $cont++) {
+            $url .= $partes_url[$cont];
+            $url = (($cont + 1) != count($partes_url) ? "{$url}-" : $url);
         }
     } else {
         $url = $partes_url[0];
     }
-    $validador = new validadorentrada($_POST['titulo'], $url, htmlspecialchars($_POST['texto']), conexion::obtener_conexion());
-    if (isset($_POST['publicar']) && $_POST['publicar'] == 'no') {
+    // $validador = new validadorentrada($_POST['titulo'], htmlspecialchars($_POST['entrada']), conexion::obtener_conexion());
+    $validador = new validadorentrada($_POST['titulo'], $_POST['entrada'], conexion::obtener_conexion());
+    if (($_POST['activa'] ?? false) == 'no') {
         $entrada_publica = 0;
     }
     if ($validador->entrada_valida()) {
-        $entrada = new entrada('', $_SESSION['id_usuario'], $url, $validador->getTitulo(), $validador->getTexto(), '', $entrada_publica);
+        $entrada = new entrada(null, $_SESSION['id_usuario'], $url, $validador->getTitulo(), $validador->getTexto(), null, $entrada_publica);
         $entrada_insertada = repositorioentrada::insertar_entrada(conexion::obtener_conexion(), $entrada);
         if ($entrada_insertada) {
-            redireccion::redirigir(RUTA_ENTRADA . '/' . $entrada->getUrl());
+            ?>
+                <script> window.location.href = "<?php echo RUTA_ENTRADA . '/' . $entrada->getUrl(); ?>" </script>
+            <?php
         }
-        conexion::cerrar_conexion();
     }
+    conexion::cerrar_conexion();
 }
 include_once 'plantillas/pc_declare.inc.php';
 ?>
