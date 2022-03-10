@@ -1,7 +1,8 @@
 <?php
 include_once 'plantillas/documento-declaracion.inc.php';
+include_once 'app/Conexion.inc.php';
 include_once 'plantillas/pc_declare.inc.php';
-
+conexion::abrir_conexion();
 switch ($gestor_actual)
 {
     case '':
@@ -21,6 +22,6 @@ switch ($gestor_actual)
         include_once 'plantillas/gestor-comentarios.inc.php';
         break;
 }
-
+conexion::cerrar_conexion();
 include_once 'plantillas/pc_closing.inc.php';
 include_once 'plantillas/documento-cierre.inc.php';

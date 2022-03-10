@@ -4,28 +4,24 @@
             <div class="d-flex justify-content-center p-1 bg-dark translucido text-white jumbo fz-jumbo my-1">Mis entradas</div>
         </div>
     </div>
-    <div class="g-e">
-        <div class="col-md-11">
-            <a href="<?php echo RUTA_NUEVA_ENTRADA; ?>" class="btn btn-lg btn-primary text-left" id="b_ent" style="margin-bottom: 2em; ">Nueva entrada</a>
-            <br>
+    <div class="row">
+        <div class="col-md-12">
+            <a href="<?php echo RUTA_NUEVA_ENTRADA; ?>" class="btn btn-outline-light rosa d-flex flex-fill justify-content-center" id="b_ent">Nueva entrada</a>
         </div>
     </div>
-    <div class="row g-e">
-        <div class="col-md-12">
+    <div class="row">
+        <div class="col-md-12 translucido">
             <?php
             if (count($array_entradas) > 0) {
             ?>
-                <table class="table table-striped">
+                <table class="table table-striped tabla bg-dark rounded my-1">
                     <thead>
                         <tr>
-                            <th>
-                                Fecha
-                            </th>
                             <th>
                                 Título
                             </th>
                             <th>
-                                Dirección
+                                Fecha
                             </th>
                             <th>
                                 Estado
@@ -33,7 +29,7 @@
                             <th>
                                 Comentarios
                             </th>
-                            <th>
+                            <th class="text-center">
                                 Acciones
                             </th>
                         </tr>
@@ -45,14 +41,22 @@
                             $comentarios_entrada_actual = $array_entradas[$i][1];
                         ?>
                             <tr>
-                                <td><?php echo $entrada_actual->getFecha(); ?></td>
                                 <td><?php echo $entrada_actual->getTitulo(); ?></td>
-                                <td><a class="btn btn-default btn-xs" role="button" id="b_ent" href="<?php echo RUTA_ENTRADA . '/' . $entrada_actual->getUrl(); ?>">Visitar entrada</a></td>
-                                <td><?php echo $entrada_actual->getActiva(); ?></td>
-                                <td><?php echo $comentarios_entrada_actual; ?></td>
+                                <td><?php echo $entrada_actual->getFecha(); ?></td>
                                 <td>
-                                    <button type="button" class="btn btn-default btn-xs" id="b_ent" role="button" style="background-color: lightgray;">Editar</button>
-                                    <button type="button" class="btn btn-default btn-xs" id="b_ent" role="button" style="background-color: lightgray;">Borrar</button>
+                                    <?php
+                                    if($entrada_actual->getActiva() == 0){
+                                        echo 'Borrador';
+                                    } else{
+                                        echo 'Activa';
+                                    }
+                                    ?>
+                                </td>
+                                <td><?php echo $comentarios_entrada_actual; ?></td>
+                                <td class="d-flex justify-content-center">
+                                    <a class="btn btn-outline-light" role="button" href="<?php echo RUTA_ENTRADA . '/' . $entrada_actual->getUrl(); ?>">Visitar entrada</a>
+                                    <button type="button" class="btn btn-outline-light mx-2">Editar</button>
+                                    <button type="button" class="btn btn-outline-light">Borrar</button>
                                 </td>
                             </tr>
                         <?php
@@ -63,9 +67,9 @@
             <?php
             } else {
             ?>
-                <h3 class="text-center">Todavia no has escrito entradas</h3>
-                <br>
-                <br>
+                <div class="bg-dark text-white rounded my-1 p-5">
+                    <h3 class="text-center">Todavia no has escrito entradas</h3>
+                </div>
             <?php
             }
             ?>

@@ -25,19 +25,19 @@ if (isset($_POST['login'])) {
                 </div>
                 <div class="card-body text-white d-flex flex-row flex-wrap">
                     <form class="d-flex flex-row flex-wrap" role="form" method="post" action="<?php echo RUTA_LOGIN ?>">
-                        <input type="email" name="correo" id="correo" class="textbox" placeholder="Email" 
+                        <input type="email" name="correo" id="correo" class="textbox form-control" placeholder="Email" 
                             <?php 
                                 if (isset($_POST['login']) && isset($_POST['correo']) && !empty($_POST['correo'])) { 
                                     echo 'value="' . $_POST['correo'] . '"';
                                 }
                             ?> required="true" autofocus="true">
-                        <input type="password" name="clave" id="clave" class="textbox mt-1" placeholder="Contraseña" required="true">
+                        <input type="password" name="clave" id="clave" class="textbox form-control mt-1" placeholder="Contraseña" required="true">
                         <?php
                             if (isset($_POST['login'])) {
                                 $validador->mostrar_error();
                             }
                         ?>
-                        <button type="submit" name="login" id="login" class="btn btn-outline-light mt-3 flex-fill">Iniciar sesión</button>
+                        <button type="submit" name="login" id="login" class="btn btn-outline-light form-control mt-3 flex-fill">Iniciar sesión</button>
                     </form>
                     <div class="d-flex flex-row flex-wrap flex-fill justify-content-center mt-2">
                         <a href="#">¿Olvidaste tu contraseña?</a>

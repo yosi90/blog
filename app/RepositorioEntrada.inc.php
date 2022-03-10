@@ -116,6 +116,8 @@ class Repositorioentrada
             } catch (PDOException $ex) {
                 print 'ERROR' . $ex->getMessage();
             }
+        }else{
+            return 'fallo';
         }
         return $total;
     }
@@ -125,7 +127,7 @@ class Repositorioentrada
         $entradas_obtenidas = [];
         if (isset($conexion)) {
             try {
-                $sql = "SELECT a.id_entrada, a.id_autor, a.url, a.titulo, a.texto, a.fecha, a.activa, COUNT(b.id) AS 'cantidad_comentarios' FROM entradas a LEFT JOIN comentarios b ON a.id_entrada = b.id_entrada WHERE a.id_autor = :num GROUP BY a.id ORDER BY a.fecha DESC";
+                $sql = "SELECT a.id_entrada, a.id_autor, a.url, a.titulo, a.texto, a.fecha, a.activa, COUNT(b.id_comentario) AS 'cantidad_comentarios' FROM entradas a LEFT JOIN comentarios b ON a.id_entrada = b.id_entrada WHERE a.id_autor = :num GROUP BY a.id_entrada ORDER BY a.fecha DESC";
                 $sentencia = $conexion->prepare($sql);
                 $sentencia->bindParam(':num', $id_usuario, PDO::PARAM_STR);
                 $sentencia->execute();
