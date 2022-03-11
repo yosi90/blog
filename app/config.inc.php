@@ -15,11 +15,11 @@ define("RUTA_FAVORITOS", SERVIDOR."/favoritos");
 define("RUTA_AUTORES", SERVIDOR."/autores");
 define("RUTA_INICIAR_SESION", SERVIDOR."/inicio_sesion");
 define("RUTA_ENTRADA", SERVIDOR."/entrada");
+define("RUTA_NUEVA_ENTRADA", SERVIDOR."/nueva-entrada");
 define("RUTA_GESTOR", SERVIDOR."/gestor");
 define("RUTA_GESTOR_ENTRADAS", RUTA_GESTOR."/entradas");
 define("RUTA_GESTOR_FAVORITOS", RUTA_GESTOR."/favoritos");
 define("RUTA_GESTOR_COMENTARIOS", RUTA_GESTOR."/comentarios");
-define("RUTA_NUEVA_ENTRADA", SERVIDOR."/nueva-entrada");
 
 define("PLANTILLAS", SERVIDOR . "/plantillas/");
 define("VISTAS", SERVIDOR . "/vistas/");

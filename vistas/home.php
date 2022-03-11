@@ -5,11 +5,9 @@ include_once 'app/escritorEntradas.inc.php';
 ?>
 <div class="container">
     <div class="row">
-        <div class="col-2"></div>
-        <div class="col-8">
-            <div class="my-5 d-flex justify-content-center p-3 bg-dark translucido text-white jumbo fz-jumbo">Troubles time</div>
+        <div class="col-12">
+            <div class="d-flex justify-content-center p-3 mt-5 mb-1 bg-dark translucido text-white jumbo fz-jumbo">Troubles time</div>
         </div>
-        <div class="col-2"></div>
     </div>
     <div class="row">
         <div class="col-md-9 mb-5">

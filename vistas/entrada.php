@@ -7,7 +7,6 @@ include_once 'app/usuario.inc.php';
 include_once 'app/RepositorioEntrada.inc.php';
 include_once 'app/RepositorioComentarios.inc.php';
 
-if (!controlsesion::sesion_iniciada()) { redireccion::redirigir(SERVIDOR); }
 ?>
 <div class="container py-4">
     <div class="row">
@@ -97,6 +96,7 @@ if (!controlsesion::sesion_iniciada()) { redireccion::redirigir(SERVIDOR); }
         include_once 'plantillas/entradas_azar.inc.php';
         ?>
     </div>
+</div>
 </div>
 <?php
 include_once 'plantillas/documento-cierre.inc.php';

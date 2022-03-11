@@ -22,34 +22,12 @@ class EscritorEntradas
         }
 ?>
         <div class="card flex-fill controlTamaño m-1 mw-100">
-            <div class="card-header bg-secondary text-white">
-                <div class="d-flex flex-wrap">
-                    <div class="flex-fill fz-subtitulo">
-                        <strong class="lt-2">
-                            <?php
-                            echo $entrada->getTitulo();
-                            ?>
-                        </strong>
+            <div class="card-header d-flex bg-secondary text-white h-100">
+                <a class="btn btn-outline-light fz-sm-texto flex-fill" role="button" href="<?php echo RUTA_ENTRADA . '/' . $entrada->getUrl() ?>">
+                    <div class="d-flex flex-wrap">
+                        <strong class="flex-fill text-start fz-subtitulo lt-2"><?php echo $entrada->getTitulo(); ?></strong>
+                        <p class="flex-fill align-self-end text-end fz-texto m-0 pt-1"><?php echo date('d/M/Y', strtotime($entrada->getFecha())); ?></p>
                     </div>
-                    <div class="flex-fill pt-1">
-                        <p class="m-0 text-end fz-texto">
-                            <?php
-                            echo date('d/M/Y', strtotime($entrada->getFecha()));
-                            ?>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="card-body p-2">
-                <p class="fz-sm-texto lt-3">
-                    <?php
-                    echo ucfirst(nl2br(self::resumir_texto($entrada->getTexto(), 400)));
-                    ?>
-                </p>
-            </div>
-            <div class="d-flex m-2">
-                <a class="btn btn-outline-light flex-grow-0 rosa fz-sm-texto" role="button" href="<?php echo RUTA_ENTRADA . '/' . $entrada->getUrl() ?>">
-                    <b>Continuar leyendo</b>
                 </a>
             </div>
         </div>

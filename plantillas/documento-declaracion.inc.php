@@ -12,9 +12,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/blog/app/controlsesion.inc.php';
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/png" href="<?php echo IMG; ?>/ficon.png">
     <?php
-    if (!isset($titulo) || empty($titulo)) {
-        $titulo = 'Troubles time';
-    }
+    if (!isset($titulo) || empty($titulo)) { $titulo = 'Troubles time'; }
     echo "<title>$titulo</title>";
     ?>
     <link href="<?php echo CSS; ?>/bootstrap.min.css" rel="stylesheet">

@@ -42,7 +42,7 @@
                         ?>
                             <tr>
                                 <td><?php echo $entrada_actual->getTitulo(); ?></td>
-                                <td><?php echo $entrada_actual->getFecha(); ?></td>
+                                <td><?php echo date('d/M/Y', strtotime($entrada_actual->getFecha())); ?></td>
                                 <td>
                                     <?php
                                     if($entrada_actual->getActiva() == 0){

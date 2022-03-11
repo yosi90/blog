@@ -6,7 +6,7 @@ include_once 'app/repositorioentrada.inc.php';
 include_once 'app/validadorentrada.inc.php';
 include_once 'app/repositoriousuario.inc.php';
 include_once 'app/Conexion.inc.php';
-$entrada_publica = 1;
+$activa = 1;
 
 if (!controlsesion::sesion_iniciada()) { redireccion::redirigir(SERVIDOR); }
 
@@ -24,11 +24,9 @@ if (isset($_POST['submit'])) {
     }
     // $validador = new validadorentrada($_POST['titulo'], htmlspecialchars($_POST['entrada']), conexion::obtener_conexion());
     $validador = new validadorentrada($_POST['titulo'], $_POST['entrada'], conexion::obtener_conexion());
-    if (($_POST['activa'] ?? false) == 'no') {
-        $entrada_publica = 0;
-    }
+    if (isset($_POST['activa'])){ $activa = 0; }
     if ($validador->entrada_valida()) {
-        $entrada = new entrada(null, $_SESSION['id_usuario'], $url, $validador->getTitulo(), $validador->getTexto(), null, $entrada_publica);
+        $entrada = new entrada(null, $_SESSION['id_usuario'], $url, $validador->getTitulo(), $validador->getTexto(), null, $activa);
         $entrada_insertada = repositorioentrada::insertar_entrada(conexion::obtener_conexion(), $entrada);
         if ($entrada_insertada) {
             ?>

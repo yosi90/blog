@@ -233,7 +233,7 @@ body {
 }
 
 .mw-100{
-  min-width: 100%;
+  min-width: 95%;
 }
 
 .mw-75 {
@@ -299,6 +299,10 @@ body {
 
 .tabla td {
   background-color: rgba(35, 40, 45, 1) !important;
+}
+
+tr td{
+  vertical-align: middle;
 }
 
 div.cke {

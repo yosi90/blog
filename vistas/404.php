@@ -21,7 +21,7 @@ include_once 'app/largate.inc.php';
         </div>
         <div class="card-body">
             <a href="<?php echo SERVIDOR ?>">
-                <div style="background: <?php echo $imagen ?>) no-repeat center center; -webkit-background-size: 100% 100%; -moz-background-size: 100% 100%; -o-background-size: 100% 100%; background-size: 100% 100%;height: 60vh;"></div>
+                <div style="background: <?php echo $imagen ?> no-repeat center center; -webkit-background-size: 100% 100%; -moz-background-size: 100% 100%; -o-background-size: 100% 100%; background-size: 100% 100%;height: 60vh;"></div>
             </a>
         </div>
     </div>

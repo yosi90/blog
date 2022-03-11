@@ -10,17 +10,19 @@ class Repositorioentrada
         $entrada_insertada = false;
         if (isset($conexion)) {
             try {
-                $sql = "INSERT INTO entradas (id_autor, url, titulo, texto, fecha, activa) VALUES (:id_autor, :url, :titulo, :texto, NOW(), 0)";
+                $sql = "INSERT INTO entradas (id_autor, url, titulo, texto, fecha, activa) VALUES (:id_autor, :url, :titulo, :texto, NOW(), :activa)";
                 $sentencia = $conexion->prepare($sql);
                 $autorTemp = $entrada->getAutor();
                 $urlTemp = $entrada->getUrl();
                 $tituloTemp = $entrada->getTitulo();
                 $textoTemp = $entrada->getTexto();
+                $activaTemp = $entrada->getActiva();
                 $sentencia = $conexion->prepare($sql);
                 $sentencia->bindParam(':id_autor', $autorTemp, PDO::PARAM_STR);
                 $sentencia->bindParam(':url', $urlTemp, PDO::PARAM_STR);
                 $sentencia->bindParam(':titulo', $tituloTemp, PDO::PARAM_STR);
                 $sentencia->bindParam(':texto', $textoTemp, PDO::PARAM_STR);
+                $sentencia->bindParam(':activa', $activaTemp, PDO::PARAM_STR);
                 $entrada_insertada = $sentencia->execute();
             } catch (PDOException $ex) {
                 print 'ERROR' . $ex->getMessage();
@@ -34,7 +36,7 @@ class Repositorioentrada
         $entradas = [];
         if (isset($conexion)) {
             try {
-                $sql = 'SELECT * FROM entradas ORDER BY fecha DESC LIMIT 8';
+                $sql = 'SELECT * FROM entradas ORDER BY fecha DESC LIMIT 16';
                 $sentencia = $conexion->prepare($sql);
                 $sentencia->execute();
                 $resultado = $sentencia->fetchAll();
@@ -55,7 +57,7 @@ class Repositorioentrada
         $entrada = null;
         if (isset($conexion)) {
             try {
-                $sql = "SELECT * FROM entradas WHERE url LIKE :url and activa = 0";
+                $sql = "SELECT * FROM entradas WHERE url LIKE :url";
                 $sentencia = $conexion->prepare($sql);
                 $sentencia->bindParam(':url', $url, PDO::PARAM_STR);
                 $sentencia->execute();
