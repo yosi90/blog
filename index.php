@@ -20,27 +20,25 @@ if ($partes_ruta[0] == 'blog') {
         $ruta_elegida = 'vistas/home.php';
     } else if (count($partes_ruta) == 2) {
         switch ($partes_ruta[1]) {
+            case 'autores':
+                $ruta_elegida = 'vistas/autores.php';
+                break;
             case 'login':
                 $ruta_elegida = 'vistas/login.php';
                 break;
             case 'logout':
-                $ruta_elegida = 'vistas/logout.php';
+                if (controlsesion::sesion_iniciada()) {
+                    $ruta_elegida = 'scripts/logout.php';
+                } else {
+                    $ruta_elegida = 'vistas/home.php';
+                }
                 break;
             case 'registro':
                 $ruta_elegida = 'vistas/registro.php';
                 break;
-            case 'autores':
-                $ruta_elegida = 'vistas/autores.php';
-                break;
-            case 'entradas':
-                $ruta_elegida = 'vistas/entradas.php';
-                break;
-            case 'favoritos':
-                $ruta_elegida = 'vistas/favoritos.php';
-                break;
             case 'relleno-dev':
                 if (controlsesion::sesion_iniciada() && $_SESSION['nombre_usuario'] == 'Yosi') {
-                    $ruta_elegida = 'vistas/script-relleno.php';
+                    $ruta_elegida = 'scripts/script-relleno.php';
                 } else {
                     $ruta_elegida = 'vistas/home.php';
                 }
@@ -53,13 +51,20 @@ if ($partes_ruta[0] == 'blog') {
                     $ruta_elegida = 'vistas/home.php';
                 }
                 break;
-            case 'nueva-entrada':
-                if (controlsesion::sesion_iniciada()) {
-                    $ruta_elegida = 'vistas/nueva-entrada.php';
-                } else {
-                    $ruta_elegida = 'vistas/home.php';
-                }
-                break;
+                case 'nueva-entrada':
+                    if (controlsesion::sesion_iniciada()) {
+                        $ruta_elegida = 'vistas/nueva-entrada.php';
+                    } else {
+                        $ruta_elegida = 'vistas/home.php';
+                    }
+                    break;
+                case 'borrar-entrada':
+                    if (controlsesion::sesion_iniciada()) {
+                        $ruta_elegida = 'scripts/borrar-entrada.php';
+                    } else {
+                        $ruta_elegida = 'vistas/home.php';
+                    }
+                    break;
         }
     } else if (count($partes_ruta) == 3) {
         if ($partes_ruta[1] == 'registro-correcto') {

@@ -118,7 +118,7 @@ class Repositorioentrada
             } catch (PDOException $ex) {
                 print 'ERROR' . $ex->getMessage();
             }
-        }else{
+        } else {
             return 'fallo';
         }
         return $total;
@@ -163,5 +163,26 @@ class Repositorioentrada
             }
         }
         return $titulo_existe;
+    }
+
+    public static function DeleteEntrada($conexion, $idEntrada)
+    {
+        if(isset($conexion)){
+            try{
+                $conexion->beginTransaction();
+                $sql = "DELETE FROM comentarios WHERE id_entrada = :id_entrada";
+                $sentencia = $conexion->prepare($sql);
+                $sentencia->bindParam(':id_entrada', $idEntrada, PDO::PARAM_STR);
+                $sentencia->execute();
+                $sql = "DELETE FROM entradas WHERE id_entrada = :id_entrada";
+                $sentencia = $conexion->prepare($sql);
+                $sentencia->bindParam(':id_entrada', $idEntrada, PDO::PARAM_STR);
+                $sentencia->execute();
+                $conexion->commit();
+            } catch (PDOException $ex) {
+                $conexion->rollBack();
+                print 'ERROR' . $ex->getMessage();
+            }
+        }
     }
 }

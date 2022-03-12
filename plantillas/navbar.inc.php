@@ -14,7 +14,7 @@
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                     <li><a href="<?php echo RUTA_GESTOR_ENTRADAS ?>" class="nav-link px-2 text-white">Entradas</a></li>
                     <li><a href="<?php echo RUTA_GESTOR_FAVORITOS ?>" class="nav-link px-2 text-white">Favoritos</a></li>
-                    <li><a href="<?php echo RUTA_GESTOR_COMENTARIOS ?>" class="nav-link px-2 text-white">Autores</a></li>
+                    <li><a href="<?php echo RUTA_AUTORES ?>" class="nav-link px-2 text-white">Autores</a></li>
                 </ul>
             <?php
             } else {

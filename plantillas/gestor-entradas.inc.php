@@ -45,18 +45,25 @@
                                 <td><?php echo date('d/M/Y', strtotime($entrada_actual->getFecha())); ?></td>
                                 <td>
                                     <?php
-                                    if($entrada_actual->getActiva() == 0){
+                                    if ($entrada_actual->getActiva() == 0) {
                                         echo 'Borrador';
-                                    } else{
+                                    } else {
                                         echo 'Activa';
                                     }
                                     ?>
                                 </td>
                                 <td><?php echo $cantComentarios; ?></td>
                                 <td class="d-flex justify-content-center">
-                                    <a class="btn btn-outline-light" role="button" href="<?php echo RUTA_ENTRADA . '/' . $entrada_actual->getUrl(); ?>">Visitar entrada</a>
-                                    <button type="button" class="btn btn-outline-light mx-2">Editar</button>
-                                    <button type="button" class="btn btn-outline-light">Borrar</button>
+                                        <a class="btn btn-outline-light mx-1" role="button" href="<?php echo RUTA_ENTRADA . '/' . $entrada_actual->getUrl(); ?>">Visitar entrada</a>
+                                    <form method="POST" action="<?php echo RUTA_EDITAR_ENTRADA; ?>">
+                                        <button type="submit" name="edit" value="edit" class="btn btn-outline-light mx-1">Editar</button>
+                                        <input type="hidden" name="IdEntrada" value="<?php echo $entrada_actual->getId_entrada(); ?>">
+                                    </form>
+                                    <form method="POST" onSubmit="return confirm('Confirma que deseas borrar esta entrada');" action="<?php echo RUTA_BORRAR_ENTRADA; ?>">
+                                        <button type="submit" name="delete" value="delete" class="btn btn-outline-light mx-1">Borrar</button>
+                                        <input type="hidden" name="IdEntrada" value="<?php echo $entrada_actual->getId_entrada(); ?>">
+                                        <input type="hidden" name="IdAutor" value="<?php echo $entrada_actual->getAutor(); ?>">
+                                    </form>
                                 </td>
                             </tr>
                         <?php

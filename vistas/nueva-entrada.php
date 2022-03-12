@@ -22,7 +22,6 @@ if (isset($_POST['submit'])) {
     } else {
         $url = $partes_url[0];
     }
-    // $validador = new validadorentrada($_POST['titulo'], htmlspecialchars($_POST['entrada']), conexion::obtener_conexion());
     $validador = new validadorentrada($_POST['titulo'], $_POST['entrada'], conexion::obtener_conexion());
     if (isset($_POST['activa'])){ $activa = 0; }
     if ($validador->entrada_valida()) {
