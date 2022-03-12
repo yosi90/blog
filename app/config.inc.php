@@ -18,11 +18,13 @@ define("RUTA_ENTRADA", SERVIDOR."/entrada");
 define("RUTA_NUEVA_ENTRADA", SERVIDOR."/nueva-entrada");
 define("RUTA_EDITAR_ENTRADA", SERVIDOR."/editar-entrada");
 define("RUTA_BORRAR_ENTRADA", SERVIDOR."/borrar-entrada");
+define("RUTA_ARCHIVAR_ENTRADA", SERVIDOR."/archivar-entrada");
 define("RUTA_GESTOR", SERVIDOR."/gestor");
 define("RUTA_GESTOR_ADM", SERVIDOR."/gestor-administrador");
 define("RUTA_GESTOR_ENTRADAS", RUTA_GESTOR."/entradas");
-define("RUTA_GESTOR_FAVORITOS", RUTA_GESTOR."/favoritos");
 define("RUTA_GESTOR_COMENTARIOS", RUTA_GESTOR."/comentarios");
+define("RUTA_GESTOR_FAVORITOS", RUTA_GESTOR."/favoritos");
+define("RUTA_GESTOR_ARCHIVO", RUTA_GESTOR."/archivo");
 define("RUTA_GESTOR_ENTRADAS_USR", RUTA_GESTOR_ADM."/entradas-usuario");
 define("RUTA_GESTOR_COMENTARIOS_USR", RUTA_GESTOR_ADM."/comentarios-usuario");
 

@@ -42,7 +42,7 @@ if ($partes_ruta[0] == 'blog') {
                 $ruta_elegida = 'vistas/registro.php';
                 break;
             case 'relleno-dev':
-                if (controlsesion::sesion_iniciada() && $_SESSION['nombre_usuario'] == 'Yosi') {
+                if (controlsesion::sesion_iniciada() && $_SESSION['administrador'] == '1') {
                     $ruta_elegida = 'scripts/script-relleno.php';
                 } else {
                     $ruta_elegida = 'vistas/home.php';
@@ -56,27 +56,42 @@ if ($partes_ruta[0] == 'blog') {
                     $ruta_elegida = 'vistas/home.php';
                 }
                 break;
-                case 'nueva-entrada':
-                    if (controlsesion::sesion_iniciada()) {
-                        $ruta_elegida = 'vistas/nueva-entrada.php';
-                    } else {
-                        $ruta_elegida = 'vistas/home.php';
-                    }
-                    break;
-                case 'borrar-entrada':
-                    if (controlsesion::sesion_iniciada()) {
-                        $ruta_elegida = 'scripts/borrar-entrada.php';
-                    } else {
-                        $ruta_elegida = 'vistas/home.php';
-                    }
-                    break;
-                case 'editar-entrada':
-                    if (controlsesion::sesion_iniciada()) {
-                        $ruta_elegida = 'vistas/editar-entrada.php';
-                    } else {
-                        $ruta_elegida = 'vistas/home.php';
-                    }
-                    break;
+            case 'gestor-administrador':
+                if (controlsesion::sesion_iniciada() && $_SESSION['administrador'] == 1) {
+                    $ruta_elegida = 'vistas/gestor-administrador.php';
+                    $gestor_actual = '';
+                } else {
+                    $ruta_elegida = 'vistas/home.php';
+                }
+                break;
+            case 'nueva-entrada':
+                if (controlsesion::sesion_iniciada()) {
+                    $ruta_elegida = 'vistas/nueva-entrada.php';
+                } else {
+                    $ruta_elegida = 'vistas/home.php';
+                }
+                break;
+            case 'archivar-entrada':
+                if (controlsesion::sesion_iniciada()) {
+                    $ruta_elegida = 'scripts/archivar-entrada.php';
+                } else {
+                    $ruta_elegida = 'vistas/home.php';
+                }
+                break;
+            case 'borrar-entrada':
+                if (controlsesion::sesion_iniciada()) {
+                    $ruta_elegida = 'scripts/borrar-entrada.php';
+                } else {
+                    $ruta_elegida = 'vistas/home.php';
+                }
+                break;
+            case 'editar-entrada':
+                if (controlsesion::sesion_iniciada()) {
+                    $ruta_elegida = 'vistas/editar-entrada.php';
+                } else {
+                    $ruta_elegida = 'vistas/home.php';
+                }
+                break;
         }
     } else if (count($partes_ruta) == 3) {
         if ($partes_ruta[1] == 'registro-correcto') {
@@ -106,6 +121,10 @@ if ($partes_ruta[0] == 'blog') {
                     break;
                 case 'favoritos':
                     $gestor_actual = 'favoritos';
+                    $ruta_elegida = 'vistas/gestor.php';
+                    break;
+                case 'archivo':
+                    $gestor_actual = 'archivo';
                     $ruta_elegida = 'vistas/gestor.php';
                     break;
             }

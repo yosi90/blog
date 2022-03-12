@@ -6,6 +6,7 @@
                 <a href="<?php echo RUTA_GESTOR_ENTRADAS; ?>"><li><i class="fas fa-clipboard fa-2x mt-1"></i><br>Entradas</li></a>
                 <a href="<?php echo RUTA_GESTOR_COMENTARIOS; ?>"><li><i class="fas fa-comments fa-2x mt-1"></i><br>Comentarios</li></a>
                 <a href="<?php echo RUTA_GESTOR_FAVORITOS; ?>"><li><i class="fas fa-star fa-2x mt-1"></i><br>Favoritos</li></a>
+                <a href="<?php echo RUTA_GESTOR_ARCHIVO; ?>"><li><i class="fas fa-box fa-2x mt-1"></i><br>Archivo</li></a>
             </ul>
         </div>
         <div class="col-sm-9 col-md-10 main">

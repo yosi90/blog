@@ -8,8 +8,9 @@ class entrada
     private $texto;
     private $fecha;
     private $activa;
+    private $archivada;
     
-    public function __construct($id_entrada, $id_autor, $url, $titulo, $texto, $fecha, $activa)
+    public function __construct($id_entrada, $id_autor, $url, $titulo, $texto, $fecha, $activa, $archivada)
     {
         $this-> id_entrada = $id_entrada;
         $this-> id_autor = $id_autor;
@@ -18,6 +19,7 @@ class entrada
         $this-> texto = $texto;
         $this-> fecha = $fecha;
         $this-> activa = $activa;
+        $this-> archivada = $archivada;
     }
 
     public function getId_entrada() { return $this->id_entrada; }
@@ -27,7 +29,9 @@ class entrada
     public function getTexto() { return $this->texto; }
     public function getFecha() { return $this->fecha; }
     public function getActiva() { return $this->activa; }
+    public function getArchivada() { return $this->archivada; }
     public function setTitulo($titulo) { $this->titulo = $titulo; }
     public function setTexto($texto) { $this->texto = $texto; }
     public function setActiva ($activa) { $this->activa = $activa; }
+    public function setArchivada($archivada) { $this->archivada = $archivada; }
 }

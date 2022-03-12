@@ -15,7 +15,7 @@ class Repositorioentrada
                 $sentencia->execute();
                 $resultado = $sentencia->fetch();
                 if (!empty($resultado)) {
-                    $entrada = new entrada($resultado['id_entrada'], $resultado['id_autor'], $resultado['url'], $resultado['titulo'], $resultado['texto'], $resultado['fecha'], $resultado['activa']);
+                    $entrada = new entrada($resultado['id_entrada'], $resultado['id_autor'], $resultado['url'], $resultado['titulo'], $resultado['texto'], $resultado['fecha'], $resultado['activa'], $resultado['archivada']);
                 }
             } catch (PDOException $ex) {
                 print 'ERROR' . $ex->getMessage();
@@ -29,13 +29,13 @@ class Repositorioentrada
         $entradas = [];
         if (isset($conexion)) {
             try {
-                $sql = 'SELECT * FROM entradas WHERE archivada = 0 ORDER BY fecha DESC LIMIT 16';
+                $sql = 'SELECT * FROM entradas WHERE activa = 1 and archivada = 0 ORDER BY fecha DESC LIMIT 16';
                 $sentencia = $conexion->prepare($sql);
                 $sentencia->execute();
                 $resultado = $sentencia->fetchAll();
                 if (count($resultado)) {
                     foreach ($resultado as $fila) {
-                        $entradas[] = new entrada($fila['id_entrada'], $fila['id_autor'], $fila['url'], $fila['titulo'], $fila['texto'], $fila['fecha'], $fila['activa']);
+                        $entradas[] = new entrada($fila['id_entrada'], $fila['id_autor'], $fila['url'], $fila['titulo'], $fila['texto'], $fila['fecha'], $fila['activa'], $fila['archivada']);
                     }
                 }
             } catch (PDOException $ex) {
@@ -56,7 +56,7 @@ class Repositorioentrada
                 $sentencia->execute();
                 $resultado = $sentencia->fetch();
                 if (!empty($resultado)) {
-                    $entrada = new entrada($resultado['id_entrada'], $resultado['id_autor'], $resultado['url'], $resultado['titulo'], $resultado['texto'], $resultado['fecha'], $resultado['activa']);
+                    $entrada = new entrada($resultado['id_entrada'], $resultado['id_autor'], $resultado['url'], $resultado['titulo'], $resultado['texto'], $resultado['fecha'], $resultado['activa'], $resultado['archivada']);
                 }
             } catch (PDOException $ex) {
                 print 'ERROR' . $ex->getMessage();
@@ -89,21 +89,13 @@ class Repositorioentrada
         $entradas = [];
         if (isset($conexion)) {
             try {
-                $sql = "SELECT * FROM entradas ORDER BY RAND() LIMIT $limite";
+                $sql = "SELECT * FROM entradas WHERE archivada = 0 ORDER BY RAND() LIMIT $limite";
                 $sentencia = $conexion->prepare($sql);
                 $sentencia->execute();
                 $resultado = $sentencia->fetchAll();
                 if (count($resultado)) {
                     foreach ($resultado as $resultado) {
-                        $entradas[] = new entrada(
-                            $resultado['id_entrada'],
-                            $resultado['id_autor'],
-                            $resultado['url'],
-                            $resultado['titulo'],
-                            $resultado['texto'],
-                            $resultado['fecha'],
-                            $resultado['activa']
-                        );
+                        $entradas[] = new entrada($resultado['id_entrada'], $resultado['id_autor'], $resultado['url'], $resultado['titulo'], $resultado['texto'], $resultado['fecha'], $resultado['activa'], $resultado['archivada']);
                     }
                 }
             } catch (PDOException $ex) {
@@ -136,26 +128,26 @@ class Repositorioentrada
         return $total;
     }
 
-    public static function entradasArchivadas($conexion, $id_usr)
+    public static function entradasArchivadas($conexion, $id_usuario)
     {
-        $total = 0;
+        $entradas_obtenidas = [];
         if (isset($conexion)) {
             try {
-                $sql = "SELECT count(*) as total FROM entradas WHERE id_autor = :id_autor and archivada = 1";
+                $sql = "SELECT a.id_entrada, a.id_autor, a.url, a.titulo, a.texto, a.fecha, a.activa, a.archivada, COUNT(b.id_comentario) AS 'cantidad_comentarios' FROM entradas a LEFT JOIN comentarios b ON a.id_entrada = b.id_entrada WHERE a.id_autor = :num and archivada = 1 GROUP BY a.id_entrada ORDER BY a.fecha DESC";
                 $sentencia = $conexion->prepare($sql);
-                $sentencia->bindParam(':id_autor', $id_usr, PDO::PARAM_STR);
+                $sentencia->bindParam(':num', $id_usuario, PDO::PARAM_STR);
                 $sentencia->execute();
-                $resultado = $sentencia->fetch();
-                if (!empty($resultado)) {
-                    $total = $resultado['total'];
+                $resultado = $sentencia->fetchAll();
+                if (count($resultado)) {
+                    foreach ($resultado as $fila) {
+                        $entradas_obtenidas[] = array(new entrada($fila['id_entrada'], $fila['id_autor'], $fila['url'], $fila['titulo'], $fila['texto'], $fila['fecha'], $fila['activa'], $fila['archivada']), $fila['cantidad_comentarios']);
+                    }
                 }
             } catch (PDOException $ex) {
                 print 'ERROR' . $ex->getMessage();
             }
-        } else {
-            return 'fallo';
         }
-        return $total;
+        return $entradas_obtenidas;
     }
 
     public static function entradas_usr_fecha($conexion, $id_usuario)
@@ -163,14 +155,14 @@ class Repositorioentrada
         $entradas_obtenidas = [];
         if (isset($conexion)) {
             try {
-                $sql = "SELECT a.id_entrada, a.id_autor, a.url, a.titulo, a.texto, a.fecha, a.activa, COUNT(b.id_comentario) AS 'cantidad_comentarios' FROM entradas a LEFT JOIN comentarios b ON a.id_entrada = b.id_entrada WHERE a.id_autor = :num GROUP BY a.id_entrada ORDER BY a.fecha DESC";
+                $sql = "SELECT a.id_entrada, a.id_autor, a.url, a.titulo, a.texto, a.fecha, a.activa, a.archivada, COUNT(b.id_comentario) AS 'cantidad_comentarios' FROM entradas a LEFT JOIN comentarios b ON a.id_entrada = b.id_entrada WHERE a.id_autor = :num and archivada = 0 GROUP BY a.id_entrada ORDER BY a.fecha DESC";
                 $sentencia = $conexion->prepare($sql);
                 $sentencia->bindParam(':num', $id_usuario, PDO::PARAM_STR);
                 $sentencia->execute();
                 $resultado = $sentencia->fetchAll();
                 if (count($resultado)) {
                     foreach ($resultado as $fila) {
-                        $entradas_obtenidas[] = array(new entrada($fila['id_entrada'], $fila['id_autor'], $fila['url'], $fila['titulo'], $fila['texto'], $fila['fecha'], $fila['activa']), $fila['cantidad_comentarios']);
+                        $entradas_obtenidas[] = array(new entrada($fila['id_entrada'], $fila['id_autor'], $fila['url'], $fila['titulo'], $fila['texto'], $fila['fecha'], $fila['activa'], $fila['archivada']), $fila['cantidad_comentarios']);
                     }
                 }
             } catch (PDOException $ex) {
@@ -267,6 +259,22 @@ class Repositorioentrada
             }
         }
         return $entradaInsertada;
+    } 
+    
+    public static function archivarEntrada($conexion, $idEntrada, $archivar)
+    {
+        $entradaarchivada = false;
+        if (isset($conexion)) {
+            try {
+                $sql = "UPDATE entradas SET archivada = $archivar WHERE id_entrada = $idEntrada";
+                $sentencia = $conexion->prepare($sql);
+                $sentencia = $conexion->prepare($sql);
+                $entradaarchivada = $sentencia->execute();
+            } catch (PDOException $ex) {
+                print 'ERROR' . $ex->getMessage();
+            }
+        }
+        return $entradaarchivada;
     }
 
     public static function DeleteEntrada($conexion, $idEntrada)

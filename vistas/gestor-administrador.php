@@ -23,8 +23,11 @@ $titulo = 'Troubles time - Panel de administración';
         case 'comentarios':
             include_once 'plantillas/gestor-comentarios.inc.php';
             break;
+        case 'archivo':
+            $array_archivo = repositorioentrada::entradasArchivadas(conexion::obtener_conexion(), $_SESSION['id_usuario']);
+            include_once 'plantillas/gestor-archivo.inc.php';
+            break;
     }
     conexion::cerrar_conexion();
     include_once 'plantillas/pc_closing.inc.php';
     include_once 'plantillas/documento-cierre.inc.php';
-?>

@@ -22,7 +22,7 @@ if (isset($_POST['submit'])) {
     $validador = new validadorEntradaEditada($_POST['titulo'], $_POST['entrada'], $url, $_SESSION['entradaPrevia'], conexion::obtener_conexion());
     if (isset($_POST['activa'])){ $activa = 0; }
     if ($validador->entrada_valida()) {
-        $entrada = new entrada(null, $_SESSION['id_usuario'], $url, $validador->getTitulo(), $validador->getTexto(), null, $activa);
+        $entrada = new entrada(null, $_SESSION['id_usuario'], $url, $validador->getTitulo(), $validador->getTexto(), null, $activa, 0);
         $entrada_insertada = repositorioentrada::actualizar_entrada(conexion::obtener_conexion(), $entrada, $_SESSION['entradaPrevia']);
         if ($entrada_insertada) {
             ?>
