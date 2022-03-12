@@ -5,30 +5,23 @@ include_once 'entrada.inc.php';
 
 class Repositorioentrada
 {
-    public static function insertar_entrada($conexion, $entrada)
-    {
-        $entrada_insertada = false;
+    public static function getEntrada($conexion, $idEntrada){
+        $entrada = null;
         if (isset($conexion)) {
             try {
-                $sql = "INSERT INTO entradas (id_autor, url, titulo, texto, fecha, activa) VALUES (:id_autor, :url, :titulo, :texto, NOW(), :activa)";
+                $sql = "SELECT * FROM entradas WHERE id_entrada = :idEntrada";
                 $sentencia = $conexion->prepare($sql);
-                $autorTemp = $entrada->getAutor();
-                $urlTemp = $entrada->getUrl();
-                $tituloTemp = $entrada->getTitulo();
-                $textoTemp = $entrada->getTexto();
-                $activaTemp = $entrada->getActiva();
-                $sentencia = $conexion->prepare($sql);
-                $sentencia->bindParam(':id_autor', $autorTemp, PDO::PARAM_STR);
-                $sentencia->bindParam(':url', $urlTemp, PDO::PARAM_STR);
-                $sentencia->bindParam(':titulo', $tituloTemp, PDO::PARAM_STR);
-                $sentencia->bindParam(':texto', $textoTemp, PDO::PARAM_STR);
-                $sentencia->bindParam(':activa', $activaTemp, PDO::PARAM_STR);
-                $entrada_insertada = $sentencia->execute();
+                $sentencia->bindParam(':idEntrada', $idEntrada, PDO::PARAM_STR);
+                $sentencia->execute();
+                $resultado = $sentencia->fetch();
+                if (!empty($resultado)) {
+                    $entrada = new entrada($resultado['id_entrada'], $resultado['id_autor'], $resultado['url'], $resultado['titulo'], $resultado['texto'], $resultado['fecha'], $resultado['activa']);
+                }
             } catch (PDOException $ex) {
                 print 'ERROR' . $ex->getMessage();
             }
         }
-        return $entrada_insertada;
+        return $entrada;
     }
 
     public static function obtener_fecha_desc($conexion)
@@ -36,7 +29,7 @@ class Repositorioentrada
         $entradas = [];
         if (isset($conexion)) {
             try {
-                $sql = 'SELECT * FROM entradas ORDER BY fecha DESC LIMIT 16';
+                $sql = 'SELECT * FROM entradas WHERE archivada = 0 ORDER BY fecha DESC LIMIT 16';
                 $sentencia = $conexion->prepare($sql);
                 $sentencia->execute();
                 $resultado = $sentencia->fetchAll();
@@ -70,6 +63,25 @@ class Repositorioentrada
             }
         }
         return $entrada;
+    }
+
+    public static function urlCoincide($conexion, $url)
+    {
+        if (isset($conexion)) {
+            try {
+                $sql = "SELECT * FROM entradas WHERE url LIKE :url";
+                $sentencia = $conexion->prepare($sql);
+                $sentencia->bindParam(':url', $url, PDO::PARAM_STR);
+                $sentencia->execute();
+                $resultado = $sentencia->fetch();
+                if (!empty($resultado)) {
+                    return true;
+                }
+            } catch (PDOException $ex) {
+                print 'ERROR' . $ex->getMessage();
+            }
+        }
+        return false;
     }
 
     public static function entrada_azar($conexion, $limite)
@@ -106,10 +118,32 @@ class Repositorioentrada
         $total = 0;
         if (isset($conexion)) {
             try {
-                $sql = "SELECT count(*) as total FROM entradas WHERE id_autor = :id_autor and activa = :num";
+                $sql = "SELECT count(*) as total FROM entradas WHERE id_autor = :id_autor and activa = :num and archivada = 0";
                 $sentencia = $conexion->prepare($sql);
                 $sentencia->bindParam(':id_autor', $id_usr, PDO::PARAM_STR);
                 $sentencia->bindParam(':num', $num, PDO::PARAM_STR);
+                $sentencia->execute();
+                $resultado = $sentencia->fetch();
+                if (!empty($resultado)) {
+                    $total = $resultado['total'];
+                }
+            } catch (PDOException $ex) {
+                print 'ERROR' . $ex->getMessage();
+            }
+        } else {
+            return 'fallo';
+        }
+        return $total;
+    }
+
+    public static function entradasArchivadas($conexion, $id_usr)
+    {
+        $total = 0;
+        if (isset($conexion)) {
+            try {
+                $sql = "SELECT count(*) as total FROM entradas WHERE id_autor = :id_autor and archivada = 1";
+                $sentencia = $conexion->prepare($sql);
+                $sentencia->bindParam(':id_autor', $id_usr, PDO::PARAM_STR);
                 $sentencia->execute();
                 $resultado = $sentencia->fetch();
                 if (!empty($resultado)) {
@@ -163,6 +197,76 @@ class Repositorioentrada
             }
         }
         return $titulo_existe;
+    }
+
+    public static function insertar_entrada($conexion, $entrada)
+    {
+        $entrada_insertada = false;
+        if (isset($conexion)) {
+            try {
+                $sql = "INSERT INTO entradas (id_autor, url, titulo, texto, fecha, activa) VALUES (:id_autor, :url, :titulo, :texto, NOW(), :activa)";
+                $sentencia = $conexion->prepare($sql);
+                $autorTemp = $entrada->getAutor();
+                $urlTemp = $entrada->getUrl();
+                $tituloTemp = $entrada->getTitulo();
+                $textoTemp = $entrada->getTexto();
+                $activaTemp = $entrada->getActiva();
+                $sentencia = $conexion->prepare($sql);
+                $sentencia->bindParam(':id_autor', $autorTemp, PDO::PARAM_STR);
+                $sentencia->bindParam(':url', $urlTemp, PDO::PARAM_STR);
+                $sentencia->bindParam(':titulo', $tituloTemp, PDO::PARAM_STR);
+                $sentencia->bindParam(':texto', $textoTemp, PDO::PARAM_STR);
+                $sentencia->bindParam(':activa', $activaTemp, PDO::PARAM_STR);
+                $entrada_insertada = $sentencia->execute();
+            } catch (PDOException $ex) {
+                print 'ERROR' . $ex->getMessage();
+            }
+        }
+        return $entrada_insertada;
+    }
+
+    public static function actualizar_entrada($conexion, $entrada, $entradaPrevia)
+    {
+        $entradaInsertada = false;
+        if (isset($conexion)) {
+            try {
+                $sql = "INSERT INTO entradasEditadas (id_entrada, id_autor, url, titulo, texto, fechaOriginal, fechaEdicion, activa) VALUES (:id_entrada, :id_autor_, :url_, :titulo_previo, :texto_previo, :fechaOriginal, NOW(), :activa_previo)";
+                $sentencia = $conexion->prepare($sql);
+                $idPrevia = $entradaPrevia->getId_entrada();
+                $autorPrevio = $entradaPrevia->getAutor();
+                $urlPrevia = $entradaPrevia->getUrl();
+                $tituloPrevio = $entradaPrevia->getTitulo();
+                $textoPrevio = $entradaPrevia->getTexto();
+                $fechaPrevia = $entradaPrevia->getFecha();
+                $activaPrevia = $entradaPrevia->getActiva();
+                $sentencia = $conexion->prepare($sql);
+                $sentencia->bindParam(':id_entrada', $idPrevia, PDO::PARAM_STR);
+                $sentencia->bindParam(':id_autor_', $autorPrevio, PDO::PARAM_STR);
+                $sentencia->bindParam(':url_', $urlPrevia, PDO::PARAM_STR);
+                $sentencia->bindParam(':titulo_previo', $tituloPrevio, PDO::PARAM_STR);
+                $sentencia->bindParam(':texto_previo', $textoPrevio, PDO::PARAM_STR);
+                $sentencia->bindParam(':fechaOriginal', $fechaPrevia, PDO::PARAM_STR);
+                $sentencia->bindParam(':activa_previo', $activaPrevia, PDO::PARAM_STR);
+                $sentencia->execute();
+                $sql = "UPDATE entradas SET id_autor = :id_autor, url = :url, titulo = :titulo, texto = :texto, fecha = now(), activa = :activa WHERE id_entrada = $idPrevia";
+                $sentencia = $conexion->prepare($sql);
+                $autorTemp = $entrada->getAutor();
+                $urlTemp = $entrada->getUrl();
+                $tituloTemp = $entrada->getTitulo();
+                $textoTemp = $entrada->getTexto();
+                $activaTemp = $entrada->getActiva();
+                $sentencia = $conexion->prepare($sql);
+                $sentencia->bindParam(':id_autor', $autorTemp, PDO::PARAM_STR);
+                $sentencia->bindParam(':url', $urlTemp, PDO::PARAM_STR);
+                $sentencia->bindParam(':titulo', $tituloTemp, PDO::PARAM_STR);
+                $sentencia->bindParam(':texto', $textoTemp, PDO::PARAM_STR);
+                $sentencia->bindParam(':activa', $activaTemp, PDO::PARAM_STR);
+                $entradaInsertada = $sentencia->execute();
+            } catch (PDOException $ex) {
+                print 'ERROR' . $ex->getMessage();
+            }
+        }
+        return $entradaInsertada;
     }
 
     public static function DeleteEntrada($conexion, $idEntrada)

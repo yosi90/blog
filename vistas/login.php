@@ -9,7 +9,7 @@ if (isset($_POST['login'])) {
     conexion::abrir_conexion();
     $validador = new validadorLogin($_POST['correo'], $_POST['clave'], conexion::obtener_conexion());
     if ($validador->obtener_error() === '' && !is_null($validador->obtener_usuario())) {
-        controlsesion::iniciar_sesion($validador->obtener_usuario()->getid(), $validador->obtener_usuario()->getnombre());
+        controlsesion::iniciar_sesion($validador->obtener_usuario()->getid(), $validador->obtener_usuario()->getnombre(), $validador->obtener_usuario()->getAdm());
         redireccion::redirigir(SERVIDOR);
     }
     conexion::cerrar_conexion();

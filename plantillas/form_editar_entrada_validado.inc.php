@@ -13,10 +13,10 @@
             <input type="checkbox" style="height:24px; width:24px" id="activa" name="activa" value="no" <?php if (!$entrada_publica) echo 'checked'; ?>><label class="ms-2" for="activa">Marca esta casilla para guardar la entrada como borrador</label>
         </div>
         <div class="col-md-2 d-flex pe-0">
-            <button type="submit" class="btn btn-outline-light flex-fill" name="submit">Publicar entrada</button>
+            <button type="submit" class="btn btn-outline-light flex-fill" name="submit">Editar entrada</button>
         </div>
         <div class="col-md-2 d-flex pe-0">
-            <button type="reset" class="btn btn-outline-light flex-fill rosa">Reiniciar</button>
+            <a class="btn btn-outline-light flex-fill rosa" role="button" href="<?php echo RUTA_GESTOR_ENTRADAS ?>">Cancelar</a>
         </div>
     </div>
 </div>

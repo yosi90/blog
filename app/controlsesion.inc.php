@@ -1,13 +1,14 @@
 <?php
 class controlSesion
 {
-    public static function iniciar_sesion($id_usuario, $nombre_usuario)
+    public static function iniciar_sesion($id_usuario, $nombre_usuario, $administrador)
     {
         if (session_id() == '' || session_id() == null) {
             session_start();
         }
         $_SESSION['id_usuario'] = $id_usuario;
         $_SESSION['nombre_usuario'] = $nombre_usuario;
+        $_SESSION['administrador'] = $administrador;
     }
 
     public static function cerrar_sesion()
@@ -20,6 +21,9 @@ class controlSesion
         }
         if (isset($_SESSION['nombre_usuario'])) {
             unset($_SESSION['nombre_usuario']);
+        }
+        if (isset($_SESSION['administrador'])) {
+            unset($_SESSION['administrador']);
         }
         session_destroy();
     }

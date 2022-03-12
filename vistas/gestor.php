@@ -1,10 +1,9 @@
 <?php
+$titulo = 'Troubles time - Panel de control';
 include_once 'plantillas/documento-declaracion.inc.php';
 include_once 'app/Conexion.inc.php';
 include_once 'plantillas/pc_declare.inc.php';
 conexion::abrir_conexion();
-
-if (!controlsesion::sesion_iniciada()) { redireccion::redirigir(SERVIDOR); }
 
 switch ($gestor_actual)
 {

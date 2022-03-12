@@ -27,7 +27,6 @@ class entrada
     public function getTexto() { return $this->texto; }
     public function getFecha() { return $this->fecha; }
     public function getActiva() { return $this->activa; }
-    public function setUrl($url) { $this->url = $url; }
     public function setTitulo($titulo) { $this->titulo = $titulo; }
     public function setTexto($texto) { $this->texto = $texto; }
     public function setActiva ($activa) { $this->activa = $activa; }

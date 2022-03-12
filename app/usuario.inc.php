@@ -6,6 +6,7 @@ class Usuario {
     private $password;
     private $registro;
     private $activo;
+    private $administrador;
     
 
     public function getId() {
@@ -44,13 +45,18 @@ class Usuario {
         $this-> activo = $activo;
     }
 
+    public function getAdm() {
+        return $this-> administrador;
+    }
 
-    public function __construct($id_usuario, $nombre, $correo, $password, $registro, $activo) {
+
+    public function __construct($id_usuario, $nombre, $correo, $password, $registro, $activo, $administrador) {
         $this -> id_usuario = $id_usuario;
         $this -> nombre = $nombre;
         $this -> correo = $correo;
         $this -> password = $password;
         $this -> registro = $registro;
         $this -> activo = $activo;
+        $this -> administrador = $administrador;
     }
 }

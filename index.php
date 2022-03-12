@@ -9,6 +9,11 @@ include_once 'app/RepositorioEntrada.inc.php';
 include_once 'app/RepositorioComentarios.inc.php';
 include_once 'app/controlsesion.inc.php';
 
+//Primero destruimos variables de sesión que no deben existir fuera de su página
+try{
+    unset($_SESSION['entradaPrevia']);
+} catch (PDOException $ex){}
+
 $componentes_url = parse_url($_SERVER['REQUEST_URI']);
 $ruta = $componentes_url['path'];
 $partes_ruta = explode('/', $ruta);
@@ -61,6 +66,13 @@ if ($partes_ruta[0] == 'blog') {
                 case 'borrar-entrada':
                     if (controlsesion::sesion_iniciada()) {
                         $ruta_elegida = 'scripts/borrar-entrada.php';
+                    } else {
+                        $ruta_elegida = 'vistas/home.php';
+                    }
+                    break;
+                case 'editar-entrada':
+                    if (controlsesion::sesion_iniciada()) {
+                        $ruta_elegida = 'vistas/editar-entrada.php';
                     } else {
                         $ruta_elegida = 'vistas/home.php';
                     }
