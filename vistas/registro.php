@@ -31,7 +31,7 @@ if (isset($_POST['submit'])) {
                         <a href="<?php echo RUTA_LOGIN; ?>" class="my-3 flex-row">¿Ya tienes cuenta?</a>
                     </div>
                     <div class="row">
-                        <a href="#" class="my-3"> ¿Olvidate tu contraseña?</a>
+                        <a href="<?php echo RUTA_RECUPERAR_PASS ?>" class="my-3"> ¿Olvidate tu contraseña?</a>
                     </div>
                 </div>
             </div>

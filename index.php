@@ -9,7 +9,7 @@ include_once 'app/RepositorioEntrada.inc.php';
 include_once 'app/RepositorioComentarios.inc.php';
 include_once 'app/controlsesion.inc.php';
 
-//Primero destruimos variables de sesión que no deben existir fuera de su página
+//Primero destruimos variables de sesión que no deben existir fuera de su entorno
 try{
     unset($_SESSION['entradaPrevia']);
 } catch (PDOException $ex){}
@@ -40,6 +40,12 @@ if ($partes_ruta[0] == 'blog') {
                 break;
             case 'registro':
                 $ruta_elegida = 'vistas/registro.php';
+                break;
+            case 'recuperar-password':
+                $ruta_elegida = 'vistas/recuperar-password.php';
+                break;
+            case 'url-usr':
+                $ruta_elegida = 'scripts/url-usr.php';
                 break;
             case 'relleno-dev':
                 if (controlsesion::sesion_iniciada() && $_SESSION['administrador'] == '1') {
@@ -128,6 +134,10 @@ if ($partes_ruta[0] == 'blog') {
                     $ruta_elegida = 'vistas/gestor.php';
                     break;
             }
+        }
+        if($partes_ruta[1] == 'rec-pass'){
+            $url_unica = $partes_ruta[2];
+            $ruta_elegida = 'vistas/actPass.php';
         }
     }
 }

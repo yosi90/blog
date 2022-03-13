@@ -27,6 +27,9 @@ define("RUTA_GESTOR_FAVORITOS", RUTA_GESTOR."/favoritos");
 define("RUTA_GESTOR_ARCHIVO", RUTA_GESTOR."/archivo");
 define("RUTA_GESTOR_ENTRADAS_USR", RUTA_GESTOR_ADM."/entradas-usuario");
 define("RUTA_GESTOR_COMENTARIOS_USR", RUTA_GESTOR_ADM."/comentarios-usuario");
+define("RUTA_RECUPERAR_PASS", SERVIDOR."/recuperar-password");
+define("RUTA_URL_USR", SERVIDOR."/url-usr");
+define("RUTA_URL_REC", SERVIDOR."/rec-pass");
 
 define("PLANTILLAS", SERVIDOR . "/plantillas/");
 define("VISTAS", SERVIDOR . "/vistas/");

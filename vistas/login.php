@@ -40,7 +40,7 @@ if (isset($_POST['login'])) {
                         <button type="submit" name="login" id="login" class="btn btn-outline-light form-control mt-3 flex-fill">Iniciar sesión</button>
                     </form>
                     <div class="d-flex flex-row flex-wrap flex-fill justify-content-center mt-2">
-                        <a href="#">¿Olvidaste tu contraseña?</a>
+                        <a href="<?php echo RUTA_RECUPERAR_PASS ?>">¿Olvidaste tu contraseña?</a>
                     </div>
                 </div>
             </div>

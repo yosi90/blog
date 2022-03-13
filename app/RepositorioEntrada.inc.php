@@ -203,7 +203,6 @@ class Repositorioentrada
                 $tituloTemp = $entrada->getTitulo();
                 $textoTemp = $entrada->getTexto();
                 $activaTemp = $entrada->getActiva();
-                $sentencia = $conexion->prepare($sql);
                 $sentencia->bindParam(':id_autor', $autorTemp, PDO::PARAM_STR);
                 $sentencia->bindParam(':url', $urlTemp, PDO::PARAM_STR);
                 $sentencia->bindParam(':titulo', $tituloTemp, PDO::PARAM_STR);
@@ -222,6 +221,7 @@ class Repositorioentrada
         $entradaInsertada = false;
         if (isset($conexion)) {
             try {
+                $conexion->beginTransaction();
                 $sql = "INSERT INTO entradasEditadas (id_entrada, id_autor, url, titulo, texto, fecha, activa) VALUES (:id_entrada, :id_autor_, :url_, :titulo_previo, :texto_previo, NOW(), :activa_previo)";
                 $sentencia = $conexion->prepare($sql);
                 $idPrevia = $entradaPrevia->getId_entrada();
@@ -230,7 +230,6 @@ class Repositorioentrada
                 $tituloPrevio = $entradaPrevia->getTitulo();
                 $textoPrevio = $entradaPrevia->getTexto();
                 $activaPrevia = $entradaPrevia->getActiva();
-                $sentencia = $conexion->prepare($sql);
                 $sentencia->bindParam(':id_entrada', $idPrevia, PDO::PARAM_STR);
                 $sentencia->bindParam(':id_autor_', $autorPrevio, PDO::PARAM_STR);
                 $sentencia->bindParam(':url_', $urlPrevia, PDO::PARAM_STR);
@@ -244,13 +243,14 @@ class Repositorioentrada
                 $tituloTemp = $entrada->getTitulo();
                 $textoTemp = $entrada->getTexto();
                 $activaTemp = $entrada->getActiva();
-                $sentencia = $conexion->prepare($sql);
                 $sentencia->bindParam(':url', $urlTemp, PDO::PARAM_STR);
                 $sentencia->bindParam(':titulo', $tituloTemp, PDO::PARAM_STR);
                 $sentencia->bindParam(':texto', $textoTemp, PDO::PARAM_STR);
                 $sentencia->bindParam(':activa', $activaTemp, PDO::PARAM_STR);
                 $entradaInsertada = $sentencia->execute();
+                $conexion->commit();
             } catch (PDOException $ex) {
+                $conexion->rollBack();
                 print 'ERROR' . $ex->getMessage();
             }
         }
@@ -263,7 +263,6 @@ class Repositorioentrada
         if (isset($conexion)) {
             try {
                 $sql = "UPDATE entradas SET archivada = $archivar WHERE id_entrada = $idEntrada";
-                $sentencia = $conexion->prepare($sql);
                 $sentencia = $conexion->prepare($sql);
                 $entradaarchivada = $sentencia->execute();
             } catch (PDOException $ex) {

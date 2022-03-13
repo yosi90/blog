@@ -39,6 +39,11 @@
                     <h3>Favoritos</h3>
                 </div>
                 <div class="card-body bg-dark-light text-white">
+                    <h4>-</h4>
+                    <h5>Entradas favoritas</h5>
+                    <br>
+                    <h4>-</h4>
+                    <h5>Autores favoritos</h5>
                 </div>
             </div>
         </div>

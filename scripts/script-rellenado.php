@@ -17,7 +17,7 @@ for ($usuarios = 0; $usuarios < $cantUsers; $usuarios++) {
     $nombre = TextoRandom(rand(4, 10));
     $email = TextoRandom(8) . '@' . TextoRandom(5) . '.com';
     $password = password_hash(ContraseñaRandom(rand(8, 15)), PASSWORD_DEFAULT);
-    $usuario = new usuario('', $nombre, $email, $password, '', '');
+    $usuario = new usuario('', $nombre, $email, $password, '', '', 0);
     RepositorioUsuario::insertar_usuario(conexion::obtener_conexion(), $usuario);
 }
 
@@ -26,7 +26,7 @@ for ($entradas = 0; $entradas < $cantEntradas; $entradas++) {
     $url = $titulo;
     $texto = lorem();
     $autor = rand(1, $cantUsers);
-    $entrada = new entrada('', $autor, $url, $titulo, $texto, '', '');
+    $entrada = new entrada('', $autor, $url, $titulo, $texto, '', '', 0);
     repositorioentrada::insertar_entrada(conexion::obtener_conexion(), $entrada);
 }
 
