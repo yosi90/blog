@@ -222,14 +222,13 @@ class Repositorioentrada
         $entradaInsertada = false;
         if (isset($conexion)) {
             try {
-                $sql = "INSERT INTO entradasEditadas (id_entrada, id_autor, url, titulo, texto, fechaOriginal, fechaEdicion, activa) VALUES (:id_entrada, :id_autor_, :url_, :titulo_previo, :texto_previo, :fechaOriginal, NOW(), :activa_previo)";
+                $sql = "INSERT INTO entradasEditadas (id_entrada, id_autor, url, titulo, texto, fecha, activa) VALUES (:id_entrada, :id_autor_, :url_, :titulo_previo, :texto_previo, NOW(), :activa_previo)";
                 $sentencia = $conexion->prepare($sql);
                 $idPrevia = $entradaPrevia->getId_entrada();
                 $autorPrevio = $entradaPrevia->getAutor();
                 $urlPrevia = $entradaPrevia->getUrl();
                 $tituloPrevio = $entradaPrevia->getTitulo();
                 $textoPrevio = $entradaPrevia->getTexto();
-                $fechaPrevia = $entradaPrevia->getFecha();
                 $activaPrevia = $entradaPrevia->getActiva();
                 $sentencia = $conexion->prepare($sql);
                 $sentencia->bindParam(':id_entrada', $idPrevia, PDO::PARAM_STR);
@@ -237,18 +236,15 @@ class Repositorioentrada
                 $sentencia->bindParam(':url_', $urlPrevia, PDO::PARAM_STR);
                 $sentencia->bindParam(':titulo_previo', $tituloPrevio, PDO::PARAM_STR);
                 $sentencia->bindParam(':texto_previo', $textoPrevio, PDO::PARAM_STR);
-                $sentencia->bindParam(':fechaOriginal', $fechaPrevia, PDO::PARAM_STR);
                 $sentencia->bindParam(':activa_previo', $activaPrevia, PDO::PARAM_STR);
                 $sentencia->execute();
-                $sql = "UPDATE entradas SET id_autor = :id_autor, url = :url, titulo = :titulo, texto = :texto, fecha = now(), activa = :activa WHERE id_entrada = $idPrevia";
+                $sql = "UPDATE entradas SET url = :url, titulo = :titulo, texto = :texto, activa = :activa WHERE id_entrada = $idPrevia";
                 $sentencia = $conexion->prepare($sql);
-                $autorTemp = $entrada->getAutor();
                 $urlTemp = $entrada->getUrl();
                 $tituloTemp = $entrada->getTitulo();
                 $textoTemp = $entrada->getTexto();
                 $activaTemp = $entrada->getActiva();
                 $sentencia = $conexion->prepare($sql);
-                $sentencia->bindParam(':id_autor', $autorTemp, PDO::PARAM_STR);
                 $sentencia->bindParam(':url', $urlTemp, PDO::PARAM_STR);
                 $sentencia->bindParam(':titulo', $tituloTemp, PDO::PARAM_STR);
                 $sentencia->bindParam(':texto', $textoTemp, PDO::PARAM_STR);
