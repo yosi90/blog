@@ -41,7 +41,7 @@
                             $cantComentarios = $array_entradas[$i][1];
                         ?>
                             <tr>
-                                <td title="<?php echo $entrada_actual->getTitulo(); ?>"><p class="lt-linea-200 mb-0"><?php echo $entrada_actual->getTitulo(); ?></p></td>
+                                <td title="<?php echo $entrada_actual->getTitulo(); ?>"><p class="lt-linea-200 mb-0 text-start"><?php echo $entrada_actual->getTitulo(); ?></p></td>
                                 <td><?php echo date('d/M/Y', strtotime($entrada_actual->getFecha())); ?></td>
                                 <td>
                                     <?php

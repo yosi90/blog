@@ -3,6 +3,7 @@ $titulo = 'Troubles time';
 include_once 'plantillas/documento-declaracion.inc.php';
 include_once 'app/escritorEntradas.inc.php';
 ?>
+<img class="logo" src="img/logoSF.png" >
 <div class="container">
     <div class="row">
         <div class="col-12">

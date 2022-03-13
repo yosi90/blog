@@ -48,8 +48,8 @@ include_once 'plantillas/pc_declare.inc.php';
                 $_SESSION['entradaPrevia'] = $entrada;
                 include_once 'plantillas/form_editar_entrada.inc.php';
                 conexion::cerrar_conexion();
-            } else if (isset($_POST['guardar'])) {
-                include_once 'plantillas/form_nueva_entrada_validado.inc.php';
+            } else if (isset($_POST['submit'])) {
+                include_once 'plantillas/form_editar_entrada_validado.inc.php';
             }
             ?>
         </form>

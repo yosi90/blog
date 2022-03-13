@@ -9,19 +9,19 @@ class validadorEntradaEditada extends validadorEntrada
         $this->error_texto = $this->validar_texto($texto);
     }
 
-    private function validar_titulo($conexion, $titulo, $url, $tituloPrevio)//verificar que al hacer un return la ejecución de la función finaliza en el y no sigue hasta el final.
+    private function validar_titulo($conexion, $titulo, $url, $tituloPrevio)
     {
+        $this->titulo = $titulo;
         if (!$this->variable_iniciada($titulo)) {
             return "Debes escribir un título";
         } else if (strlen($titulo) > 80) {
-            return "El titulo no puede tener mas de 80 caracteres";
+            return "El título no puede tener mas de 80 caracteres";
         } else if ($titulo != $tituloPrevio) {
             if (repositorioentrada::titulo_existe($conexion, $titulo)) {
-                return "Titulo ya usado";
+                return "Título ya usado";
             } else if (repositorioentrada::urlCoincide($conexion, $url)) {
-                return "Este titulo provocaría una url duplicada";
+                return "Este título provocaría una url duplicada";
             }
         } 
-        $this->titulo = $titulo;
     }
 }

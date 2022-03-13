@@ -11,6 +11,7 @@ class validadorEntradaNueva extends validadorEntrada
 
     private function validar_titulo($conexion, $titulo, $url)
     {
+        $this->titulo = $titulo;
         if (!$this->variable_iniciada($titulo)) {
             return "Debes escribir un título";
         } else if (strlen($titulo) > 80) {
@@ -20,6 +21,5 @@ class validadorEntradaNueva extends validadorEntrada
         }else if (repositorioentrada::urlCoincide($conexion, $url)) {
             return "Este titulo provocaría una url duplicada";
         }
-        $this->titulo = $titulo;
     }
 }

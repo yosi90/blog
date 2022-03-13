@@ -6,7 +6,7 @@ if (isset($_POST['submit'])) {
     conexion::abrir_conexion();
     $validador = new validadorRegistro($_POST['nombre'], $_POST['email'], $_POST['clave1'], $_POST['clave2'], conexion::obtener_conexion());
     if ($validador->registro_valido()) {
-        $usuario = new usuario('', $validador->obtener_nombre(), $validador->obtener_email(), password_hash($validador->obtener_clave(), PASSWORD_DEFAULT), '', '');
+        $usuario = new usuario('', $validador->obtener_nombre(), $validador->obtener_email(), password_hash($validador->obtener_clave(), PASSWORD_DEFAULT), '', '', 0);
         $usuario_insertado = RepositorioUsuario::insertar_usuario(conexion::obtener_conexion(), $usuario);
         if ($usuario_insertado) {
             redireccion::redirigir(RUTA_REGISTRO_CORRECTO . '/' . $usuario->getNombre());
@@ -15,13 +15,11 @@ if (isset($_POST['submit'])) {
     conexion::cerrar_conexion();
 }
 ?>
-<div class="container"> <!-- Jumbotron -->
+<div class="container">
     <div class="row">
-        <div class="col-2"></div>
-        <div class="col-8">
-            <div class="my-5 d-flex justify-content-center p-3 bg-dark bg-opacity-75 text-white jumbo fz-jumbo">Formulario de registro</div>
+        <div class="col-12">
+            <div class="d-flex justify-content-center p-3 mt-5 mb-1 bg-dark translucido text-white jumbo fz-jumbo">Formulario de registro</div>
         </div>
-        <div class="col-2"></div>
     </div>
 </div>
 <div class="container">
@@ -30,7 +28,7 @@ if (isset($_POST['submit'])) {
             <div class="card bg-dark">
                 <div class="card-body">
                     <div class="row">
-                        <a href="inicio_sesion.php" class="my-3 flex-row">¿Ya tienes cuenta?</a>
+                        <a href="<?php echo RUTA_LOGIN; ?>" class="my-3 flex-row">¿Ya tienes cuenta?</a>
                     </div>
                     <div class="row">
                         <a href="#" class="my-3"> ¿Olvidate tu contraseña?</a>

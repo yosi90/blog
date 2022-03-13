@@ -22,50 +22,39 @@ abstract class validadorEntrada
 
     protected function validar_texto($texto)
     {
+        $this->texto = $texto;
         if (!$this->variable_iniciada($texto)) {
             return "Debes escribir algo de texto";
         } else if (strlen($texto) < 20) {
             return "Entrada demasiado corta";
-        } else {
-            $this->texto = $texto;
         }
     }
 
-    public function getTitulo()
-    {
-        return $this->titulo;
-    }
-    public function getTexto()
-    {
-        return $this->texto;
-    }
+    public function getTitulo() { return $this->titulo; }
+    public function getTexto() { return $this->texto; }
 
     public function mostrar_titulo()
     {
-        if ($this->titulo != "") {
-            echo 'value = "' . $this->titulo . '"';
-        }
+        if ($this->titulo != "")
+            echo $this->titulo;
     }
 
     public function mostrar_texto()
     {
-        if ($this->texto != "" && strlen(trim($this->texto)) > 0) {
+        if ($this->texto != "" && strlen(trim($this->texto)) > 0)
             echo $this->texto;
-        }
     }
 
     public function mostrar_error_titulo()
     {
-        if ($this->error_titulo != "") {
+        if ($this->error_titulo != "")
             echo $this->aviso_inicio . $this->error_titulo . $this->aviso_cierre;
-        }
     }
 
     public function mostrar_error_texto()
     {
-        if ($this->error_texto != "") {
+        if ($this->error_texto != "")
             echo $this->aviso_inicio . $this->error_texto . $this->aviso_cierre;
-        }
     }
 
     public function entrada_valida()

@@ -8,7 +8,7 @@
     <script>CKEDITOR.replace('entrada');</script>
     <div class="row mx-auto py-1">
         <div class="col-md-8 d-flex flex-fill align-items-center p-0">
-            <input type="checkbox" style="height:24px; width:24px" id="activa" name="activa" value="no" <?php if ($entrada->getActiva()) echo 'checked'; ?>><label class="ms-2" for="activa">Marca esta casilla para guardar la entrada como borrador</label>
+            <input type="checkbox" style="height:24px; width:24px" id="activa" name="activa" value="no" <?php if (!$entrada->getActiva()) echo 'checked'; ?>><label class="ms-2" for="activa">Marca esta casilla para guardar la entrada como borrador</label>
         </div>
         <div class="col-md-2 d-flex pe-0">
             <button type="submit" class="btn btn-outline-light flex-fill" name="submit">Editar entrada</button>
