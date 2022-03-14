@@ -16,6 +16,7 @@ class recuperarPassword{
     }
 
     public function getIdUrl() { return $this->id_url; }
+    public function getIdUsr() { return $this->id_usuario; }
     public function getUrl() { return $this->url; }
     public function getIntentos() { return $this->intentos; }
 }

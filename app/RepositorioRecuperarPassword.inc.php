@@ -37,7 +37,7 @@ class RepositorioRecuperarPassword
             }
         }
         if ($peticion != false) {
-            if ($peticion->getIntentos() >= 3) {
+            if ($peticion->getIntentos() == 3) {
                 return 'bloqueado';
             } else {
                 RepositorioRecuperarPassword::añadirIntento($conexion, $peticion->getIdUrl(), ($peticion->getIntentos() + 1));
@@ -91,5 +91,26 @@ class RepositorioRecuperarPassword
             }
         }
         return $peticion;
+    }
+
+    public static function ActualizarContraseña($conexion, $password, $idUsuario, $idPeticion)
+    {
+        if (isset($conexion)) {
+            try {
+                $conexion->beginTransaction();
+                $sql = "UPDATE usuarios SET password = :password WHERE id_usuario = :idUsuario";
+                $sentencia = $conexion->prepare($sql);
+                $sentencia->bindParam(':password', $password, PDO::PARAM_STR);
+                $sentencia->bindParam(':idUsuario', $idUsuario, PDO::PARAM_STR);
+                $sentencia->execute();
+                $conexion->commit();
+                RepositorioRecuperarPassword::añadirIntento($conexion, $idPeticion, 5);
+                return true;
+            } catch (PDOException $ex) {
+                $conexion->rollBack();
+                print 'ERROR' . $ex->getMessage();
+            }
+        }
+        return false;
     }
 }

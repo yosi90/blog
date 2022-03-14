@@ -1,0 +1,5 @@
+<input name="clave1" class="form-control textbox mt-1" type="password" maxlength="25" placeholder="Nueva contraseña" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="La contraseña debe contener al menos un número, una letra minúscula, una letra mayúscula y al menos 8 caracteres." required>
+<?php $validador->insertErrorClave1(); ?>
+<input name="clave2" class="form-control textbox mt-1" type="password" maxlength="25" placeholder="Confirmar nueva contraseña" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="La contraseña debe contener al menos un número, una letra minúscula, una letra mayúscula y al menos 8 caracteres." required>
+<?php $validador->insertErrorClave2(); ?>
+<button type="submit" name="submit" id="submit" class="btn btn-outline-light form-control mt-3 flex-fill">Actualizar</button>
