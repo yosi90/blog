@@ -25,6 +25,9 @@ if ($partes_ruta[0] == 'blog') {
         $ruta_elegida = 'vistas/home.php';
     } else if (count($partes_ruta) == 2) {
         switch ($partes_ruta[1]) {
+            case 'buscar':
+                $ruta_elegida = 'vistas/busqueda.php';
+                break;
             case 'autores':
                 $ruta_elegida = 'vistas/autores.php';
                 break;
@@ -73,6 +76,13 @@ if ($partes_ruta[0] == 'blog') {
             case 'nueva-entrada':
                 if (controlsesion::sesion_iniciada()) {
                     $ruta_elegida = 'vistas/nueva-entrada.php';
+                } else {
+                    $ruta_elegida = 'vistas/home.php';
+                }
+                break;
+            case 'activar-entrada':
+                if (controlsesion::sesion_iniciada()) {
+                    $ruta_elegida = 'scripts/activar-entrada.php';
                 } else {
                     $ruta_elegida = 'vistas/home.php';
                 }

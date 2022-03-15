@@ -23,13 +23,9 @@ if (isset($_POST['correo'])) {
             </script>
         <?php
         } else {
-            /*Generamos nueva petición*/
             $urlRandom = hash('sha256', TextoRandom(rand(0, 40)) . $usuario->getNombre());
             $peticion = RepositorioRecuperarPassword::generarPeticion(conexion::obtener_conexion(), $usuario->getId(), $urlRandom);
-            /*Enviamos correo electrónico
-            
-            */
-            /*Avisamos en pantalla de que el correo fue enviado.*/
+            /*Enviamos correo electrónico*/
         ?>
             <script>
                 alert("Se ha enviado un correo electrónico con instrucciones a la dirección solicitada");

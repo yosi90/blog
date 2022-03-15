@@ -17,6 +17,7 @@ define("RUTA_INICIAR_SESION", SERVIDOR."/inicio_sesion");
 define("RUTA_ENTRADA", SERVIDOR."/entrada");
 define("RUTA_NUEVA_ENTRADA", SERVIDOR."/nueva-entrada");
 define("RUTA_EDITAR_ENTRADA", SERVIDOR."/editar-entrada");
+define("RUTA_ACTIVAR_ENTRADA", SERVIDOR."/activar-entrada");
 define("RUTA_BORRAR_ENTRADA", SERVIDOR."/borrar-entrada");
 define("RUTA_ARCHIVAR_ENTRADA", SERVIDOR."/archivar-entrada");
 define("RUTA_GESTOR", SERVIDOR."/gestor");
@@ -30,6 +31,7 @@ define("RUTA_GESTOR_COMENTARIOS_USR", RUTA_GESTOR_ADM."/comentarios-usuario");
 define("RUTA_RECUPERAR_PASS", SERVIDOR."/recuperar-password");
 define("RUTA_URL_USR", SERVIDOR."/url-usr");
 define("RUTA_URL_REC", SERVIDOR."/rec-pass");
+define("RUTA_BUSQUEDA", SERVIDOR."/buscar");
 
 define("PLANTILLAS", SERVIDOR . "/plantillas/");
 define("VISTAS", SERVIDOR . "/vistas/");

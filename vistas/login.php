@@ -10,7 +10,9 @@ if (isset($_POST['login'])) {
     $validador = new validadorLogin($_POST['correo'], $_POST['clave'], conexion::obtener_conexion());
     if ($validador->obtener_error() === '' && !is_null($validador->obtener_usuario())) {
         controlsesion::iniciar_sesion($validador->obtener_usuario()->getid(), $validador->obtener_usuario()->getnombre(), $validador->obtener_usuario()->getAdm());
-        redireccion::redirigir(SERVIDOR);
+?>
+        <script>window.location.href = "<?php echo SERVIDOR ?>"</script>
+<?php
     }
     conexion::cerrar_conexion();
 }
@@ -25,17 +27,16 @@ if (isset($_POST['login'])) {
                 </div>
                 <div class="card-body text-white d-flex flex-row flex-wrap">
                     <form class="d-flex flex-row flex-wrap" role="form" method="post" action="<?php echo RUTA_LOGIN ?>">
-                        <input type="email" name="correo" id="correo" class="textbox form-control" placeholder="Email" 
-                            <?php 
-                                if (isset($_POST['login']) && isset($_POST['correo']) && !empty($_POST['correo'])) { 
-                                    echo 'value="' . $_POST['correo'] . '"';
-                                }
-                            ?> required="true" autofocus="true">
+                        <input type="email" name="correo" id="correo" class="textbox form-control" placeholder="Email" <?php
+                                                                                                                        if (isset($_POST['login']) && isset($_POST['correo']) && !empty($_POST['correo'])) {
+                                                                                                                            echo 'value="' . $_POST['correo'] . '"';
+                                                                                                                        }
+                                                                                                                        ?> required="true" autofocus="true">
                         <input type="password" name="clave" id="clave" class="textbox form-control mt-1" placeholder="Contraseña" required="true">
                         <?php
-                            if (isset($_POST['login'])) {
-                                $validador->mostrar_error();
-                            }
+                        if (isset($_POST['login'])) {
+                            $validador->mostrar_error();
+                        }
                         ?>
                         <button type="submit" name="login" id="login" class="btn btn-outline-light form-control mt-3 flex-fill">Iniciar sesión</button>
                     </form>

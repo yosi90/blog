@@ -5,7 +5,8 @@ include_once 'entrada.inc.php';
 
 class Repositorioentrada
 {
-    public static function getEntrada($conexion, $idEntrada){
+    public static function getEntrada($conexion, $idEntrada)
+    {
         $entrada = null;
         if (isset($conexion)) {
             try {
@@ -255,27 +256,56 @@ class Repositorioentrada
             }
         }
         return $entradaInsertada;
-    } 
-    
-    public static function archivarEntrada($conexion, $idEntrada, $archivar)
+    }
+
+    public static function activarEntrada($conexion, $idEntrada, $activa)
     {
-        $entradaarchivada = false;
+        $activada = false;
         if (isset($conexion)) {
             try {
-                $sql = "UPDATE entradas SET archivada = $archivar WHERE id_entrada = $idEntrada";
+                $conexion->beginTransaction();
+                $sql = "UPDATE entradas SET activa = :activa WHERE id_entrada = :idEntrada";
                 $sentencia = $conexion->prepare($sql);
-                $entradaarchivada = $sentencia->execute();
+                $entradaTemp = $idEntrada;
+                $archivarTemp = $activa;
+                $sentencia->bindParam(':idEntrada', $entradaTemp, PDO::PARAM_STR);
+                $sentencia->bindParam(':activa', $archivarTemp, PDO::PARAM_STR);
+                $activada = $sentencia->execute();
+                $conexion->commit();
             } catch (PDOException $ex) {
+                $conexion->rollBack();
                 print 'ERROR' . $ex->getMessage();
             }
         }
-        return $entradaarchivada;
+        return $activada;
+    }
+
+    public static function archivarEntrada($conexion, $idEntrada, $archivar)
+    {
+        $archivada = false;
+        if (isset($conexion)) {
+            try {
+                $conexion->beginTransaction();
+                $sql = "UPDATE entradas SET archivada = :archivar WHERE id_entrada = :idEntrada";
+                $sentencia = $conexion->prepare($sql);
+                $entradaTemp = $idEntrada;
+                $archivarTemp = $archivar;
+                $sentencia->bindParam(':idEntrada', $entradaTemp, PDO::PARAM_STR);
+                $sentencia->bindParam(':archivada', $archivarTemp, PDO::PARAM_STR);
+                $archivada = $sentencia->execute();
+                $conexion->commit();
+            } catch (PDOException $ex) {
+                $conexion->rollBack();
+                print 'ERROR' . $ex->getMessage();
+            }
+        }
+        return $archivada;
     }
 
     public static function DeleteEntrada($conexion, $idEntrada)
     {
-        if(isset($conexion)){
-            try{
+        if (isset($conexion)) {
+            try {
                 $conexion->beginTransaction();
                 $sql = "DELETE FROM comentarios WHERE id_entrada = :id_entrada";
                 $sentencia = $conexion->prepare($sql);

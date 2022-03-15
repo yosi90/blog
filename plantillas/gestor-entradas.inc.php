@@ -41,20 +41,26 @@
                             $cantComentarios = $array_entradas[$i][1];
                         ?>
                             <tr>
-                                <td title="<?php echo $entrada_actual->getTitulo(); ?>"><p class="lt-linea-200 mb-0 text-start"><?php echo $entrada_actual->getTitulo(); ?></p></td>
+                                <td title="<?php echo $entrada_actual->getTitulo(); ?>"><a class="text-decoration-none text-white" href="<?php echo RUTA_ENTRADA . '/' . $entrada_actual->getUrl(); ?>"><p class="lt-linea-200 mb-0 text-start"><?php echo $entrada_actual->getTitulo(); ?></p></a></td>
                                 <td><?php echo date('d/M/Y', strtotime($entrada_actual->getFecha())); ?></td>
                                 <td>
+                                    <form method="POST" action="<?php echo RUTA_ACTIVAR_ENTRADA; ?>">
                                     <?php
                                     if ($entrada_actual->getActiva() == 0) {
                                     ?>
-                                        <div class="btnmimic red mx-1"><strong>Borrador</strong></div>
+                                        <input type="submit" name="toggle" class="btnmimic red mx-1" value="Borrador">
+                                        <input type="hidden" name="activo" value="1">
                                     <?php
                                     } else {
                                     ?>
-                                        <div class="btnmimic green mx-1"><strong>Activa</strong></div>
+                                        <input type="submit" name="toggle" class="btnmimic green mx-1" value="Activa">
+                                        <input type="hidden" name="activo" value="0">
                                     <?php
                                     }
                                     ?>
+                                    <input type="hidden" name="IdEntrada" value="<?php echo $entrada_actual->getId_entrada(); ?>">
+                                    <input type="hidden" name="IdAutor" value="<?php echo $entrada_actual->getAutor(); ?>">
+                                    </form>
                                 </td>
                                 <td><?php echo $cantComentarios; ?></td>
                                 <td class="d-flex justify-content-center">
