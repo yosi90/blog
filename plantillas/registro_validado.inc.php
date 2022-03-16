@@ -1,4 +1,4 @@
-<input type="text" class="form-control textbox" placeholder="Nombre de usuario" maxlength="20" required="true" name="nombre" title="Este será el nombre que se muestre a los demás usuarios. Debe ser único" <?php $validador->mostrar_nombre() ?>>
+<input type="text" class="form-control textbox" placeholder="Nombre de usuario" minlength="4" maxlength="20" required="true" name="nombre" title="Este será el nombre que se muestre a los demás usuarios. Debe ser único" <?php $validador->mostrar_nombre() ?>>
 <?php
 $validador->mostrar_error_nombre();
 ?>

@@ -1,4 +1,4 @@
-<input type="text" class="form-control textbox" placeholder="Nombre de usuario" maxlength="20" required="true" name="nombre" title="Este será el nombre que se muestre a los demás usuarios. Debe ser único">
+<input type="text" class="form-control textbox" placeholder="Nombre de usuario" minlength="4" maxlength="20" required="true" name="nombre" title="Este será el nombre que se muestre a los demás usuarios. Debe ser único">
 <input type="email" class="form-control textbox mt-1" placeholder="Email" maxlength="30" required="true" name="email">
 <input type="password" class="form-control textbox mt-1" placeholder="Contraseña" maxlength="25" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="La contraseña debe contener al menos un número, una letra minúscula, una letra mayúscula y al menos 8 caracteres." required="true" name="clave1">
 <input type="password" class="form-control textbox mt-1" placeholder="Repite la contraseña" maxlength="25" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="La contraseña debe contener al menos un número, una letra minúscula, una letra mayúscula y al menos 8 caracteres." required="true" name="clave2">

@@ -31,11 +31,10 @@ for ($entradas = 0; $entradas < $cantEntradas; $entradas++) {
 }
 
 for ($comentarios = 0; $comentarios < $cantCometarios; $comentarios++) {
-    $titulo = TextoRandom(10);
     $texto = lorem();
     $autor = rand(1, $cantUsers);
     $entrada = rand(1, $cantEntradas);
-    $comentario = new comentario('', $autor, $entrada, $titulo, $texto, '');
+    $comentario = new comentario('', $autor, $entrada, $texto, '');
     repositoriocomentarios::insertar_comentario(conexion::obtener_conexion(), $comentario);
 }
 

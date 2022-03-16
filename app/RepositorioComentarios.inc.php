@@ -8,16 +8,14 @@ class RepositorioComentarios
         $comentario_insertado = FALSE;
         if (isset($conexion)) {
             try {
-                $sql = "INSERT INTO comentarios (id_autor, id_entrada, titulo, texto, fecha) VALUES (:id_autor, :id_entrada, :titulo, :texto, NOW())";
+                $sql = "INSERT INTO comentarios (id_autor, id_entrada, texto, fecha) VALUES (:id_autor, :id_entrada, :texto, NOW())";
                 $sentencia = $conexion->prepare($sql);
                 $autorTemp = $comentario->getAutor();
                 $entradaTemp = $comentario->getId_entrada();
-                $tituloTemp = $comentario->getTitulo();
                 $textoTemp = $comentario->getTexto();
                 $sentencia = $conexion->prepare($sql);
                 $sentencia->bindParam(':id_autor', $autorTemp, PDO::PARAM_STR);
                 $sentencia->bindParam(':id_entrada', $entradaTemp, PDO::PARAM_STR);
-                $sentencia->bindParam(':titulo', $tituloTemp, PDO::PARAM_STR);
                 $sentencia->bindParam(':texto', $textoTemp, PDO::PARAM_STR);
                 $comentario_insertado = $sentencia->execute();
             } catch (PDOException $ex) {
@@ -40,7 +38,7 @@ class RepositorioComentarios
                 $resultado = $sentencia->fetchAll();
                 if (count($resultado)) {
                     foreach ($resultado as $fila) {
-                        $comentarios[] = new comentario($fila['id_comentario'], $fila['id_autor'], $fila['id_entrada'], $fila['titulo'], $fila['texto'], $fila['fecha']);
+                        $comentarios[] = new comentario($fila['id_comentario'], $fila['id_autor'], $fila['id_entrada'], $fila['texto'], $fila['fecha']);
                     }
                 }
             } catch (PDOException $ex) {
@@ -68,5 +66,27 @@ class RepositorioComentarios
             }
         }
         return $total;
+    }
+
+    public static function obtenerFiltrados($conexion, $filtro)
+    {
+        $comentarios = [];
+        if (isset($conexion)) {
+            try {
+                $sql = 'SELECT * FROM comentarios WHERE texto like :filtro ORDER BY fecha';
+                $sentencia = $conexion->prepare($sql);
+                $sentencia->bindParam(':filtro', $filtro, PDO::PARAM_STR);
+                $sentencia->execute();
+                $resultado = $sentencia->fetchAll();
+                if (count($resultado)) {
+                    foreach ($resultado as $fila) {
+                        $comentarios[] = new comentario($fila['id_comentario'], $fila['id_autor'], $fila['id_entrada'], $fila['texto'], $fila['fecha']);
+                    }
+                }
+            } catch (PDOException $ex) {
+                print 'ERROR: ' . $ex->getMessage();
+            }
+        }
+        return $comentarios;
     }
 }

@@ -3,7 +3,7 @@ $titulo = 'Troubles time';
 include_once 'plantillas/documento-declaracion.inc.php';
 include_once 'app/escritorEntradas.inc.php';
 ?>
-<img class="logo" src="img/logoSF.png" >
+<img class="logo" src="img/logoSF.png">
 <div class="container">
     <div class="row">
         <div class="col-12">
@@ -25,7 +25,7 @@ include_once 'app/escritorEntradas.inc.php';
                 <div class="card-body bg-dark-light d-flex flex-wrap justify-content-around pt-0 pe-0 ps-0 pb-1">
                     <?php
                     conexion::abrir_conexion();
-                    EscritorEntradas::escribirListaEntradas();
+                    EscritorEntradas::entradasRecientes();
                     conexion::cerrar_conexion();
                     ?>
                 </div>
@@ -54,7 +54,7 @@ include_once 'app/escritorEntradas.inc.php';
                             </svg>
                             Filtrar entradas
                         </div>
-                        <div class="card-body">Aquí un motor de filtrado aun por crear</div>
+                        <div class="card-body bg-dark-light text-white">Aquí un motor de filtrado aun por crear</div>
                     </div>
                 </div>
             </div>
@@ -62,12 +62,12 @@ include_once 'app/escritorEntradas.inc.php';
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header bg-dark text-white">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-archive-fill" viewBox="0 0 16 16">
-                                <path d="M12.643 15C13.979 15 15 13.845 15 12.5V5H1v7.5C1 13.845 2.021 15 3.357 15h9.286zM5.5 7h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1zM.8 1a.8.8 0 0 0-.8.8V3a.8.8 0 0 0 .8.8h14.4A.8.8 0 0 0 16 3V1.8a.8.8 0 0 0-.8-.8H.8z" />
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar2-week-fill" viewBox="0 0 16 16">
+                                <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zm9.954 3H2.545c-.3 0-.545.224-.545.5v1c0 .276.244.5.545.5h10.91c.3 0 .545-.224.545-.5v-1c0-.276-.244-.5-.546-.5zM8.5 7a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zM3 10.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5zm3.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1z" />
                             </svg>
-                            Archivo
+                            Entradas antiguas
                         </div>
-                        <div class="card-body">Aquí un calendario aun por crear</div>
+                        <div class="card-body bg-dark-light text-white">Aquí un calendario aun por crear</div>
                     </div>
                 </div>
             </div>

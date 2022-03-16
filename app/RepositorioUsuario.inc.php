@@ -126,4 +126,35 @@ class RepositorioUsuario
         }
         return $usuario;
     }
+
+    public static function obtenerFiltrados($conexion, $filtro)
+    {
+        $usuarios = [];
+        if (isset($conexion)) {
+            try {
+                $sql = "SELECT u.id_usuario, u.nombre, u.correo, u.password, u.fecha_registro, u.activo, u.administrador, COUNT(e.id_entrada) AS 'totalEntradas' FROM usuarios u LEFT JOIN entradas e ON u.id_usuario = e.id_autor WHERE u.nombre like :filtro GROUP BY u.id_usuario ORDER BY u.fecha_registro DESC"; /*and u.activo = 1*/
+                $sentencia1 = $conexion->prepare($sql);
+                $sentencia1->bindParam(':filtro', $filtro, PDO::PARAM_STR);
+                $sentencia1->execute();
+                $resultado1 = $sentencia1->fetchAll();
+                $sql = "SELECT COUNT(c.id_comentario) AS 'totalComentarios' FROM usuarios u LEFT JOIN comentarios c ON u.id_usuario = c.id_autor WHERE u.nombre like :filtro GROUP BY u.id_usuario ORDER BY u.fecha_registro DESC"; /*and u.activo = 1*/
+                $sentencia2 = $conexion->prepare($sql);
+                $sentencia2->bindParam(':filtro', $filtro, PDO::PARAM_STR);
+                $sentencia2->execute();
+                $resultado2 = $sentencia2->fetchAll();
+                if (count($resultado1)) {
+                    $cont = 0;
+                    foreach ($resultado1 as $fila) {
+                        $usuarios[] = new usuario($fila['id_usuario'], $fila['nombre'], $fila['correo'], $fila['password'], $fila['fecha_registro'], $fila['activo'], $fila['administrador']);
+                        $usuarios[$cont]->setTotalEntradas($fila['totalEntradas']);
+                        $usuarios[$cont]->setTotalComentarios($resultado2[$cont]['totalComentarios']);
+                        $cont++;
+                    }
+                }
+            } catch (PDOException $ex) {
+                print 'ERROR: ' . $ex->getMessage();
+            }
+        }
+        return $usuarios;
+    }
 }

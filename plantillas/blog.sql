@@ -13,12 +13,23 @@ CREATE TABLE usuarios(
     PRIMARY KEY(id_usuario)
 );
 
-CREATE TABLE usuariosUrl(
+CREATE TABLE usuariosUrlActualizar(
     id_url INT NOT NULL UNIQUE AUTO_INCREMENT,
     id_usuario INT NOT NULL,
     url VARCHAR(255) NOT NULL,
     fecha DATETIME NOT NULL,
     intentos INT NOT NULL DEFAULT 1,
+    PRIMARY KEY (id_url),
+    FOREIGN KEY (id_usuario) REFERENCES usuarios (id_usuario)
+    ON UPDATE CASCADE
+    ON DELETE RESTRICT
+);
+
+CREATE TABLE usuariosUrlActivar(
+    id_url INT NOT NULL UNIQUE AUTO_INCREMENT,
+    id_usuario INT NOT NULL,
+    url VARCHAR(255) NOT NULL,
+    fecha DATETIME NOT NULL,
     PRIMARY KEY (id_url),
     FOREIGN KEY (id_usuario) REFERENCES usuarios (id_usuario)
     ON UPDATE CASCADE

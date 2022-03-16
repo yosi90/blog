@@ -7,7 +7,7 @@ class RepositorioRecuperarPassword
     {
         $peticionGenerada = false;
         try {
-            $sql = "INSERT INTO usuariosurl (id_usuario, url, fecha) VALUES (:id_usuario, :url, now())";
+            $sql = "INSERT INTO usuariosurlactualizar (id_usuario, url, fecha) VALUES (:id_usuario, :url, now())";
             $sentencia = $conexion->prepare($sql);
             $sentencia->bindParam(':id_usuario', $id_usuario, PDO::PARAM_STR);
             $sentencia->bindParam(':url', $url, PDO::PARAM_STR);
@@ -23,7 +23,7 @@ class RepositorioRecuperarPassword
         $peticion = false;
         if (isset($conexion)) {
             try {
-                $sql = "SELECT * FROM usuariosurl WHERE id_usuario = :id_usuario and fecha > now() - interval 1 hour";
+                $sql = "SELECT * FROM usuariosurlactualizar WHERE id_usuario = :id_usuario and fecha > now() - interval 1 hour";
                 $sentencia = $conexion->prepare($sql);
                 $sentencia->bindParam(':id_usuario', $id_usuario, PDO::PARAM_STR);
                 $sentencia->execute();
@@ -44,7 +44,7 @@ class RepositorioRecuperarPassword
             }
         } else {
             try {
-                $sql = "SELECT * FROM usuariosurl WHERE id_usuario = :id_usuario and fecha > now() - interval 1 day";
+                $sql = "SELECT * FROM usuariosurlactualizar WHERE id_usuario = :id_usuario and fecha > now() - interval 1 day";
                 $sentencia = $conexion->prepare($sql);
                 $sentencia->bindParam(':id_usuario', $id_usuario, PDO::PARAM_STR);
                 $sentencia->execute();
@@ -65,7 +65,7 @@ class RepositorioRecuperarPassword
     public static function añadirIntento($conexion, $id_url, $intentos)
     {
         $conexion->beginTransaction();
-        $sql = "UPDATE usuariosurl SET intentos = $intentos WHERE id_url = :id_url";
+        $sql = "UPDATE usuariosurlactualizar SET intentos = $intentos WHERE id_url = :id_url";
         $sentencia = $conexion->prepare($sql);
         $sentencia->bindParam(':id_url', $id_url, PDO::PARAM_STR);
         $sentencia->execute();
@@ -77,7 +77,7 @@ class RepositorioRecuperarPassword
         $peticion = null;
         if (isset($conexion)) {
             try {
-                $sql = "SELECT * FROM usuariosurl WHERE url = :url";
+                $sql = "SELECT * FROM usuariosurlactualizar WHERE url = :url";
                 $sentencia = $conexion->prepare($sql);
                 $sentencia->bindParam(':url', $url, PDO::PARAM_STR);
                 $sentencia->execute();

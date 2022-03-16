@@ -25,13 +25,35 @@ class Repositorioentrada
         return $entrada;
     }
 
-    public static function obtener_fecha_desc($conexion)
+    public static function obtenerRecientes($conexion)
     {
         $entradas = [];
         if (isset($conexion)) {
             try {
                 $sql = 'SELECT * FROM entradas WHERE activa = 1 and archivada = 0 ORDER BY fecha DESC LIMIT 16';
                 $sentencia = $conexion->prepare($sql);
+                $sentencia->execute();
+                $resultado = $sentencia->fetchAll();
+                if (count($resultado)) {
+                    foreach ($resultado as $fila) {
+                        $entradas[] = new entrada($fila['id_entrada'], $fila['id_autor'], $fila['url'], $fila['titulo'], $fila['texto'], $fila['fecha'], $fila['activa'], $fila['archivada']);
+                    }
+                }
+            } catch (PDOException $ex) {
+                print 'ERROR: ' . $ex->getMessage();
+            }
+        }
+        return $entradas;
+    }
+
+    public static function obtenerFiltradas($conexion, $filtro)
+    {
+        $entradas = [];
+        if (isset($conexion)) {
+            try {
+                $sql = 'SELECT * FROM entradas WHERE (texto like :filtro or titulo like :filtro) and (activa = 1 and archivada = 0) ORDER BY fecha';
+                $sentencia = $conexion->prepare($sql);
+                $sentencia->bindParam(':filtro', $filtro, PDO::PARAM_STR);
                 $sentencia->execute();
                 $resultado = $sentencia->fetchAll();
                 if (count($resultado)) {

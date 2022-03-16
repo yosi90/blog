@@ -7,13 +7,15 @@ class Usuario {
     private $registro;
     private $activo;
     private $administrador;
+    private $totalEntradas;
+    private $totalComentarios;
     
 
     public function getId() {
         return $this -> id_usuario;
     }
 
-    public function getNombre() {  /*Tengo que controlar que no se cause un overflow y que no se inyecte código sql*/
+    public function getNombre() {
         return $this -> nombre;
     }
     public function setNombre($nombre) {
@@ -47,6 +49,20 @@ class Usuario {
 
     public function getAdm() {
         return $this-> administrador;
+    }
+
+    public function getTotalEntradas() {
+        return $this-> totalEntradas;
+    }
+    public function setTotalEntradas($total) {
+        $this-> totalEntradas = $total;
+    }
+
+    public function getTotalComentarios() {
+        return $this-> totalComentarios;
+    }
+    public function setTotalComentarios($total) {
+        $this-> totalComentarios = $total;
     }
 
 

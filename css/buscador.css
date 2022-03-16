@@ -1,0 +1,22 @@
+.switch:hover{
+    cursor: pointer;
+}
+
+.sliders>:first-child{
+    width: 140px;
+    min-width: 140px;
+}
+
+.sliders>:nth-child(2){
+    width: 170px;
+    min-width: 170px;
+}
+
+.sliders>:nth-child(3){
+    width: 130px;
+    min-width: 130px;
+}
+
+.buscar{
+    width: 300px;
+}

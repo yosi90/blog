@@ -1,0 +1,1 @@
+<h2><strong>No hay resultados</strong></h2>
