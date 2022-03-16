@@ -9,24 +9,13 @@ include_once 'app/Conexion.inc.php';
 if (isset($_POST['submit'])) {
     $activa = 1;
     conexion::abrir_conexion();
-    $partes_url = explode(' ', $_POST['titulo']);
-    $url = "";
-    if (count($partes_url) > 1) {
-        for ($cont = 0; $cont < count($partes_url); $cont++) {
-            $url .= $partes_url[$cont];
-            $url = (($cont + 1) != count($partes_url) ? "{$url}-" : $url);
-        }
-    } else {
-        $url = $partes_url[0];
-    }
+    $url = Repositorioentrada::crearUrl($_POST['titulo']);
     if (isset($_POST['activa'])){ $activa = 0; }
     $validador = new validadorEntradaNueva($_POST['titulo'], $_POST['entrada'], $url, conexion::obtener_conexion());
     if ($validador->entrada_valida()) {
-        $entrada = new entrada(null, $_SESSION['id_usuario'], $url, $validador->getTitulo(), $validador->getTexto(), null, $activa, 0);
-        $entrada_insertada = repositorioentrada::insertar_entrada(conexion::obtener_conexion(), $entrada);
-        if ($entrada_insertada) {
+        if (repositorioentrada::insertar_entrada(conexion::obtener_conexion(), $url, $validador->getTitulo(), $validador->getTexto(), null, $activa, 0, 0, $_SESSION['id_usuario'])) {
             ?>
-                <script> window.location.href = "<?php echo RUTA_ENTRADA . '/' . $entrada->getUrl(); ?>" </script>
+                <script> window.location.href = "<?php echo RUTA_ENTRADA . '/' . $url ?>" </script>
             <?php
         }
     }

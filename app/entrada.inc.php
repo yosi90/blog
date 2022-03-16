@@ -2,6 +2,7 @@
 class entrada
 {
     private $id_entrada;
+    private $autor;
     private $id_autor;
     private $url;
     private $titulo;
@@ -9,10 +10,12 @@ class entrada
     private $fecha;
     private $activa;
     private $archivada;
+    private $bloqueada;
     
-    public function __construct($id_entrada, $id_autor, $url, $titulo, $texto, $fecha, $activa, $archivada)
+    public function __construct($id_entrada, $autor, $id_autor, $url, $titulo, $texto, $fecha, $activa, $archivada = 0, $bloqueada = 0)
     {
         $this-> id_entrada = $id_entrada;
+        $this-> autor = $autor;
         $this-> id_autor = $id_autor;
         $this-> url = $url;
         $this-> titulo = $titulo;
@@ -20,18 +23,32 @@ class entrada
         $this-> fecha = $fecha;
         $this-> activa = $activa;
         $this-> archivada = $archivada;
+        $this-> bloqueada = $bloqueada;
     }
 
     public function getId_entrada() { return $this->id_entrada; }
-    public function getAutor() { return $this->id_autor; }
+
+    public function getAutor() { return $this->autor; }
+
+    public function getIdAutor() { return $this->id_autor; }
+
     public function getUrl() { return $this->url; }
+
     public function getTitulo() { return $this->titulo; }
-    public function getTexto() { return $this->texto; }
-    public function getFecha() { return $this->fecha; }
-    public function getActiva() { return $this->activa; }
-    public function getArchivada() { return $this->archivada; }
     public function setTitulo($titulo) { $this->titulo = $titulo; }
+
+    public function getTexto() { return $this->texto; }
     public function setTexto($texto) { $this->texto = $texto; }
+
+    public function getFecha() { return $this->fecha; }
+
+    public function getActiva() { return $this->activa; }
     public function setActiva ($activa) { $this->activa = $activa; }
+
+    public function getArchivada() { return $this->archivada; }
     public function setArchivada($archivada) { $this->archivada = $archivada; }
+
+    public function getBloqueada() { return $this->bloqueada; }
+    public function setBloqueada($bloqueada) { $this->bloqueada = $bloqueada; }
+    
 }

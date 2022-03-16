@@ -52,7 +52,7 @@ if ($partes_ruta[0] == 'blog') {
                 break;
             case 'relleno-dev':
                 if (controlsesion::sesion_iniciada() && $_SESSION['administrador'] == '1') {
-                    $ruta_elegida = 'scripts/script-relleno.php';
+                    $ruta_elegida = 'scripts/rellenarBaseDatos.php';
                 } else {
                     $ruta_elegida = 'vistas/home.php';
                 }
@@ -121,9 +121,10 @@ if ($partes_ruta[0] == 'blog') {
             if ($entrada != null) {
                 $autor = repositoriousuario::obtener_usuario_id(conexion::obtener_conexion(), $entrada->getAutor());
                 $comentarios = RepositorioComentarios::getComments(conexion::obtener_conexion(), $entrada->getId_entrada());
-                $entradas_azar = repositorioentrada::entrada_azar(conexion::obtener_conexion(), 3);
+                $entradas_azar = repositorioentrada::entradasAleatorias(conexion::obtener_conexion(), 3);
                 $ruta_elegida = 'vistas/entrada.php';
             }
+            conexion::cerrar_conexion();
         }
         if ($partes_ruta[1] == 'gestor' && controlsesion::sesion_iniciada()) {
             switch ($partes_ruta[2]) {

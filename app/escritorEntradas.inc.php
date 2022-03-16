@@ -3,7 +3,7 @@ include_once 'entrada.inc.php';
 include_once 'RepositorioEntrada.inc.php';
 include_once 'Conexion.inc.php';
 
-class EscritorEntradas
+class escritorEntradas
 {
     public static function entradasRecientes()
     {

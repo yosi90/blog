@@ -5,6 +5,7 @@ $entradas = $comentarios = $autores = [];
 include_once 'plantillas/documento-declaracion.inc.php';
 include_once 'app/escritorEntradas.inc.php';
 include_once 'app/escritorUsuarios.inc.php';
+include_once 'app/escritorComentarios.inc.php';
 if (isset($_POST['texto']) && !empty($_POST['texto'])) {
     $filtro = $_POST['texto'];
     conexion::abrir_conexion();
@@ -66,7 +67,7 @@ if (isset($_POST['texto']) && !empty($_POST['texto'])) {
                                 include 'plantillas/busquedaVacia.inc.php';
                             } else {
                                 conexion::abrir_conexion();
-                                EscritorEntradas::entradasFiltradas($entradas);
+                                escritorEntradas::entradasFiltradas($entradas);
                                 conexion::cerrar_conexion();
                             }
                             ?>
@@ -82,7 +83,7 @@ if (isset($_POST['texto']) && !empty($_POST['texto'])) {
                                 include 'plantillas/busquedaVacia.inc.php';
                             } else {
                                 conexion::abrir_conexion();
-                                /*Cargar la plantilla con los datos*/
+                                escritorComentarios::comentariosFiltrados($comentarios);
                                 conexion::cerrar_conexion();
                             }
                             ?>

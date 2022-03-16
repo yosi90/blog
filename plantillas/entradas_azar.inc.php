@@ -1,5 +1,5 @@
 <?php
-include_once 'app/escritorentradas.inc.php';
+include_once 'app/escritorEntradas.inc.php';
 ?>
 
 <div class="card rounded-1">
@@ -16,14 +16,10 @@ include_once 'app/escritorentradas.inc.php';
         for ($i = 0; $i < count($entradas_azar); $i++) {
             $entrada_actual = $entradas_azar[$i];
         ?>
-            <div class="card text-white d-flex flex-fill max-35 m-1">
+            <div class="card text-white d-flex flex-fill bg-dark-light mw-35 m-1">
                 <div class="card-header bg-dark fz-subtitulo lt-1">
                     <i class="far fa-newspaper fa-lg"></i>
-                    <span>
-                        <?php
-                        echo $entrada_actual->getTitulo();
-                        ?>
-                    </span>
+                    <span><?php echo $entrada_actual->getTitulo(); ?></span>
                 </div>
                 <div class="card-body bg-dark-light">
                     <div class="row">
@@ -31,14 +27,13 @@ include_once 'app/escritorentradas.inc.php';
                             <?php echo Escritorentradas::resumirTexto(nl2br($entrada_actual->getTexto()), 0); ?>
                         </p>
                     </div>
-                    <div class="row">
-                        <a class="btn btn-outline-light rosa fz-sm-texto" role="button" href="<?php echo RUTA_ENTRADA . '/' . $entrada_actual->getUrl() ?>">
-                            <b>Parece interesante..</b>
-                        </a>
-                    </div>
+                    <a class="btn btn-outline-light rosa fz-sm-texto" role="button" href="<?php echo RUTA_ENTRADA . '/' . $entrada_actual->getUrl() ?>">
+                        <b>Parece interesante..</b>
+                    </a>
                 </div>
             </div>
         <?php
         }
         ?>
     </div>
+</div>

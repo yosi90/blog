@@ -14,7 +14,7 @@ switch ($gestor_actual)
         include_once 'plantillas/gestor-generico.inc.php';
         break;
     case 'entradas':
-        $array_entradas = repositorioentrada::entradas_usr_fecha(conexion::obtener_conexion(), $_SESSION['id_usuario']);
+        $array_entradas = repositorioentrada::entradasUsuario(conexion::obtener_conexion(), $_SESSION['id_usuario']);
         include_once 'plantillas/gestor-entradas.inc.php';
         break;
     case 'favoritos':
@@ -24,7 +24,7 @@ switch ($gestor_actual)
         include_once 'plantillas/gestor-comentarios.inc.php';
         break;
     case 'archivo':
-        $array_archivo = repositorioentrada::entradasArchivadas(conexion::obtener_conexion(), $_SESSION['id_usuario']);
+        $array_archivo = repositorioentrada::entradasUsuario(conexion::obtener_conexion(), $_SESSION['id_usuario'], 1);
         include_once 'plantillas/gestor-archivo.inc.php';
         break;
 }
