@@ -1,5 +1,5 @@
 <?php
-if(isset($entrada)){
+if (isset($entrada)) {
     $titulo = 'Troubles time' . $entrada->getTitulo();
 }
 include_once 'plantillas/documento-declaracion.inc.php';
@@ -8,7 +8,6 @@ include_once 'app/comentario.inc.php';
 include_once 'app/usuario.inc.php';
 include_once 'app/RepositorioEntrada.inc.php';
 include_once 'app/RepositorioComentarios.inc.php';
-
 ?>
 <div class="container py-4">
     <div class="row">
@@ -99,5 +98,14 @@ include_once 'app/RepositorioComentarios.inc.php';
     </div>
 </div>
 <?php
+if (isset($_POST['busqueda'])) {
+    echo '<script type="text/javascript" src="'. JS .'scroll.js"></script>';
+    echo '<script type="text/javascript">
+        document.getElementById("desplegarComentarios").click();
+        </script>';
+    echo '<script type="text/javascript">
+        scroll("'.$_POST['posicion'].'");
+        </script>';
+}
 include_once 'plantillas/documento-cierre.inc.php';
 ?>

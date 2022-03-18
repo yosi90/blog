@@ -21,7 +21,6 @@ if (isset($_POST['texto']) && !empty($_POST['texto'])) {
         var boton = document.getElementById(boton);
         var card = document.getElementById(elemento);
         card.style.display = boton.checked ? 'flex' : 'none';
-        console.log('le suda la polla');
     }
 </script>
 <div class="container">
@@ -39,7 +38,7 @@ if (isset($_POST['texto']) && !empty($_POST['texto'])) {
                         <div class="sliders d-flex flex-row flex-wrap align-items-center justify-content-end mt-2 py-2">
                             <label class="switch d-flex align-items-center me-2 my-1">
                                 Entradas
-                                <input type="checkbox" id="chbEntradas" name="entradas" onclick="toggle('chbEntradas', 'entradas')" checked>
+                                <input type="checkbox" id="chbEntradas" name="entradas" onclick="toggle('chbEntradas', 'entradas')" <?php echo (count($comentarios) || count($autores)) ? '' : 'checked' ?>>
                                 <span class="slider round"></span>
                             </label>
                             <label class="switch d-flex align-items-center me-2 my-1">
@@ -57,7 +56,7 @@ if (isset($_POST['texto']) && !empty($_POST['texto'])) {
                     </form>
                 </div>
                 <div class="card-body d-flex flex-wrap bg-dark-light text-white">
-                    <div class="card flex-fill m-1" id="entradas" style="display: flex;">
+                    <div class="card flex-fill m-1" id="entradas" style="display: <?php echo (count($comentarios) || count($autores)) ? 'none' : 'flex' ?>;">
                         <div class="card-header bg-dark text-white text-center">
                             <h3><strong><?php echo count($entradas) != 1 ? ' ' . count($entradas) . ' entradas coinciden' : '1 entrada coincide'; ?></strong></h3>
                         </div>
