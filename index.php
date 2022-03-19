@@ -1,4 +1,11 @@
 <?php
+
+\chdir(__DIR__);
+\define('ROOT_DIRECTORY', __DIR__);
+
+require_once 'vendor/autoload.php';
+
+// exit(__DIR__);
 include_once 'app/config.inc.php';
 include_once 'app/Conexion.inc.php';
 include_once 'app/usuario.inc.php';
