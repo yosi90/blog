@@ -9,7 +9,7 @@ body {
 }
 
 .logo {
-  position: fixed;
+  position: absolute;
   top: 70px;
   right: 20px;
   height: 14vh;
@@ -37,6 +37,13 @@ body {
   font-size: calc(.2vw + 10px);
 }
 
+.lt-10, .lt-3, .lt-2 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+}
+
 .lt-10 {
   -webkit-line-clamp: 10;
 }
@@ -55,15 +62,6 @@ body {
   white-space: nowrap;
   -webkit-line-clamp: 2;
   text-overflow: ellipsis;
-}
-
-.lt-10,
-.lt-3,
-.lt-2 {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
 }
 
 .lt-linea-200 {
@@ -354,4 +352,15 @@ div.cke {
   font: inherit;
   cursor: pointer;
   outline: inherit;
+}
+
+.navigation a{
+  display: inline-block;
+  width: 43px;
+  text-align: center;
+}
+
+.navigation a:hover{
+  background-color: darkgray;
+  color: black !important;
 }

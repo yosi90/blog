@@ -1,5 +1,6 @@
 <?php
 $titulo = 'Troubles time - Panel de control';
+$inicioBusqueda = 0;
 include_once 'plantillas/documento-declaracion.inc.php';
 include_once 'app/Conexion.inc.php';
 include_once 'plantillas/pc_declare.inc.php';
@@ -8,13 +9,14 @@ conexion::abrir_conexion();
 switch ($gestor_actual)
 {
     case '':
-        $entradas_activas = repositorioentrada::entradas_usr(conexion::obtener_conexion(), $_SESSION['id_usuario'], 1);
-        $entradas_inactivas = repositorioentrada::entradas_usr(conexion::obtener_conexion(), $_SESSION['id_usuario'], 0);
-        $comentarios = repositoriocomentarios::usr_comments(conexion::obtener_conexion(), $_SESSION['id_usuario']);
+        $entradas_activas = repositorioEntrada::entradas_usr(conexion::obtener_conexion(), $_SESSION['id_usuario'], 1);
+        $entradas_inactivas = repositorioEntrada::entradas_usr(conexion::obtener_conexion(), $_SESSION['id_usuario'], 0);
+        $comentarios = repositorioComentarios::usr_comments(conexion::obtener_conexion(), $_SESSION['id_usuario']);
         include_once 'plantillas/gestor-generico.inc.php';
         break;
     case 'entradas':
-        $array_entradas = repositorioentrada::entradasUsuario(conexion::obtener_conexion(), $_SESSION['id_usuario']);
+        $array_entradas = repositorioEntrada::entradasUsuario(conexion::obtener_conexion(), $_SESSION['id_usuario'], $inicioBusqueda);
+        $total = repositorioEntrada::totalUsuario(conexion::obtener_conexion(), $_SESSION['id_usuario']);
         include_once 'plantillas/gestor-entradas.inc.php';
         break;
     case 'favoritos':
@@ -24,7 +26,7 @@ switch ($gestor_actual)
         include_once 'plantillas/gestor-comentarios.inc.php';
         break;
     case 'archivo':
-        $array_archivo = repositorioentrada::entradasUsuario(conexion::obtener_conexion(), $_SESSION['id_usuario'], 1);
+        $array_archivo = repositorioEntrada::entradasUsuario(conexion::obtener_conexion(), $_SESSION['id_usuario'], 1);
         include_once 'plantillas/gestor-archivo.inc.php';
         break;
 }

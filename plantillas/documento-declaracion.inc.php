@@ -21,6 +21,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/blog/app/controlsesion.inc.php';
     <link href="<?php echo CSS; ?>/index.css" rel="stylesheet">
     <link href="<?php echo CSS; ?>/mediaQueris.css" rel="stylesheet">
     <link href="<?php echo CSS; ?>/material.css" rel="stylesheet">
+    <link href="<?php echo CSS; ?>/paginador.css" rel="stylesheet">
     <link href="<?php echo CSS; ?>/scrollbar.css" rel="stylesheet">
     <link href="<?php echo CSS; ?>/gestor.css" rel="stylesheet">
     <script type="text/javascript" src="<?php echo JS; ?>/jquery.min.js"></script>
@@ -31,6 +32,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/blog/app/controlsesion.inc.php';
     <script type="text/javascript" src="<?php echo editor; ?>/adapters/jquery.js"></script>
     <script defer type="text/javascript" src="<?php echo JS; ?>/fondo.js"></script>
     <script defer type="text/javascript" src="<?php echo JS; ?>/alternarVistas.js"></script>
+    <script type="text/javascript" src="<?php echo JS; ?>/resultadoPaginacion.js"></script>
 </head>
 
 <body>

@@ -1,4 +1,5 @@
 <?php
+
 $titulo = 'Troubles time';
 include_once 'plantillas/documento-declaracion.inc.php';
 include_once 'app/escritorEntradas.inc.php';
@@ -22,11 +23,16 @@ include_once 'app/escritorEntradas.inc.php';
                     </p>
                     <button id="vistas" value="0" class="btn btn-no-shadow text-white p-1" title="Alternar vistas" onclick="alternarVistaEntradas()"></button>
                 </div>
-                <div class="card-body bg-dark-light d-flex flex-wrap justify-content-around pt-0 pe-0 ps-0 pb-1">
-                    <?php
-                    conexion::abrir_conexion();
-                    EscritorEntradas::entradasRecientes();
-                    conexion::cerrar_conexion();
+                <div id="recientes" class="card-body bg-dark-light d-flex flex-wrap justify-content-around pt-0 pe-0 ps-0 pb-1">
+                    <?php 
+                        conexion::abrir_conexion(); 
+                        $entradas = EscritorEntradas::entradasRecientes();
+                        $total = count(json_decode($entradas));
+                    ?>
+                    <script>mostrarLista("recientes", <?php echo $entradas ?>, 16, 1, 'recientes');</script>
+                    <?php 
+                        conexion::cerrar_conexion(); 
+                        require_once 'plantillas/navegadorElementos.inc.php';
                     ?>
                 </div>
             </div>

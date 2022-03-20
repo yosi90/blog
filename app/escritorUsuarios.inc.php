@@ -15,7 +15,7 @@ class escritorUsuarios
                     return;
                 }
 ?>
-                <div class="card flex-fill controlTamaño m-1 mw-100">
+                <div class="card flex-fill sizeControl m-1 mw-100">
                     <div class="card-header d-flex bg-secondary text-white h-100">
                         <a class="btn btn-outline-light fz-sm-texto flex-fill" role="button" href="<?php echo RUTA_AUTORES . '/' . $usuario->getNombre() ?>">
                             <div class="d-flex flex-wrap">

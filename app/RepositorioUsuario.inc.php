@@ -1,5 +1,7 @@
 <?php
 include_once 'Conexion.inc.php';
+include_once 'purificador.inc.php';
+
 class RepositorioUsuario
 {
     public static function obtener_numero_usuarios($conexion)
@@ -27,11 +29,11 @@ class RepositorioUsuario
                 $sql = "INSERT INTO usuarios (nombre, correo, password, fecha_registro, activo) VALUES (:nombre, :correo, :password, NOW(), 0)";
                 $sentencia = $conexion->prepare($sql);
                 $nombreTemp = $usuario->getNombre();
-                $emailTemp = $usuario->getEmail();
                 $passwordTemp = $usuario->getPassword();
                 $sentencia = $conexion->prepare($sql);
                 $sentencia->bindParam(':nombre', $nombreTemp, PDO::PARAM_STR);
-                $sentencia->bindParam(':correo', $emailTemp, PDO::PARAM_STR);
+                $correo = purifier::purifier($usuario->getEmail(), 'email');
+                $sentencia->bindParam(':correo', $correo, PDO::PARAM_STR);
                 $sentencia->bindParam(':password', $passwordTemp, PDO::PARAM_STR);
                 $usuario_insertado = $sentencia->execute();
             } catch (PDOException $ex) {

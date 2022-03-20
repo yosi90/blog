@@ -6,10 +6,14 @@ if (isset($_POST['submit'])) {
     conexion::abrir_conexion();
     $validador = new validadorRegistro($_POST['nombre'], $_POST['email'], $_POST['clave1'], $_POST['clave2'], conexion::obtener_conexion());
     if ($validador->registro_valido()) {
-        $usuario = new usuario('', $validador->obtener_nombre(), $validador->obtener_email(), password_hash($validador->obtener_clave(), PASSWORD_DEFAULT), '', '', 0);
+        $usuario = new usuario('', $validador->obtener_nombre(), $validador->obtener_email(), password_hash($validador->obtener_clave(), PASSWORD_DEFAULT), '', '', 0, 0);
         $usuario_insertado = RepositorioUsuario::insertar_usuario(conexion::obtener_conexion(), $usuario);
         if ($usuario_insertado) {
-            redireccion::redirigir(RUTA_REGISTRO_CORRECTO . '/' . $usuario->getNombre());
+?>
+            <script>
+                window.location.href = "<?php echo RUTA_LOGIN ?>"
+            </script>
+<?php
         }
     }
     conexion::cerrar_conexion();

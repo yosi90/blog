@@ -1,5 +1,5 @@
 <?php
-include_once 'app/escritorEntradas.inc.php';
+require_once 'app/utilidades.inc.php';
 ?>
 
 <div class="card rounded-1">
@@ -16,20 +16,20 @@ include_once 'app/escritorEntradas.inc.php';
         for ($i = 0; $i < count($entradas_azar); $i++) {
             $entrada_actual = $entradas_azar[$i];
         ?>
-            <div class="card text-white d-flex flex-fill bg-dark-light mw-35 m-1">
-                <div class="card-header bg-dark fz-subtitulo lt-1">
-                    <i class="far fa-newspaper fa-lg"></i>
-                    <span><?php echo $entrada_actual->getTitulo(); ?></span>
-                </div>
-                <div class="card-body bg-dark-light">
-                    <div class="row">
-                        <p class="text-justify lt-10">
-                            <?php echo Escritorentradas::resumirTexto(nl2br($entrada_actual->getTexto()), 0); ?>
-                        </p>
+            <div class="col-4">
+                <div class="card text-white d-flex flex-fill bg-dark-light m-1 h-100">
+                    <div class="card-header bg-dark fz-subtitulo lt-1">
+                        <i class="far fa-newspaper fa-lg"></i>
+                        <span><?php echo $entrada_actual->getTitulo(); ?></span>
                     </div>
-                    <a class="btn btn-outline-light rosa fz-sm-texto" role="button" href="<?php echo RUTA_ENTRADA . '/' . $entrada_actual->getUrl() ?>">
-                        <b>Parece interesante..</b>
-                    </a>
+                    <div class="card-body d-flex flex-column bg-dark-light">
+                        <p class="text-justify lt-10">
+                            <?php echo utilidades::truncateText(nl2br($entrada_actual->getTexto()), 0); ?>
+                        </p>
+                        <a class="btn btn-outline-light rosa fz-sm-texto align-self-center mt-auto" role="button" href="<?php echo RUTA_ENTRADA . '/' . $entrada_actual->getUrl() ?>">
+                            <b>Parece interesante..</b>
+                        </a>
+                    </div>
                 </div>
             </div>
         <?php

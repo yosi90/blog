@@ -94,6 +94,7 @@
                     </tbody>
                 </table>
             <?php
+                include_once 'navegadorElementos.inc.php';
             } else {
             ?>
                 <div class="bg-dark text-white rounded my-1 p-5">

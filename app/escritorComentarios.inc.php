@@ -17,7 +17,7 @@ class escritorComentarios
                 if (!isset($comentario))
                     return;
 ?>
-                <div class="card flex-fill controlTamaño m-1 mw-100">
+                <div class="card flex-fill sizeControl m-1 mw-100">
                     <div class="card-header d-flex bg-secondary text-white h-100">
                         <form class="d-flex flex-fill" method="POST" action="<?php echo RUTA_ENTRADA . '/' . $comentario->getUrl_entrada() ?>">
                             <strong class="d-flex flex-fill">

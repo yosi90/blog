@@ -26,6 +26,23 @@ class entrada
         $this-> bloqueada = $bloqueada;
     }
 
+    public function getArray()
+    {
+        return [
+            'id_entrada' => $this-> id_entrada,
+            'autor' => $this-> autor,
+            'id_autor' => $this-> id_autor,
+            'url' => $this-> url,
+            'titulo' => $this-> titulo,
+            'texto' => $this-> texto,
+            'fecha' => $this-> fecha,
+            'activa' => $this-> activa,
+            'archivada' => $this-> archivada,
+            'bloqueada' => $this-> bloqueada,
+
+        ];
+    }
+
     public function getId_entrada() { return $this->id_entrada; }
 
     public function getAutor() { return $this->autor; }

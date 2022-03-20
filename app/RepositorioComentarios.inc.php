@@ -1,10 +1,13 @@
 <?php
 include_once 'config.inc.php';
 include_once 'conexion.inc.php';
+include_once 'purificador.inc.php';
+
 class RepositorioComentarios
 {
     public static function insertar_comentario($conexion, $texto, $idAutor, $id_entrada)
     {
+        $texto = purifier::purifier($texto, 'texto');
         $comentario_insertado = FALSE;
         if (isset($conexion)) {
             try {
