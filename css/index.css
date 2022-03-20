@@ -102,6 +102,19 @@ body {
   background-color: rgb(206, 143, 153);
 }
 
+.rosaFuerte {
+  background-color: rgb(246, 173, 193);
+}
+
+.deshabilitado{
+  background-color: darkgray;
+}
+
+.deshabilitado:hover{
+  cursor: default !important;
+  background-color: darkgray !important;
+}
+
 .text-pink {
   color: rgb(206, 143, 153);
 }
@@ -294,8 +307,16 @@ body {
   border-style: solid;
 }
 
+.bw-2{
+  border-width: .2rem .2rem;
+}
+
 .bc-dark {
   border-color: #adb5bd;
+}
+
+.bc-white {
+  border-color: gainsboro;
 }
 
 .translucido {
@@ -361,6 +382,6 @@ div.cke {
 }
 
 .navigation a:hover{
-  background-color: darkgray;
+  background-color: lightgrey;
   color: black !important;
 }

@@ -59,7 +59,7 @@
                                     }
                                     ?>
                                     <input type="hidden" name="IdEntrada" value="<?php echo $entrada_actual->getId_entrada(); ?>">
-                                    <input type="hidden" name="IdAutor" value="<?php echo $entrada_actual->getAutor(); ?>">
+                                    <input type="hidden" name="IdAutor" value="<?php echo $entrada_actual->getIdAutor(); ?>">
                                     </form>
                                 </td>
                                 <td><?php echo $cantComentarios; ?></td>
@@ -94,7 +94,6 @@
                     </tbody>
                 </table>
             <?php
-                include_once 'navegadorElementos.inc.php';
             } else {
             ?>
                 <div class="bg-dark text-white rounded my-1 p-5">

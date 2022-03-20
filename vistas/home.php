@@ -23,17 +23,15 @@ include_once 'app/escritorEntradas.inc.php';
                     </p>
                     <button id="vistas" value="0" class="btn btn-no-shadow text-white p-1" title="Alternar vistas" onclick="alternarVistaEntradas()"></button>
                 </div>
-                <div id="recientes" class="card-body bg-dark-light d-flex flex-wrap justify-content-around pt-0 pe-0 ps-0 pb-1">
+                <div id="contPaginacion" class="card-body bg-dark-light d-flex flex-wrap justify-content-around pt-0 pe-0 ps-0 pb-1">
                     <?php 
                         conexion::abrir_conexion(); 
                         $entradas = EscritorEntradas::entradasRecientes();
                         $total = count(json_decode($entradas));
+                        require_once 'plantillas/resultadoPaginacion.min.php'; 
                     ?>
-                    <script>mostrarLista("recientes", <?php echo $entradas ?>, 16, 1, 'recientes');</script>
-                    <?php 
-                        conexion::cerrar_conexion(); 
-                        require_once 'plantillas/navegadorElementos.inc.php';
-                    ?>
+                    <script>mostrarLista(16, 1, 'recientes');</script>
+                    <?php conexion::cerrar_conexion(); ?>
                 </div>
             </div>
         </div>
