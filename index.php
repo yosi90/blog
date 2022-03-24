@@ -17,7 +17,7 @@ try{
     unset($_SESSION['entradaPrevia']);
 } catch (PDOException $ex){}
 
-$componentes_url = parse_url($_SERVER['REQUEST_URI']);
+$componentes_url = parse_url( urldecode($_SERVER['REQUEST_URI']));
 $ruta = $componentes_url['path'];
 $partes_ruta = explode('/', $ruta);
 $partes_ruta = array_filter($partes_ruta);
@@ -93,6 +93,13 @@ if ($partes_ruta[0] == 'blog') {
             case 'archivar-entrada':
                 if (controlsesion::sesion_iniciada()) {
                     $ruta_elegida = 'scripts/archivar-entrada.php';
+                } else {
+                    $ruta_elegida = 'vistas/home.php';
+                }
+                break;
+            case 'bloquear-entrada':
+                if (controlsesion::sesion_iniciada() && ($_SESSION['moderador'] == 1 || $_SESSION['administrador'] == 1)) {
+                    $ruta_elegida = 'scripts/bloquear-entrada.php';
                 } else {
                     $ruta_elegida = 'vistas/home.php';
                 }

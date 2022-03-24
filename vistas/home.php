@@ -27,10 +27,9 @@ include_once 'app/escritorEntradas.inc.php';
                     <?php 
                         conexion::abrir_conexion(); 
                         $entradas = EscritorEntradas::entradasRecientes();
-                        $total = count(json_decode($entradas));
-                        require_once 'plantillas/resultadoPaginacion.min.php'; 
+                        require_once 'plantillas/paginador.min.php'; 
                     ?>
-                    <script>mostrarLista(16, 1, 'recientes');</script>
+                    <script>mostrarLista(16, 1, 'recientesEntrada');</script>
                     <?php conexion::cerrar_conexion(); ?>
                 </div>
             </div>

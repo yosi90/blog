@@ -9,29 +9,20 @@ include_once 'app/Conexion.inc.php';
 if (isset($_POST['submit'])) {
     $activa = 1;
     conexion::abrir_conexion();
-    $partes_url = explode(' ', $_POST['titulo']);
-    $url = "";
-    if (count($partes_url) > 1) {
-        for ($cont = 0; $cont < count($partes_url); $cont++) {
-            $url .= $partes_url[$cont];
-            $url = (($cont + 1) != count($partes_url) ? "{$url}-" : $url);
-        }
-    } else {
-        $url = $partes_url[0];
-    }
+    $url = repositorioEntrada::crearUrl($_POST['titulo']);
     $validador = new validadorEntradaEditada($_POST['titulo'], $_POST['entrada'], $url, $_SESSION['entradaPrevia'], conexion::obtener_conexion());
     if (isset($_POST['activa'])) { $activa = 0; }
     if ($validador->entrada_valida()) {
-        $entrada = new entrada(null, $_SESSION['id_usuario'], $url, $validador->getTitulo(), $validador->getTexto(), null, $activa, 0);
+        $entrada = new entrada(null, '', $_SESSION['id_usuario'], $url, htmlentities($validador->getTitulo(), ENT_QUOTES, 'UTF-8', true), $validador->getTexto(), null, $activa, 0);
         $entrada_insertada = repositorioentrada::actualizar_entrada(conexion::obtener_conexion(), $entrada, $_SESSION['entradaPrevia']);
         if ($entrada_insertada) {
-?>
+            ?>
             <script>window.location.href = "<?php echo RUTA_ENTRADA . '/' . $entrada->getUrl(); ?>"</script>
         <?php
         } else {
-        ?>
+            ?>
             <script>alert("La entrada no pudo ser actualizada");</script>
-<?php
+            <?php
         }
     }
     conexion::cerrar_conexion();

@@ -1,6 +1,5 @@
 <?php
 $titulo = 'Troubles time - Panel de control';
-$inicioBusqueda = 0;
 include_once 'plantillas/documento-declaracion.inc.php';
 include_once 'app/Conexion.inc.php';
 include_once 'plantillas/pc_declare.inc.php';
@@ -15,8 +14,7 @@ switch ($gestor_actual)
         include_once 'plantillas/gestor-generico.inc.php';
         break;
     case 'entradas':
-        $array_entradas = repositorioEntrada::entradasUsuario(conexion::obtener_conexion(), $_SESSION['id_usuario'], $inicioBusqueda);
-        $total = repositorioEntrada::totalUsuario(conexion::obtener_conexion(), $_SESSION['id_usuario']);
+        $entradas = repositorioEntrada::entradasUsuario(conexion::obtener_conexion(), $_SESSION['id_usuario'], 0, 1);
         include_once 'plantillas/gestor-entradas.inc.php';
         break;
     case 'favoritos':
@@ -26,7 +24,7 @@ switch ($gestor_actual)
         include_once 'plantillas/gestor-comentarios.inc.php';
         break;
     case 'archivo':
-        $array_archivo = repositorioEntrada::entradasUsuario(conexion::obtener_conexion(), $_SESSION['id_usuario'], 1);
+        $entradas = repositorioEntrada::entradasUsuario(conexion::obtener_conexion(), $_SESSION['id_usuario'], 1);
         include_once 'plantillas/gestor-archivo.inc.php';
         break;
 }

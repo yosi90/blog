@@ -12,13 +12,15 @@ class repositorioEntrada
         $entrada = null;
         if (isset($conexion)) {
             try {
-                $sql = "SELECT * FROM entradas WHERE id_entrada = :idEntrada";
+                $sql = 'SELECT e.id_entrada, u.nombre, ue.id_usuario, e.url, e.titulo, e.texto, e.fecha, e.activa, e.archivada, e.bloqueada' .
+                ' FROM entradas e INNER JOIN usuario_entradas ue on e.id_entrada = ue.id_entrada inner join usuarios u on ue.id_usuario = u.id_usuario'.
+                ' WHERE e.id_entrada = :idEntrada ORDER BY fecha DESC';
                 $sentencia = $conexion->prepare($sql);
                 $sentencia->bindParam(':idEntrada', $idEntrada, PDO::PARAM_STR);
                 $sentencia->execute();
                 $resultado = $sentencia->fetch();
                 if (!empty($resultado)) {
-                    $entrada = new entrada($resultado['id_entrada'], $resultado['id_autor'], $resultado['url'], $resultado['titulo'], $resultado['texto'], $resultado['fecha'], $resultado['activa'], $resultado['archivada'], $resultado['bloqueada']);
+                    $entrada = new entrada($resultado['id_entrada'], $resultado['nombre'], $resultado['id_usuario'], $resultado['url'], html_entity_decode($resultado['titulo'], ENT_QUOTES, 'UTF-8'), $resultado['texto'], $resultado['fecha'], $resultado['activa'], $resultado['archivada'], $resultado['bloqueada']);
                 }
             } catch (PDOException $ex) {
                 print 'ERROR' . $ex->getMessage();
@@ -38,7 +40,9 @@ class repositorioEntrada
                 $sentencia->execute();
                 $resultado = $sentencia->fetchAll();
                 return count($resultado);
-            } catch (PDOException $ex) { print 'ERROR' . $ex->getMessage(); }
+            } catch (PDOException $ex) {
+                print 'ERROR' . $ex->getMessage();
+            }
         }
         return 0;
     }
@@ -48,15 +52,15 @@ class repositorioEntrada
         $entradas = [];
         if (isset($conexion)) {
             try {
-                $sql = 'SELECT e.id_entrada, u.nombre, ue.id_usuario, e.url, e.titulo, e.texto, e.fecha, e.activa, e.archivada, e.bloqueada'.
-                ' FROM entradas e INNER JOIN usuario_entradas ue on e.id_entrada = ue.id_entrada inner join usuarios u on ue.id_usuario = u.id_usuario'.
-                ' WHERE e.activa = 1 and e.archivada = 0 and e.bloqueada = 0 ORDER BY fecha DESC';
+                $sql = 'SELECT e.id_entrada, u.nombre, ue.id_usuario, e.url, e.titulo, e.texto, e.fecha, e.activa, e.archivada, e.bloqueada' .
+                    ' FROM entradas e INNER JOIN usuario_entradas ue on e.id_entrada = ue.id_entrada inner join usuarios u on ue.id_usuario = u.id_usuario' .
+                    ' WHERE e.activa = 1 and e.archivada = 0 and e.bloqueada = 0 ORDER BY fecha DESC';
                 $sentencia = $conexion->prepare($sql);
                 $sentencia->execute();
                 $resultado = $sentencia->fetchAll(PDO::FETCH_ASSOC);
                 if (count($resultado)) {
                     foreach ($resultado as $fila) {
-                        $instance = new entrada($fila['id_entrada'], $fila['nombre'], $fila['id_usuario'], $fila['url'], $fila['titulo'], $fila['texto'], $fila['fecha'], $fila['activa']);
+                        $instance = new entrada($fila['id_entrada'], $fila['nombre'], $fila['id_usuario'], $fila['url'], html_entity_decode($fila['titulo'], ENT_QUOTES, 'UTF-8'), $fila['texto'], $fila['fecha'], $fila['activa']);
                         $entradas[] = $instance->getArray();
                     }
                 }
@@ -72,16 +76,16 @@ class repositorioEntrada
         $entradas = [];
         if (isset($conexion)) {
             try {
-                $sql = 'SELECT e.id_entrada, u.nombre, ue.id_usuario, e.url, e.titulo, e.texto, e.fecha, e.activa, e.archivada, e.bloqueada'.
-                ' FROM entradas e INNER JOIN usuario_entradas ue on e.id_entrada = ue.id_entrada inner join usuarios u on ue.id_usuario = u.id_usuario'.
-                ' WHERE (texto like :filtro or titulo like :filtro) and (activa = 1 and archivada = 0 and bloqueada = 0) ORDER BY fecha';
+                $sql = 'SELECT e.id_entrada, u.nombre, ue.id_usuario, e.url, e.titulo, e.texto, e.fecha, e.activa, e.archivada, e.bloqueada' .
+                    ' FROM entradas e INNER JOIN usuario_entradas ue on e.id_entrada = ue.id_entrada inner join usuarios u on ue.id_usuario = u.id_usuario' .
+                    ' WHERE (texto like :filtro or titulo like :filtro) and (activa = 1 and archivada = 0 and bloqueada = 0) ORDER BY fecha';
                 $sentencia = $conexion->prepare($sql);
                 $sentencia->bindParam(':filtro', $filtro, PDO::PARAM_STR);
                 $sentencia->execute();
                 $resultado = $sentencia->fetchAll();
                 if (count($resultado)) {
                     foreach ($resultado as $fila) {
-                        $entradas[] = new entrada($fila['id_entrada'], $fila['nombre'], $fila['id_usuario'], $fila['url'], $fila['titulo'], $fila['texto'], $fila['fecha'], $fila['activa']);
+                        $entradas[] = new entrada($fila['id_entrada'], $fila['nombre'], $fila['id_usuario'], $fila['url'], html_entity_decode($fila['titulo'], ENT_QUOTES, 'UTF-8'), $fila['texto'], $fila['fecha'], $fila['activa']);
                     }
                 }
             } catch (PDOException $ex) {
@@ -102,7 +106,7 @@ class repositorioEntrada
                 $sentencia->execute();
                 $resultado = $sentencia->fetch();
                 if (!empty($resultado)) {
-                    $entrada = new entrada($resultado['id_entrada'], $resultado['nombre'], $resultado['id_usuario'], $resultado['url'], $resultado['titulo'], $resultado['texto'], $resultado['fecha'], $resultado['activa'], $resultado['archivada'], $resultado['bloqueada']);
+                    $entrada = new entrada($resultado['id_entrada'], $resultado['nombre'], $resultado['id_usuario'], $resultado['url'], html_entity_decode($resultado['titulo'], ENT_QUOTES, 'UTF-8'), $resultado['texto'], $resultado['fecha'], $resultado['activa'], $resultado['archivada'], $resultado['bloqueada']);
                 }
             } catch (PDOException $ex) {
                 print 'ERROR' . $ex->getMessage();
@@ -135,15 +139,15 @@ class repositorioEntrada
         $entradas = [];
         if (isset($conexion)) {
             try {
-                $sql = 'SELECT e.id_entrada, u.nombre, ue.id_usuario, e.url, e.titulo, e.texto, e.fecha, e.activa, e.archivada, e.bloqueada'.
-                ' FROM entradas e INNER JOIN usuario_entradas ue on e.id_entrada = ue.id_entrada inner join usuarios u on ue.id_usuario = u.id_usuario'.
-                ' WHERE archivada = 0 and bloqueada = 0 ORDER BY RAND() LIMIT ' . $limite;
+                $sql = 'SELECT e.id_entrada, u.nombre, ue.id_usuario, e.url, e.titulo, e.texto, e.fecha, e.activa, e.archivada, e.bloqueada' .
+                    ' FROM entradas e INNER JOIN usuario_entradas ue on e.id_entrada = ue.id_entrada inner join usuarios u on ue.id_usuario = u.id_usuario' .
+                    ' WHERE archivada = 0 and bloqueada = 0 ORDER BY RAND() LIMIT ' . $limite;
                 $sentencia = $conexion->prepare($sql);
                 $sentencia->execute();
                 $resultado = $sentencia->fetchAll();
                 if (count($resultado)) {
-                    foreach ($resultado as $resultado) {
-                        $entradas[] = new entrada($resultado['id_entrada'], $resultado['nombre'], $resultado['id_usuario'], $resultado['url'], $resultado['titulo'], $resultado['texto'], $resultado['fecha'], $resultado['activa']);
+                    foreach ($resultado as $fila) {
+                        $entradas[] = new entrada($fila['id_entrada'], $fila['nombre'], $fila['id_usuario'], $fila['url'], html_entity_decode($fila['titulo'], ENT_QUOTES, 'UTF-8'), $fila['texto'], $fila['fecha'], $fila['activa']);
                     }
                 }
             } catch (PDOException $ex) {
@@ -178,26 +182,37 @@ class repositorioEntrada
 
     public static function entradasUsuario($conexion, $id_usuario, $archivada = 0, $bloqueada = 0)
     {
-        $entradas_obtenidas = [];
+        $entradas = [];
+        $archivo = " and e.archivada = :archivada ";
+        if ($archivada == 1)
+            $archivo = "";
+        $bloqueo = " and e.bloqueada = :bloqueada ";
+        if ($bloqueada == 1)
+            $bloqueo = "";
         if (isset($conexion)) {
             try {
-                $sql = 'SELECT e.id_entrada, u.nombre, ue.id_usuario, e.url, e.titulo, e.texto, e.fecha, e.activa, e.archivada, e.bloqueada, COUNT(ec.id_comentario) AS "cantidad_comentarios"'. 
-                ' FROM entradas e inner join usuario_entradas ue on e.id_entrada = ue.id_entrada inner join usuarios u on ue.id_usuario = u.id_usuario LEFT JOIN entrada_comentarios ec ON e.id_entrada = ec.id_entrada'.
-                ' WHERE ue.id_usuario = :id_usuario and e.archivada = :archivada and e.bloqueada = :bloqueada GROUP BY e.id_entrada ORDER BY e.fecha DESC';
+                $sql = 'SELECT e.id_entrada, u.nombre, ue.id_usuario, e.url, e.titulo, e.texto, e.fecha, e.activa, e.archivada, e.bloqueada, COUNT(ec.id_comentario) AS "cantidad_comentarios"' .
+                    ' FROM entradas e inner join usuario_entradas ue on e.id_entrada = ue.id_entrada inner join usuarios u on ue.id_usuario = u.id_usuario LEFT JOIN entrada_comentarios ec ON e.id_entrada = ec.id_entrada' .
+                    ' WHERE ue.id_usuario = :id_usuario' . $archivo . $bloqueo . 'GROUP BY e.id_entrada ORDER BY e.fecha DESC';
                 $sentencia = $conexion->prepare($sql);
                 $sentencia->bindParam(':id_usuario', $id_usuario, PDO::PARAM_STR);
-                $sentencia->bindParam(':archivada', $archivada, PDO::PARAM_STR);
-                $sentencia->bindParam(':bloqueada', $bloqueada, PDO::PARAM_STR);
+                if ($archivo != "")
+                    $sentencia->bindParam(':archivada', $archivada, PDO::PARAM_STR);
+                if ($bloqueo != "")
+                    $sentencia->bindParam(':bloqueada', $bloqueada, PDO::PARAM_STR);
                 $sentencia->execute();
-                $resultado = $sentencia->fetchAll();
+                $resultado = $sentencia->fetchAll(PDO::FETCH_ASSOC);
                 if (count($resultado)) {
                     foreach ($resultado as $fila) {
-                        $entradas_obtenidas[] = array(new entrada($fila['id_entrada'], $fila['nombre'], $fila['id_usuario'], $fila['url'], $fila['titulo'], $fila['texto'], $fila['fecha'], $fila['activa'], $fila['archivada'], $fila['bloqueada']), $fila['cantidad_comentarios']);
+                        $instance = new entrada($fila['id_entrada'], $fila['nombre'], $fila['id_usuario'], $fila['url'], html_entity_decode($fila['titulo'], ENT_QUOTES, 'UTF-8'), $fila['texto'], $fila['fecha'], $fila['activa'], $fila['archivada'], $fila['bloqueada'], $fila['cantidad_comentarios']);
+                        $entradas[] = $instance->getArray();
                     }
                 }
-            } catch (PDOException $ex) { print 'ERROR' . $ex->getMessage(); }
+            } catch (PDOException $ex) {
+                print 'ERROR' . $ex->getMessage();
+            }
         }
-        return $entradas_obtenidas;
+        return $entradas;
     }
 
     public static function totalUsuario($conexion, $id_usuario, $archivada = 0, $bloqueada = 0)
@@ -212,7 +227,9 @@ class repositorioEntrada
                 $sentencia->execute();
                 $resultado = $sentencia->fetchAll();
                 return count($resultado);
-            } catch (PDOException $ex) { print 'ERROR' . $ex->getMessage(); }
+            } catch (PDOException $ex) {
+                print 'ERROR' . $ex->getMessage();
+            }
         }
         return 0;
     }
@@ -252,7 +269,7 @@ class repositorioEntrada
                 $sentencia->bindParam(':archivada', $archivada, PDO::PARAM_STR);
                 $sentencia->bindParam(':bloqueada', $bloqueada, PDO::PARAM_STR);
                 $entrada_insertada = $sentencia->execute();
-                if($id_usuario != null){
+                if ($id_usuario != null) {
                     $sql = "SELECT id_entrada FROM entradas WHERE url = :url";
                     $sentencia = $conexion->prepare($sql);
                     $sentencia->bindParam(':url', $url, PDO::PARAM_STR);
@@ -277,16 +294,14 @@ class repositorioEntrada
         if (isset($conexion)) {
             try {
                 $conexion->beginTransaction();
-                $sql = "INSERT INTO entradas_ediciones (id_entrada, id_autor, url, titulo, texto, fecha, activa) VALUES (:url_, :titulo_previo, :texto_previo, NOW(), :activa_previo)";
+                $sql = "INSERT INTO entradas_ediciones (id_entrada, url, titulo, texto, fecha, activa) VALUES (:id_entrada, :url_, :titulo_previo, :texto_previo, NOW(), :activa_previo)";
                 $sentencia = $conexion->prepare($sql);
                 $idPrevia = $entradaPrevia->getId_entrada();
-                $autorPrevio = $entradaPrevia->getAutor();
                 $urlPrevia = $entradaPrevia->getUrl();
                 $tituloPrevio = $entradaPrevia->getTitulo();
                 $textoPrevio = $entradaPrevia->getTexto();
                 $activaPrevia = $entradaPrevia->getActiva();
                 $sentencia->bindParam(':id_entrada', $idPrevia, PDO::PARAM_STR);
-                $sentencia->bindParam(':id_autor_', $autorPrevio, PDO::PARAM_STR);
                 $sentencia->bindParam(':url_', $urlPrevia, PDO::PARAM_STR);
                 $sentencia->bindParam(':titulo_previo', $tituloPrevio, PDO::PARAM_STR);
                 $sentencia->bindParam(':texto_previo', $textoPrevio, PDO::PARAM_STR);
@@ -352,6 +367,28 @@ class repositorioEntrada
             }
         }
         return $archivada;
+    }
+
+    public static function bloquearEntrada($conexion, $idEntrada, $bloquear)
+    {
+        $bloqueada = false;
+        if (isset($conexion)) {
+            try {
+                $conexion->beginTransaction();
+                $sql = "UPDATE entradas SET bloqueada = :bloquear WHERE id_entrada = :idEntrada";
+                $sentencia = $conexion->prepare($sql);
+                $entradaTemp = $idEntrada;
+                $bloquearTemp = $bloquear;
+                $sentencia->bindParam(':idEntrada', $entradaTemp, PDO::PARAM_STR);
+                $sentencia->bindParam(':bloquear', $bloquearTemp, PDO::PARAM_STR);
+                $bloqueada = $sentencia->execute();
+                $conexion->commit();
+            } catch (PDOException $ex) {
+                $conexion->rollBack();
+                print 'ERROR' . $ex->getMessage();
+            }
+        }
+        return $bloqueada;
     }
 
     public static function DeleteEntrada($conexion, $idEntrada)

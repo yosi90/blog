@@ -1,4 +1,7 @@
 <?php
+
+use phpDocumentor\Reflection\PseudoTypes\HtmlEscapedString;
+
 $titulo = 'Nueva entrada';
 include_once 'plantillas/documento-declaracion.inc.php';
 include_once 'app/entrada.inc.php';
@@ -13,7 +16,7 @@ if (isset($_POST['submit'])) {
     if (isset($_POST['activa'])){ $activa = 0; }
     $validador = new validadorEntradaNueva($_POST['titulo'], $_POST['entrada'], $url, conexion::obtener_conexion());
     if ($validador->entrada_valida()) {
-        if (repositorioentrada::insertar_entrada(conexion::obtener_conexion(), $url, $validador->getTitulo(), $validador->getTexto(), null, $activa, 0, 0, $_SESSION['id_usuario'])) {
+        if (repositorioentrada::insertar_entrada(conexion::obtener_conexion(), $url, htmlentities($validador->getTitulo(), ENT_QUOTES, 'UTF-8', true), $validador->getTexto(), $activa, 0, 0, $_SESSION['id_usuario'])) {
             ?>
                 <script> window.location.href = "<?php echo RUTA_ENTRADA . '/' . $url ?>" </script>
             <?php
@@ -30,7 +33,7 @@ include_once 'plantillas/pc_declare.inc.php';
     <div class="card-body bg-dark-light text-white">
         <form class="d-flex flex-row flex-wrap" method="POST" action="<?php echo RUTA_NUEVA_ENTRADA; ?>">
             <?php
-            if (isset($_POST['guardar'])) {
+            if (isset($_POST['submit'])) {
                 include_once 'plantillas/form_nueva_entrada_validado.inc.php';
             } else {
                 include_once 'plantillas/form_nueva_entrada_vacio.inc.php';

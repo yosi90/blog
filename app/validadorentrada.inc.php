@@ -24,7 +24,7 @@ abstract class validadorEntrada
     {
         $this->texto = $texto;
         if (!$this->variable_iniciada($texto)) {
-            return "Debes escribir algo de texto";
+            return "Este campo es obligatorio";
         } else if (strlen($texto) < 20) {
             return "Entrada demasiado corta";
         }

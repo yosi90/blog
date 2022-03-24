@@ -37,7 +37,9 @@ body {
   font-size: calc(.2vw + 10px);
 }
 
-.lt-10, .lt-3, .lt-2 {
+.lt-10,
+.lt-3,
+.lt-2 {
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -106,11 +108,11 @@ body {
   background-color: rgb(246, 173, 193);
 }
 
-.deshabilitado{
+.deshabilitado {
   background-color: darkgray;
 }
 
-.deshabilitado:hover{
+.deshabilitado:hover {
   cursor: default !important;
   background-color: darkgray !important;
 }
@@ -307,7 +309,7 @@ body {
   border-style: solid;
 }
 
-.bw-2{
+.bw-2 {
   border-width: .2rem .2rem;
 }
 
@@ -375,13 +377,13 @@ div.cke {
   outline: inherit;
 }
 
-.navigation a{
+.navigation a {
   display: inline-block;
   width: 43px;
   text-align: center;
 }
 
-.navigation a:hover{
+.navigation a:hover {
   background-color: lightgrey;
   color: black !important;
 }

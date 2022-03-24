@@ -34,7 +34,9 @@ for ($comentarios = 0; $comentarios < $cantCometarios; $comentarios++) {
     $autor = rand(1, $cantUsers);
     repositoriocomentarios::insertar_comentario(conexion::obtener_conexion(), $texto, $autor, $entrada);
 }
-
+?>
+<script>window.location.href = "<?php echo RUTA_ENTRADA . '/' . $entrada->getUrl(); ?>"</script>
+<?php
 function Texto($longitud)
 {
     $caracteres = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ ';

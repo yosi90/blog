@@ -11,8 +11,9 @@ class entrada
     private $activa;
     private $archivada;
     private $bloqueada;
+    private $cantComentarios;
     
-    public function __construct($id_entrada, $autor, $id_autor, $url, $titulo, $texto, $fecha, $activa, $archivada = 0, $bloqueada = 0)
+    public function __construct($id_entrada, $autor, $id_autor, $url, $titulo, $texto, $fecha, $activa, $archivada = 0, $bloqueada = 0, $comentarios = 0)
     {
         $this-> id_entrada = $id_entrada;
         $this-> autor = $autor;
@@ -24,6 +25,7 @@ class entrada
         $this-> activa = $activa;
         $this-> archivada = $archivada;
         $this-> bloqueada = $bloqueada;
+        $this-> cantComentarios = $comentarios;
     }
 
     public function getArray()
@@ -39,7 +41,7 @@ class entrada
             'activa' => $this-> activa,
             'archivada' => $this-> archivada,
             'bloqueada' => $this-> bloqueada,
-
+            'cantComentarios' => $this-> cantComentarios
         ];
     }
 
@@ -67,5 +69,6 @@ class entrada
 
     public function getBloqueada() { return $this->bloqueada; }
     public function setBloqueada($bloqueada) { $this->bloqueada = $bloqueada; }
-    
+
+    public function getCantComentarios() { return $this->cantComentarios; }
 }

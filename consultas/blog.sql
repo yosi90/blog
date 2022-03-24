@@ -11,7 +11,7 @@ CREATE TABLE usuarios(
     activo TINYINT NOT NULL,
     moderador TINYINT NOT NULL DEFAULT 0,
     administrador TINYINT NOT NULL DEFAULT 0,
-    bloquead0 TINYINT NOT NULL DEFAULT 0,
+    bloqueado TINYINT NOT NULL DEFAULT 0,
     PRIMARY KEY(id_usuario)
 );
 
@@ -61,8 +61,8 @@ CREATE TABLE usuario_entradas(
 CREATE TABLE entradas_ediciones(
     id_edicion INT NOT NULL UNIQUE AUTO_INCREMENT,
     id_entrada INT NOT NULL,
-    url VARCHAR(255) NOT NULL UNIQUE,
-    titulo VARCHAR(80) NOT NULL UNIQUE,
+    url VARCHAR(255) NOT NULL,
+    titulo VARCHAR(80) NOT NULL,
     texto TEXT NOT NULL,
     fecha DATETIME NOT NULL,
     activa TINYINT NOT NULL,

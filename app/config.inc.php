@@ -19,6 +19,7 @@ define("RUTA_NUEVA_ENTRADA", SERVIDOR."/nueva-entrada");
 define("RUTA_EDITAR_ENTRADA", SERVIDOR."/editar-entrada");
 define("RUTA_ACTIVAR_ENTRADA", SERVIDOR."/activar-entrada");
 define("RUTA_BORRAR_ENTRADA", SERVIDOR."/borrar-entrada");
+define("RUTA_BLOQUEAR_ENTRADA", SERVIDOR."/bloquear-entrada");
 define("RUTA_ARCHIVAR_ENTRADA", SERVIDOR."/archivar-entrada");
 define("RUTA_GESTOR", SERVIDOR."/gestor");
 define("RUTA_GESTOR_ADM", SERVIDOR."/gestor-administrador");

@@ -25,7 +25,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/blog/app/controlsesion.inc.php';
     <link href="<?php echo CSS; ?>/gestor.css" rel="stylesheet">
     <script type="text/javascript" src="<?php echo JS; ?>/jquery.min.js"></script>
     <script type="text/javascript" src="<?php echo JS; ?>/bootstrap.bundle.js"></script>
-    <script type="text/javascript" src="<?php echo editor; ?>ckeditor.js"></script>
+    <script type="text/javascript" src="<?php echo editor; ?>ckeditor.js" charset="utf-8"></script>
     <script type="text/javascript" src="<?php echo editor; ?>config.js"></script>
     <script type="text/javascript" src="<?php echo editor; ?>styles.js"></script>
     <script type="text/javascript" src="<?php echo editor; ?>/adapters/jquery.js"></script>
