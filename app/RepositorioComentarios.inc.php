@@ -102,7 +102,8 @@ class RepositorioComentarios
                 $resultado = $sentencia->fetchAll();
                 if (count($resultado)) {
                     foreach ($resultado as $fila) {
-                        $comentarios[] = new comentario($fila['id_comentario'], $fila['nombre'], $fila['id_usuario'], $fila['titulo'], $fila['id_entrada'], $fila['url'], $fila['texto'], $fila['fecha'], $fila['indice']);
+                        $instance = new comentario($fila['id_comentario'], $fila['nombre'], $fila['id_usuario'], html_entity_decode($fila['titulo'], ENT_QUOTES, 'UTF-8'), $fila['id_entrada'], $fila['url'], $fila['texto'], $fila['fecha'], $fila['indice']);
+                        $comentarios[] = $instance->getArray();
                     }
                 }
             } catch (PDOException $ex) {

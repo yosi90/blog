@@ -3,9 +3,7 @@ $titulo = 'Troubles time - Buscador';
 $filtro = "";
 $entradas = $comentarios = $autores = [];
 include_once 'plantillas/documento-declaracion.inc.php';
-include_once 'app/escritorEntradas.inc.php';
 include_once 'app/escritorUsuarios.inc.php';
-include_once 'app/escritorComentarios.inc.php';
 if (isset($_POST['texto']) && !empty($_POST['texto'])) {
     $filtro = $_POST['texto'];
     conexion::abrir_conexion();
@@ -38,7 +36,7 @@ if (isset($_POST['texto']) && !empty($_POST['texto'])) {
                         <div class="sliders d-flex flex-row flex-wrap align-items-center justify-content-end mt-2 py-2">
                             <label class="switch d-flex align-items-center me-2 my-1">
                                 Entradas
-                                <input type="checkbox" id="chbEntradas" name="entradas" onclick="toggle('chbEntradas', 'entradas')" <?php echo (count($comentarios) || count($autores)) ? '' : 'checked' ?>>
+                                <input type="checkbox" id="chbEntradas" name="entradas" onclick="toggle('chbEntradas', 'entradas')" <?php echo (count($entradas) || (count($comentarios) == 0 && count($autores) == 0)) ? 'checked' : '' ?>>
                                 <span class="slider round"></span>
                             </label>
                             <label class="switch d-flex align-items-center me-2 my-1">
@@ -60,14 +58,16 @@ if (isset($_POST['texto']) && !empty($_POST['texto'])) {
                         <div class="card-header bg-dark text-white text-center">
                             <h3><strong><?php echo count($entradas) != 1 ? ' ' . count($entradas) . ' entradas coinciden' : '1 entrada coincide'; ?></strong></h3>
                         </div>
-                        <div class="card-body bg-dark-light text-white bs-s border-1 border-dark">
+                        <div id="contPaginacion" class="card-body bg-dark-light text-white bs-s border-1 border-dark">
                             <?php
                             if ($entradas == "" || empty($entradas) || !isset($entradas)) {
                                 include 'plantillas/busquedaVacia.inc.php';
                             } else {
-                                conexion::abrir_conexion();
-                                escritorEntradas::entradasFiltradas($entradas);
-                                conexion::cerrar_conexion();
+                                $entradas = json_encode($entradas);
+                                require_once 'plantillas/paginadorEntradas.min.php';
+                            ?>
+                                <script>mostrarLista(10, 1, 'busqueda');</script>
+                            <?php 
                             }
                             ?>
                         </div>
@@ -76,14 +76,16 @@ if (isset($_POST['texto']) && !empty($_POST['texto'])) {
                         <div class="card-header bg-dark text-white text-center">
                             <h3><strong><?php echo count($comentarios) != 1 ? ' ' . count($comentarios) . ' comentarios coinciden' : '1 comentario coincide'; ?></strong></h3>
                         </div>
-                        <div class="card-body bg-dark-light text-white bs-s border-1 border-dark">
+                        <div id="contPaginacion2" class="card-body bg-dark-light text-white bs-s border-1 border-dark">
                             <?php
                             if ($comentarios == "" || empty($comentarios) || !isset($comentarios)) {
                                 include 'plantillas/busquedaVacia.inc.php';
                             } else {
-                                conexion::abrir_conexion();
-                                escritorComentarios::comentariosFiltrados($comentarios);
-                                conexion::cerrar_conexion();
+                                $comentarios = json_encode($comentarios);
+                                require_once 'plantillas/paginadorComentarios.min.php';
+                            ?>
+                                <script>mostrarLista(10, 1, 'busqueda', 'contPaginacion2', 'contPaginacion2');</script>
+                            <?php 
                             }
                             ?>
                         </div>
@@ -111,9 +113,11 @@ if (isset($_POST['texto']) && !empty($_POST['texto'])) {
     </div>
 </div>
 <?php
-if (count($comentarios))
+if ($entradas != "")
+    echo '<script type="text/javascript">toggle("chbEntradas", "entradas");</script>';
+if ($comentarios != "")
     echo '<script type="text/javascript">toggle("chbComentarios", "comentarios");</script>';
-if (count($autores))
+if ($autores != "")
     echo '<script type="text/javascript">toggle("chbAutores", "autores");</script>';
 include_once 'plantillas/documento-cierre.inc.php';
 ?>

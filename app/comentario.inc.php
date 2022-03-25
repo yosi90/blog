@@ -24,6 +24,21 @@ class comentario
         $this->index = $index;
     }
 
+    public function getArray()
+    {
+        return [
+            'idComentario' => $this-> idComentario,
+            'idAutor' => $this-> idAutor,
+            'autor' => $this-> autor,
+            'tituloEntrada' => $this-> tituloEntrada,
+            'idEntrada' => $this-> idEntrada,
+            'urlEntrada' => $this-> urlEntrada,
+            'texto' => $this-> texto,
+            'fecha' => $this-> fecha,
+            'indice' => $this-> index
+        ];
+    }
+
     public function getId() { return $this->idComentario; }
 
     public function getAutor() { return $this->autor; }

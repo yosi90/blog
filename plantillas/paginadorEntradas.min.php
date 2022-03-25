@@ -1,3 +1,6 @@
+<?php
+require_once 'paginador.inc.php';
+?>
 <script>
     let paginActual; //utilizar esta variable para navegar con los botones de previa y siguiente.
     let lista = <?php echo $entradas ?>;
@@ -19,11 +22,14 @@
         let itemsPaginados = lista.slice(start, end);
         itemsPaginados.forEach(e => {
             switch (type) {
-                case 'recientesEntrada':
+                case 'reciente':
                     contenedor.appendChild(crearEntradaBasica(e));
                     break;
-                case 'tablaEntrada':
+                case 'tabla':
                     contenedor.appendChild(crearEntradaTabla(e));
+                    break;
+                case 'busqueda':
+                    contenedor.appendChild(crearEntradaBusqueda(e));
                     break;
                 default:
                     break;
@@ -263,72 +269,44 @@
         return tr;
     }
 
-    function crearPaginador() {
-        let paginador;
-        let div = document.createElement("div");
-        ['rounded', 'fz-texto', 'py-1', 'px-3'].forEach(className => {
-            div.classList.add(className);
+    function crearEntradaBusqueda(element) {
+        let card = document.createElement("div");
+        ['card', 'flex-fill', 'controlTamaño', 'm-1', 'mw-100'].forEach(className => {
+            card.classList.add(className);
         });
-        contenedorPaginacion.appendChild(div);
-        let strong = document.createElement("strong");
-        div.appendChild(strong);
-        paginador = document.createElement("span");
-        paginador.classList.add("navigation");
-        paginador.id = "navigation";
-        strong.appendChild(paginador);
-        cantPag = Math.ceil(lista.length / filas);
-        if (cantPag > 8)
-            paginador.appendChild(crearEnlace('<', paginActual != 1));
-        paginador.appendChild(crearEnlace(1, paginActual != 1));
-        var start, end;
-        if (paginActual < 5 && cantPag > 8) {
-            start = 2;
-            end = 6;
-        } else if (paginActual + 3 >= cantPag && cantPag > 8) {
-            start = cantPag - 4;
-            end = cantPag;
-        } else if (cantPag <= 8) {
-            start = 2;
-            end = cantPag;
-        } else {
-            start = paginActual - 2;
-            end = paginActual + 3;
-        }
-        if (cantPag > 8 && paginActual >= 5)
-            paginador.appendChild(crearEnlace('...', false));
-        for (var i = start; i < end; i++)
-            paginador.appendChild(crearEnlace(i, paginActual != i));
-        if (cantPag > 8 && paginActual < (cantPag - 3))
-            paginador.appendChild(crearEnlace('...', false));
-        paginador.appendChild(crearEnlace(cantPag, paginActual != cantPag));
-        if (cantPag > 8)
-            paginador.appendChild(crearEnlace('>', paginActual != cantPag));
-    }
-
-    function crearEnlace(texto, darPropiedades = true) {
+        let cHeader = document.createElement("div");
+        ['card-header', 'd-flex', 'bg-secondary', 'text-white', 'h-100'].forEach(className => {
+            cHeader.classList.add(className);
+        });
+        card.appendChild(cHeader);
         let enlace = document.createElement("a");
-        ['rounded', 'btn', 'm-1', 'px-2', 'py-1'].forEach(className => {
+        ['btn', 'btn-outline-light', 'fz-sm-texto', 'flex-fill'].forEach(className => {
             enlace.classList.add(className);
         });
-        if (darPropiedades && texto != "<" && texto != ">") {
-            enlace.href = "#";
-            enlace.setAttribute('onclick', 'mostrarLista(' + filas + ', ' + texto + ', "' + tipo + '", "' + nomcontenedor + '", "' + nomPaginador + '")');
-            ['rosa', 'text-white'].forEach(className => {
-                enlace.classList.add(className);
-            });
-        } else if (darPropiedades) {
-            enlace.href = "#";
-            enlace.setAttribute('onclick', 'mostrarLista(' + filas + ', ' + (texto == '<' ? (paginActual - 1) : (paginActual + 1)) + '", "' + tipo + '", "' + nomcontenedor + '", "' + nomPaginador + '")');
-            ['rosa', 'text-white'].forEach(className => {
-                enlace.classList.add(className);
-            });
-        } else if (texto != "<" && texto != ">" && texto != "...")
-            ['rosaFuerte', 'bs-s', 'bc-white', 'b-2', 'bw-2', 'text-white'].forEach(className => {
-                enlace.classList.add(className);
-            });
-        else
-            enlace.classList.add('deshabilitado');
-        enlace.innerHTML = texto;
-        return enlace;
+        enlace.role = "button";
+        enlace.href = "<?php echo RUTA_ENTRADA . '/' ?>" + element.url;
+        cHeader.appendChild(enlace);
+        let divInterno = document.createElement("div");
+        ['d-flex', 'flex-wrap'].forEach(className => {
+            divInterno.classList.add(className);
+        });
+        enlace.appendChild(divInterno);
+        let negrita = document.createElement("strong");
+        ['flex-fill', 'text-start', 'fz-subtitulo', 'lt-2'].forEach(className => {
+            negrita.classList.add(className);
+        });
+        negrita.innerText = element.titulo;
+        divInterno.appendChild(negrita);
+        let parrafo = document.createElement("p");
+        ['flex-fill', 'align-self-end', 'text-end', 'fz-text', 'm-0', 'pt-1'].forEach(className => {
+            parrafo.classList.add(className);
+        });
+        parrafo.innerText = (new Date(element.fecha)).toLocaleDateString('es-es', {
+            day: '2-digit',
+            month: 'long',
+            year: 'numeric'
+        });
+        divInterno.appendChild(parrafo);
+        return card;
     }
 </script>

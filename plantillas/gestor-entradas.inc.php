@@ -36,7 +36,7 @@
                         </tr>
                     </thead>
                     <tbody id="contPaginacion">
-                        <?php require_once 'plantillas/paginador.min.php'; ?>
+                        <?php require_once 'plantillas/paginadorEntradas.min.php'; ?>
                     </tbody>
                 </table>
             <?php
@@ -53,5 +53,5 @@
     </div>
 </div>
 <script>
-    mostrarLista(8, 1, 'tablaEntrada', 'contPaginacion', 'paginador');
+    mostrarLista(8, 1, 'tabla', 'contPaginacion', 'paginador');
 </script>

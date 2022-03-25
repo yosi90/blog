@@ -2,7 +2,6 @@
 
 $titulo = 'Troubles time';
 include_once 'plantillas/documento-declaracion.inc.php';
-include_once 'app/escritorEntradas.inc.php';
 ?>
 <img class="logo" src="img/logoSF.png">
 <div class="container">
@@ -26,10 +25,10 @@ include_once 'app/escritorEntradas.inc.php';
                 <div id="contPaginacion" class="card-body bg-dark-light d-flex flex-wrap justify-content-around pt-0 pe-0 ps-0 pb-1">
                     <?php 
                         conexion::abrir_conexion(); 
-                        $entradas = EscritorEntradas::entradasRecientes();
-                        require_once 'plantillas/paginador.min.php'; 
+                        $entradas = json_encode(repositorioEntrada::obtenerRecientes(Conexion::obtener_conexion()));
+                        require_once 'plantillas/paginadorEntradas.min.php'; 
                     ?>
-                    <script>mostrarLista(16, 1, 'recientesEntrada');</script>
+                    <script>mostrarLista(16, 1, 'reciente');</script>
                     <?php conexion::cerrar_conexion(); ?>
                 </div>
             </div>

@@ -85,7 +85,8 @@ class repositorioEntrada
                 $resultado = $sentencia->fetchAll();
                 if (count($resultado)) {
                     foreach ($resultado as $fila) {
-                        $entradas[] = new entrada($fila['id_entrada'], $fila['nombre'], $fila['id_usuario'], $fila['url'], html_entity_decode($fila['titulo'], ENT_QUOTES, 'UTF-8'), $fila['texto'], $fila['fecha'], $fila['activa']);
+                        $instance = new entrada($fila['id_entrada'], $fila['nombre'], $fila['id_usuario'], $fila['url'], html_entity_decode($fila['titulo'], ENT_QUOTES, 'UTF-8'), $fila['texto'], $fila['fecha'], $fila['activa']);
+                        $entradas[] = $instance->getArray();
                     }
                 }
             } catch (PDOException $ex) {
@@ -310,10 +311,12 @@ class repositorioEntrada
                 $sql = "UPDATE entradas SET url = :url, titulo = :titulo, texto = :texto, activa = :activa WHERE id_entrada = $idPrevia";
                 $sentencia = $conexion->prepare($sql);
                 $urlTemp = $entrada->getUrl();
+                $tituloTemp = purifier::purifier($entrada->getTitulo(), 'titulo');
+                $textoTemp = purifier::purifier($entrada->getTexto(), 'texto');
                 $activaTemp = $entrada->getActiva();
                 $sentencia->bindParam(':url', $urlTemp, PDO::PARAM_STR);
-                $sentencia->bindParam(':titulo', purifier::purifier($entrada->getTitulo(), 'titulo'), PDO::PARAM_STR);
-                $sentencia->bindParam(':texto', purifier::purifier($entrada->getTexto(), 'texto'), PDO::PARAM_STR);
+                $sentencia->bindParam(':titulo', $tituloTemp, PDO::PARAM_STR);
+                $sentencia->bindParam(':texto', $textoTemp, PDO::PARAM_STR);
                 $sentencia->bindParam(':activa', $activaTemp, PDO::PARAM_STR);
                 $entradaInsertada = $sentencia->execute();
                 $conexion->commit();
