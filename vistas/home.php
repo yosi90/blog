@@ -23,12 +23,14 @@ include_once 'plantillas/documento-declaracion.inc.php';
                     <button id="vistas" value="0" class="btn btn-no-shadow text-white p-1" title="Alternar vistas" onclick="alternarVistaEntradas()"></button>
                 </div>
                 <div id="contPaginacion" class="card-body bg-dark-light d-flex flex-wrap justify-content-around pt-0 pe-0 ps-0 pb-1">
-                    <?php 
-                        conexion::abrir_conexion(); 
-                        $entradas = json_encode(repositorioEntrada::obtenerRecientes(Conexion::obtener_conexion()));
-                        require_once 'plantillas/paginadorEntradas.min.php'; 
+                    <?php
+                    conexion::abrir_conexion();
+                    require_once 'plantillas/paginadorEntradas.min.php';
                     ?>
-                    <script>mostrarEntradas(16, 1, 'reciente');</script>
+                    <script>
+                        var paginador = new paginadorEntradas(1, <?php echo json_encode(repositorioEntrada::obtenerRecientes(Conexion::obtener_conexion())) ?>, 16, 'reciente', 'contPaginacion', 'contPaginacion');
+                        paginador.mostrarEntradas();
+                    </script>
                     <?php conexion::cerrar_conexion(); ?>
                 </div>
             </div>
