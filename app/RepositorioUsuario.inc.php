@@ -148,9 +148,10 @@ class RepositorioUsuario
                 if (count($resultado1)) {
                     $cont = 0;
                     foreach ($resultado1 as $fila) {
-                        $usuarios[] = new usuario($fila['id_usuario'], $fila['nombre'], $fila['correo'], $fila['password'], $fila['fecha_registro'], $fila['activo'], $fila['moderador'], $fila['administrador']);
-                        $usuarios[$cont]->setTotalEntradas($fila['totalEntradas']);
-                        $usuarios[$cont]->setTotalComentarios($resultado2[$cont]['totalComentarios']);
+                        $instance = new usuario($fila['id_usuario'], $fila['nombre'], $fila['correo'], $fila['password'], $fila['fecha_registro'], $fila['activo'], $fila['moderador'], $fila['administrador']);
+                        $instance->setTotalEntradas($fila['totalEntradas']);
+                        $instance->setTotalComentarios($resultado2[$cont]['totalComentarios']);
+                        $usuarios[] = $instance->getArray();
                         $cont++;
                     }
                 }

@@ -2,21 +2,18 @@
 require_once 'paginador.inc.php';
 ?>
 <script>
-    let listaEntradas = <?php echo $entradas ?>;
+    let listaAutores = <?php echo $autores ?>;
 
-    function mostrarEntradas(rows, actual, tipo, contenedorelementos = "contPaginacion", contenedorPaginador = "contPaginacion") {
+    function mostrarUsuarios(rows, actual, tipo, contenedorelementos = "contPaginacion", contenedorPaginador = "contPaginacion") {
         let contenedor = document.getElementById(contenedorelementos);
         contenedor.innerHTML = "";
         let start = rows * (actual - 1);
         let end = start + rows;
-        let itemsPaginados = listaEntradas.slice(start, end);
+        let itemsPaginados = listaAutores.slice(start, end);
         itemsPaginados.forEach(e => {
             switch (tipo) {
-                case 'reciente':
-                    contenedor.appendChild(Basica(e));
-                    break;
                 case 'tabla':
-                    contenedor.appendChild(Tabla(e));
+                    // contenedor.appendChild(Tabla(e));
                     break;
                 case 'busqueda':
                     contenedor.appendChild(Busqueda(e));
@@ -25,55 +22,12 @@ require_once 'paginador.inc.php';
                     break;
             }
         });
-        debugger;
-        if (listaEntradas.length > rows) {
+        if (listaAutores.length > rows) {
             let contenedorPaginacion = document.getElementById(contenedorPaginador);
             if (contenedor != contenedorPaginacion)
                 contenedorPaginacion.innerHTML = "";
-            crearPaginador("mostrarEntradas", actual, listaEntradas, rows, tipo, contenedorelementos, contenedorPaginador, contenedorPaginacion);
+            crearPaginador("mostrarUsuarios", actual, listaAutores, rows, tipo, contenedorelementos, contenedorPaginador, contenedorPaginacion);
         }
-    }
-
-    function Basica(element) {
-        let mw = document.getElementById("vistas");
-        let carta = document.createElement("div");
-        ['card', 'flex-fill', 'sizeControl', 'm-1', mw.value == '1' ? 'mw-100' : (mw.value == '2' ? 'mw-50' : 'mw-25')].forEach(className => {
-            carta.classList.add(className);
-        });
-        let cabeceraCarta = document.createElement("div");
-        ['card-header', 'd-flex', 'bg-secondary', 'text-white', 'h-100'].forEach(className => {
-            cabeceraCarta.classList.add(className);
-        });
-        carta.appendChild(cabeceraCarta);
-        let enlace = document.createElement("a");
-        ['btn', 'btn-outline-light', 'fz-sm-texto', 'flex-fill'].forEach(className => {
-            enlace.classList.add(className);
-        });
-        enlace.setAttribute("role", "button");
-        enlace.setAttribute("href", '/blog/entrada/' + element.url); //URL
-        cabeceraCarta.appendChild(enlace);
-        let container = document.createElement("div");
-        ['d-flex', 'flex-wrap'].forEach(className => {
-            container.classList.add(className);
-        });
-        enlace.appendChild(container);
-        let negrita = document.createElement("strong");
-        ['flex-fill', 'text-start', 'fz-subtitulo', 'lt-2'].forEach(className => {
-            negrita.classList.add(className);
-        });
-        negrita.innerText = element.titulo; //TITULO
-        container.appendChild(negrita);
-        let parrafo = document.createElement("p");
-        ['flex-fill', 'align-self-end', 'text-end', 'fz-texto', 'm-0', 'pt-1'].forEach(className => {
-            parrafo.classList.add(className);
-        });
-        parrafo.innerText = (new Date(element.fecha)).toLocaleDateString('es-es', {
-            day: '2-digit',
-            month: 'long',
-            year: 'numeric'
-        }); //FECHA
-        container.appendChild(parrafo);
-        return carta;
     }
 
     function Tabla(element) {
@@ -275,7 +229,7 @@ require_once 'paginador.inc.php';
             enlace.classList.add(className);
         });
         enlace.role = "button";
-        enlace.href = "<?php echo RUTA_ENTRADA . '/' ?>" + element.url;
+        enlace.href = "<?php echo RUTA_AUTORES . '/' ?>" + element.nombre;
         cHeader.appendChild(enlace);
         let divInterno = document.createElement("div");
         ['d-flex', 'flex-wrap'].forEach(className => {
@@ -286,17 +240,24 @@ require_once 'paginador.inc.php';
         ['flex-fill', 'text-start', 'fz-subtitulo', 'lt-2'].forEach(className => {
             negrita.classList.add(className);
         });
-        negrita.innerText = element.titulo;
+        negrita.innerText = element.nombre;
         divInterno.appendChild(negrita);
         let parrafo = document.createElement("p");
         ['flex-fill', 'align-self-end', 'text-end', 'fz-text', 'm-0', 'pt-1'].forEach(className => {
             parrafo.classList.add(className);
         });
-        parrafo.innerText = (new Date(element.fecha)).toLocaleDateString('es-es', {
-            day: '2-digit',
-            month: 'long',
-            year: 'numeric'
+        parrafo.innerText = element.entradas + " ";
+        let clipboard = document.createElement("i");
+        ['far', 'fa-clipboard'].forEach(className => {
+            clipboard.classList.add(className);
         });
+        parrafo.appendChild(clipboard);
+        parrafo.innerText += "   " + element.comentarios + " ";
+        let comments = document.createElement("i");
+        ['fas', 'fa-comments'].forEach(className => {
+            comments.classList.add(className);
+        });
+        parrafo.appendChild(comments);
         divInterno.appendChild(parrafo);
         return card;
     }

@@ -1,6 +1,15 @@
 <script>
-    function crearPaginador() {
-        let paginador;
+    let funcion, pagina, lista, filas, tipo, contenedor, nomContenedorPaginador;
+    function crearPaginador(funcionInvocada, paginActual, listaActual, filasTotales, tipoActual, container, nomContainerPaginador, contenedorPaginacion) {
+        debugger;
+        funcion = funcionInvocada;
+        pagina = paginActual;
+        lista = listaActual;
+        filas = filasTotales;
+        tipo = tipoActual;
+        contenedor = container;
+        nomContenedorPaginador = nomContainerPaginador;
+
         let div = document.createElement("div");
         ['d-flex', 'justify-content-center', 'rounded', 'fz-texto', 'py-1', 'px-3'].forEach(className => {
             div.classList.add(className);
@@ -8,37 +17,38 @@
         contenedorPaginacion.appendChild(div);
         let strong = document.createElement("strong");
         div.appendChild(strong);
+        let paginador;
         paginador = document.createElement("span");
         paginador.classList.add("navigation");
         paginador.id = "navigation";
         strong.appendChild(paginador);
         cantPag = Math.ceil(lista.length / filas);
         if (cantPag > 8)
-            paginador.appendChild(crearEnlace('<', paginActual != 1));
-        paginador.appendChild(crearEnlace(1, paginActual != 1));
+            paginador.appendChild(crearEnlace('<', pagina != 1));
+        paginador.appendChild(crearEnlace(1, pagina != 1));
         var start, end;
-        if (paginActual < 5 && cantPag > 8) {
+        if (pagina < 5 && cantPag > 8) {
             start = 2;
             end = 6;
-        } else if (paginActual + 3 >= cantPag && cantPag > 8) {
+        } else if (pagina + 3 >= cantPag && cantPag > 8) {
             start = cantPag - 4;
             end = cantPag;
         } else if (cantPag <= 8) {
             start = 2;
             end = cantPag;
         } else {
-            start = paginActual - 2;
-            end = paginActual + 3;
+            start = pagina - 2;
+            end = pagina + 3;
         }
-        if (cantPag > 8 && paginActual >= 5)
+        if (cantPag > 8 && pagina >= 5)
             paginador.appendChild(crearEnlace('...', false));
         for (var i = start; i < end; i++)
-            paginador.appendChild(crearEnlace(i, paginActual != i));
-        if (cantPag > 8 && paginActual < (cantPag - 3))
+            paginador.appendChild(crearEnlace(i, pagina != i));
+        if (cantPag > 8 && pagina < (cantPag - 3))
             paginador.appendChild(crearEnlace('...', false));
-        paginador.appendChild(crearEnlace(cantPag, paginActual != cantPag));
+        paginador.appendChild(crearEnlace(cantPag, pagina != cantPag));
         if (cantPag > 8)
-            paginador.appendChild(crearEnlace('>', paginActual != cantPag));
+            paginador.appendChild(crearEnlace('>', pagina != cantPag));
     }
 
     function crearEnlace(texto, darPropiedades = true) {
@@ -48,13 +58,13 @@
         });
         if (darPropiedades && texto != "<" && texto != ">") {
             enlace.href = "#";
-            enlace.setAttribute('onclick', 'mostrarLista(' + filas + ', ' + texto + ', "' + tipo + '", "' + nomcontenedor + '", "' + nomPaginador + '")');
+            enlace.setAttribute('onclick', funcion + '(' + filas + ', ' + texto + ', "' + tipo + '", "' + contenedor + '", "' + nomContenedorPaginador + '")');
             ['rosa', 'text-white'].forEach(className => {
                 enlace.classList.add(className);
             });
         } else if (darPropiedades) {
             enlace.href = "#";
-            enlace.setAttribute('onclick', 'mostrarLista(' + filas + ', ' + (texto == '<' ? (paginActual - 1) : (paginActual + 1)) + ', "' + tipo + '", "' + nomcontenedor + '", "' + nomPaginador + '")');
+            enlace.setAttribute('onclick', funcion + '(' + filas + ', ' + (texto == '<' ? (pagina - 1) : (pagina + 1)) + ', "' + tipo + '", "' + contenedor + '", "' + nomContenedorPaginador + '")');
             ['rosa', 'text-white'].forEach(className => {
                 enlace.classList.add(className);
             });

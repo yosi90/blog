@@ -3,7 +3,6 @@ $titulo = 'Troubles time - Buscador';
 $filtro = "";
 $entradas = $comentarios = $autores = [];
 include_once 'plantillas/documento-declaracion.inc.php';
-include_once 'app/escritorUsuarios.inc.php';
 if (isset($_POST['texto']) && !empty($_POST['texto'])) {
     $filtro = $_POST['texto'];
     conexion::abrir_conexion();
@@ -64,9 +63,9 @@ if (isset($_POST['texto']) && !empty($_POST['texto'])) {
                                 include 'plantillas/busquedaVacia.inc.php';
                             } else {
                                 $entradas = json_encode($entradas);
-                                require_once 'plantillas/paginadorEntradas.min.php';
+                                require 'plantillas/paginadorEntradas.min.php';
                             ?>
-                                <script>mostrarLista(10, 1, 'busqueda');</script>
+                                <script>mostrarEntradas(10, 1, 'busqueda');</script>
                             <?php 
                             }
                             ?>
@@ -82,9 +81,9 @@ if (isset($_POST['texto']) && !empty($_POST['texto'])) {
                                 include 'plantillas/busquedaVacia.inc.php';
                             } else {
                                 $comentarios = json_encode($comentarios);
-                                require_once 'plantillas/paginadorComentarios.min.php';
+                                require 'plantillas/paginadorComentarios.min.php';
                             ?>
-                                <script>mostrarLista(10, 1, 'busqueda', 'contPaginacion2', 'contPaginacion2');</script>
+                                <script>mostrarComentarios(10, 1, 'busqueda', 'contPaginacion2', 'contPaginacion2');</script>
                             <?php 
                             }
                             ?>
@@ -94,17 +93,19 @@ if (isset($_POST['texto']) && !empty($_POST['texto'])) {
                         <div class="card-header bg-dark text-white text-center">
                             <h3><strong><?php echo count($autores) != 1 ? ' ' . count($autores) . ' autores coinciden' : '1 autor coincide'; ?></strong></h3>
                         </div>
-                        <div class="card-body bg-dark-light text-white bs-s border-1 border-dark">
+                        <div id="contPaginacion3" class="card-body bg-dark-light text-white bs-s border-1 border-dark">
                             <?php
                             if ($autores == "" || empty($autores) || !isset($autores)) {
                                 include 'plantillas/busquedaVacia.inc.php';
                             } else {
-                                conexion::abrir_conexion();
-                                escritorUsuarios::usuariosFiltrados($autores);
-                                conexion::cerrar_conexion();
-                                /*Añadir insignias, reputación o demás cosas que los diferencien entre ellos si las creo*/
+                                $autores = json_encode($autores);
+                                require 'plantillas/paginadorUsuarios.min.php';
+                            ?>
+                                <script>mostrarUsuarios(10, 1, 'busqueda', 'contPaginacion3', 'contPaginacion3');</script>
+                            <?php 
                             }
                             ?>
+                            <!-- ordenar según insignias, reputación o demás cosas que los diferencien entre ellos -->
                         </div>
                     </div>
                 </div>

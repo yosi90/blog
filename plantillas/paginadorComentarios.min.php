@@ -2,45 +2,35 @@
 require_once 'paginador.inc.php';
 ?>
 <script>
-    let paginActual; //utilizar esta variable para navegar con los botones de previa y siguiente.
-    let lista = <?php echo $comentarios ?>;
-    let filas, tipo;
-    let nomcontenedor, nomPaginador;
-    let contenedor, contenedorPaginacion;
+    let listaComentarios = <?php echo $comentarios ?>;
 
-    function mostrarLista(rows, actual, type, contenedorelementos = "contPaginacion", contenedorPaginador = "contPaginacion") {
-        paginActual = actual;
-        filas = rows;
-        tipo = type;
-        nomcontenedor = contenedorelementos;
-        nomPaginador = contenedorPaginador;
-        actual--;
-        contenedor = document.getElementById(nomcontenedor);
+    function mostrarComentarios(rows, actual, tipo, contenedorelementos = "contPaginacion", contenedorPaginador = "contPaginacion") {
+        let contenedor = document.getElementById(contenedorelementos);
         contenedor.innerHTML = "";
-        let start = rows * actual;
+        let start = rows * (actual - 1);
         let end = start + rows;
-        let itemsPaginados = lista.slice(start, end);
+        let itemsPaginados = listaComentarios.slice(start, end);
         itemsPaginados.forEach(e => {
-            switch (type) {
+            switch (tipo) {
                 case 'entrada':
-                    // contenedor.appendChild(crearComentarioBasico(e));
+                    // contenedor.appendChild(Basico(e));
                     break;
                 case 'busqueda':
-                    contenedor.appendChild(crearComentarioBusqueda(e));
+                    contenedor.appendChild(Busqueda(e));
                     break;
                 default:
                     break;
             }
         });
-        if (lista.length > rows) {
-            contenedorPaginacion = document.getElementById(nomPaginador);
+        if (listaComentarios.length > rows) {
+            let contenedorPaginacion = document.getElementById(contenedorPaginador);
             if (contenedor != contenedorPaginacion)
                 contenedorPaginacion.innerHTML = "";
-            crearPaginador();
+            crearPaginador("mostrarComentarios", actual, listaComentarios, rows, tipo, contenedorelementos, contenedorPaginador, contenedorPaginacion);
         }
     }
 
-    function crearComentarioBusqueda(element) {
+    function Busqueda(element) {
         debugger;
         let card = document.createElement("div");
         ['card', 'flex-fill', 'controlTamaño', 'm-1', 'mw-100'].forEach(className => {

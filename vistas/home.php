@@ -28,7 +28,7 @@ include_once 'plantillas/documento-declaracion.inc.php';
                         $entradas = json_encode(repositorioEntrada::obtenerRecientes(Conexion::obtener_conexion()));
                         require_once 'plantillas/paginadorEntradas.min.php'; 
                     ?>
-                    <script>mostrarLista(16, 1, 'reciente');</script>
+                    <script>mostrarEntradas(16, 1, 'reciente');</script>
                     <?php conexion::cerrar_conexion(); ?>
                 </div>
             </div>

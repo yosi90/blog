@@ -10,8 +10,29 @@ class Usuario {
     private $administrador;
     private $totalEntradas;
     private $totalComentarios;
-    
 
+    public function __construct($id_usuario, $nombre, $correo, $password, $registro, $activo, $moderador, $administrador) {
+        $this -> id_usuario = $id_usuario;
+        $this -> nombre = $nombre;
+        $this -> correo = $correo;
+        $this -> password = $password;
+        $this -> registro = $registro;
+        $this -> activo = $activo;
+        $this -> moderador = $moderador;
+        $this -> administrador = $administrador;
+    }
+
+    public function getArray()
+    {
+        return [
+            'idUsuario' => $this-> id_usuario,
+            'nombre' => $this-> nombre,
+            'registro' => $this-> registro,
+            'entradas' => $this-> totalEntradas,
+            'comentarios' => $this-> totalComentarios
+        ];
+    }
+    
     public function getId() { return $this -> id_usuario; }
 
     public function getNombre() { return $this -> nombre; }
@@ -38,14 +59,4 @@ class Usuario {
     public function setTotalComentarios($total) { $this-> totalComentarios = $total; }
 
 
-    public function __construct($id_usuario, $nombre, $correo, $password, $registro, $activo, $moderador, $administrador) {
-        $this -> id_usuario = $id_usuario;
-        $this -> nombre = $nombre;
-        $this -> correo = $correo;
-        $this -> password = $password;
-        $this -> registro = $registro;
-        $this -> activo = $activo;
-        $this -> moderador = $moderador;
-        $this -> administrador = $administrador;
-    }
 }

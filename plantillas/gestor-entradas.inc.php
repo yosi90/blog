@@ -53,5 +53,5 @@
     </div>
 </div>
 <script>
-    mostrarLista(8, 1, 'tabla', 'contPaginacion', 'paginador');
+    mostrarEntradas(8, 1, 'tabla', 'contPaginacion', 'paginador');
 </script>
