@@ -22,17 +22,7 @@ include_once 'plantillas/documento-declaracion.inc.php';
                     </p>
                     <button id="vistas" value="0" class="btn btn-no-shadow text-white p-1" title="Alternar vistas" onclick="alternarVistaEntradas()"></button>
                 </div>
-                <div id="contPaginacion" class="card-body bg-dark-light d-flex flex-wrap justify-content-around pt-0 pe-0 ps-0 pb-1">
-                    <?php
-                    conexion::abrir_conexion();
-                    require_once 'plantillas/paginadorEntradas.min.php';
-                    ?>
-                    <script>
-                        var paginador = new paginadorEntradas(1, <?php echo json_encode(repositorioEntrada::obtenerRecientes(Conexion::obtener_conexion())) ?>, 16, 'reciente', 'contPaginacion', 'contPaginacion');
-                        paginador.mostrarEntradas();
-                    </script>
-                    <?php conexion::cerrar_conexion(); ?>
-                </div>
+                <div id="contPaginacion" class="card-body bg-dark-light d-flex flex-wrap justify-content-around pt-0 pe-0 ps-0 pb-1"></div>
             </div>
         </div>
         <div class="col-md-3 mb-5">
@@ -78,6 +68,8 @@ include_once 'plantillas/documento-declaracion.inc.php';
         </div>
     </div>
 </div>
+<input id="tipoEntradas" type="hidden" value="recientes">
+<script type="module" src="<?php echo CLASES; ?>paginadorEntradas.js"></script>
 <?php
 include_once 'plantillas/documento-cierre.inc.php';
 ?>

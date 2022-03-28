@@ -1,17 +1,56 @@
-<script>
-    import paginador from ('../js/paginador.js');
+    import paginador from './paginador.js';
+
+    let actual = $('#tipoEntradas').val();
+    let paginator;
+
+    jQuery(document).ready(function () {
+        $.post("http://localhost:8080/blog/actions/getRecords.php", {
+                type: actual
+            },
+            function (res, status) {
+                var data = JSON.parse(res);
+                if (status === 'success') {
+                    let url = window.location.href.split('/');
+                    url = url.filter(n => n);
+                    debugger;
+                    switch (actual) {
+                        case 'recientes':
+                            if (url[2] === 'blog' && (url[3] == null || url[3] === '#')) {
+                                paginator = new paginadorEntradas(data, 16, 'reciente', 'contPaginacion', 'contPaginacion');
+                                paginator.mostrarEntradas();
+                            }
+                            break;
+                        case 'tabla':
+                            if (url[4] === 'entradas' && url[5] == null) {
+                                paginator = new paginadorEntradas(data, 8, 'tabla', 'contPaginacion', 'paginador');
+                                paginator.mostrarEntradas();
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+        );
+    });
+
+    function cambio(actual) {
+        debugger;
+        paginator.pagina = actual;
+        paginator.mostrarEntradas();
+    }
+    window.cambio = cambio; //las funciones dentro de modulos solo son visibles en el modulo. por eso esta línea es requerida.
 
     class paginadorEntradas extends paginador {
 
-        constructor (pagina, lista, filas, tipo, nomContenedor, nomContenedorPaginador) {
-            this.objetoContenedor = document.getElementById(nomContenedorPaginador);
-            super(pagina, lista, filas, this.objetoContenedor);
+        constructor(lista, filas, tipo, nomContenedor, nomContenedorPaginador) {
+            super(lista, filas, document.getElementById(nomContenedorPaginador));
             this.tipo = tipo;
             this.nomContenedor = nomContenedor;
             this.nomContenedorPaginador = nomContenedorPaginador;
         }
 
-        static mostrarEntradas() {
+        mostrarEntradas() {
             let contenedor = document.getElementById(this.nomContenedor);
             contenedor.innerHTML = "";
             let start = this.filas * (this.pagina - 1);
@@ -34,18 +73,13 @@
             });
             if (this.lista.length > this.filas) {
                 let contenedorPaginacion = document.getElementById(this.nomContenedorPaginador);
-                if (this.nomContenedor != this.nomContainerPaginador)
+                if (this.nomContenedor != this.nomContenedorPaginador)
                     contenedorPaginacion.innerHTML = "";
                 this.crearPaginador();
             }
         }
 
-        static cambio(actual) {
-            this.pagina = actual;
-            this.mostrarEntradas();
-        }
-
-        static Basica(element) {
+        Basica(element) {
             let mw = document.getElementById("vistas");
             let carta = document.createElement("div");
             ['card', 'flex-fill', 'sizeControl', 'm-1', mw.value == '1' ? 'mw-100' : (mw.value == '2' ? 'mw-50' : 'mw-25')].forEach(className => {
@@ -200,14 +234,14 @@
             archivo.name = "archivo";
             archivo.value = "1";
             formArchivar.appendChild(archivo);
-            <?php
-            if (controlSesion::sesion_iniciada()) {
-            ?>
-                let mod = "<?php echo $_SESSION['moderador'] ?>";
-                let adm = "<?php echo $_SESSION['administrador'] ?>";
-            <?php
-            }
-            ?>
+            // <?php
+            // if (controlSesion::sesion_iniciada()) {
+            // ?>
+            //     let mod = "<?php echo $_SESSION['moderador'] ?>";
+            //     let adm = "<?php echo $_SESSION['administrador'] ?>";
+            // <?php
+            // }
+            // ?>
             let formBloquear = document.createElement("form");
             formBloquear.method = "POST";
             if (mod == 1 || adm == 1)
@@ -271,7 +305,7 @@
             return tr;
         }
 
-        static Busqueda(element) {
+        Busqueda(element) {
             let card = document.createElement("div");
             ['card', 'flex-fill', 'controlTamaño', 'm-1', 'mw-100'].forEach(className => {
                 card.classList.add(className);
@@ -312,4 +346,3 @@
             return card;
         }
     }
-</script>

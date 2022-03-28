@@ -14,7 +14,6 @@ switch ($gestor_actual)
         include_once 'plantillas/gestor-generico.inc.php';
         break;
     case 'entradas':
-        $entradas = repositorioEntrada::entradasUsuario(conexion::obtener_conexion(), $_SESSION['id_usuario'], 0, 1);
         include_once 'plantillas/gestor-entradas.inc.php';
         break;
     case 'favoritos':

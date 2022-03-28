@@ -1,7 +1,7 @@
-class paginador {
+export class paginador {
 
-    constructor(pagina, lista, filas, objetoContenedor) {
-        this.pagina = pagina;
+    constructor(lista, filas, objetoContenedor) {
+        this.pagina = 1;
         this.lista = lista;
         this.filas = filas;
         this.objetoContenedor = objetoContenedor;
@@ -56,13 +56,13 @@ class paginador {
         });
         if (darPropiedades && pagina != "<" && pagina != ">") {
             enlace.href = "#";
-            enlace.setAttribute('onclick', 'cambio(' + pagina + ')');
+            enlace.setAttribute('onclick', 'cambio(' + pagina + ');');
             ['rosa', 'text-white'].forEach(className => {
                 enlace.classList.add(className);
             });
         } else if (darPropiedades) {
             enlace.href = "#";
-            enlace.setAttribute('onclick', 'cambio(' + (pagina == '<' ? (this.pagina - 1) : (this.pagina + 1)) + ')');
+            enlace.setAttribute('onclick', 'cambio(' + (pagina == '<' ? (this.pagina - 1) : (this.pagina + 1)) + ');');
             ['rosa', 'text-white'].forEach(className => {
                 enlace.classList.add(className);
             });
