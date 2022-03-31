@@ -55,7 +55,7 @@
                                 </li>
                                 <li><a class="dropdown-item" href="<?php echo RUTA_GESTOR ?>">Panel de control</a></li>
                                 <?php
-                                if ($_SESSION['administrador'] == 1) {
+                                if ($_SESSION['moderador'] == 1 || $_SESSION['administrador'] == 1) {
                                 ?>
                                     <li><a class="dropdown-item" href="<?php echo RUTA_GESTOR_ADM ?>">Panel de Administración</a></li>
                                 <?php

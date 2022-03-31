@@ -1,5 +1,4 @@
 <?php
-
 $titulo = 'Troubles time';
 include_once 'plantillas/documento-declaracion.inc.php';
 ?>

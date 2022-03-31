@@ -122,3 +122,5 @@ if ($autores != "")
     echo '<script type="text/javascript">toggle("chbAutores", "autores");</script>';
 include_once 'plantillas/documento-cierre.inc.php';
 ?>
+<input id="tipoEntradas" type="hidden" value="tabla">
+<script type="module" src="<?php echo CLASES; ?>paginadorEntradas.js"></script>

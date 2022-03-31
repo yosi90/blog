@@ -32,12 +32,13 @@
                     </tr>
                 </thead>
                 <tbody id="contPaginacion">
-                    <div class="bg-dark text-white rounded my-1 p-5">
-                        <h3 class="text-center">Todavia no has escrito entradas</h3>
-                    </div>
                 </tbody>
             </table>
-            <div id="paginador" class="d-flex justify-content-center align-items-center bg-dark"></div>
+            <div id="paginador" class="d-flex justify-content-center align-items-center bg-dark">
+                <div class="bg-dark text-white rounded my-1 p-5">
+                    <h3 class="text-center">Todavia no has escrito entradas</h3>
+                </div>
+            </div>
         </div>
     </div>
 </div>
