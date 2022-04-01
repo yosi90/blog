@@ -12,7 +12,7 @@ include_once 'app/Conexion.inc.php';
 if (isset($_POST['submit'])) {
     $activa = 1;
     conexion::abrir_conexion();
-    $url = Repositorioentrada::crearUrl($_POST['titulo']);
+    $url = Repositorioentrada::crearUrl(purifier::purifier($_POST['titulo'], 'titulo'));
     if (isset($_POST['activa'])){ $activa = 0; }
     $validador = new validadorEntradaNueva($_POST['titulo'], $_POST['entrada'], $url, conexion::obtener_conexion());
     if ($validador->entrada_valida()) {

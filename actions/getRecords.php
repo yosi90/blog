@@ -6,6 +6,7 @@ function error($msg)
 }
 
 $type = $_POST['type'];
+$filtro = $_POST['filter'];
 if ($type == "") {
     die(error('Error: no type'));
 }
@@ -14,15 +15,21 @@ require_once '../app/RepositorioEntrada.inc.php';
 require_once '../app/controlsesion.inc.php';
 conexion::abrir_conexion();
 switch ($type) {
-    case 'recientes':
+    case 'reciente':
         $records = repositorioEntrada::obtenerRecientes(Conexion::obtener_conexion());
+        break;
+    case 'busqueda':
+        $records = RepositorioEntrada::obtenerFiltradas(Conexion::obtener_conexion(), "%" . $filtro . "%");
         break;
     case 'tabla':
         if (controlSesion::sesion_iniciada())
-            $records = repositorioEntrada::entradasUsuario(conexion::obtener_conexion(), $_SESSION['id_usuario'], 0, 1);
+            $records = repositorioEntrada::entradasUsuario(conexion::obtener_conexion(), $_SESSION['id_usuario'], 0, 0);
+        break;
+    case 'archivo':
+        if (controlSesion::sesion_iniciada())
+            $records = repositorioEntrada::entradasUsuario(conexion::obtener_conexion(), $_SESSION['id_usuario'], 1, 0);
         break;
     default:
-        $records = "";
         break;
 }
 conexion::cerrar_conexion();

@@ -1,27 +1,41 @@
 import paginador from './paginador.js';
 
-let actual = $('#tipoEntradas').val();
+let tipo = $('#tipo').val();
+let filtro = $('#filtro').val() ?? '';
 let paginator;
 
 jQuery(document).ready(function () {
     $.post("http://localhost:8080/blog/actions/getRecords.php", {
-            type: actual
+            type: tipo,
+            filter: filtro
         },
         function (res, status) {
             var data = JSON.parse(res);
             if (status === 'success') {
                 let url = window.location.href.split('/');
                 url = url.filter(n => n);
-                switch (actual) {
-                    case 'recientes':
+                switch (tipo) {
+                    case 'reciente':
                         if (url[2] === 'blog' && (url[3] == null || url[3] === '#')) {
-                            paginator = new paginadorEntradas(data, 16, 'reciente', 'contPaginacion', 'contPaginacion');
+                            paginator = new paginadorEntradas(data, 16);
                             paginator.mostrarEntradas();
                         }
                         break;
                     case 'tabla':
-                        if (url[4] === 'entradas' && url[5] == null) {
-                            paginator = new paginadorEntradas(data, 8, 'tabla', 'contPaginacion', 'paginador');
+                        if ((url[4] === 'entradas' || url[4] === 'entradas#') && url[5] == null) {
+                            paginator = new paginadorEntradas(data, 8, 'contPaginacion', 'paginador');
+                            paginator.mostrarEntradas();
+                        }
+                        break;
+                    case 'busqueda':
+                        if ((url[3] === 'buscar' || url[3] === 'buscar#') && url[4] == null) {
+                            paginator = new paginadorEntradas(data, 8);
+                            paginator.mostrarEntradas();
+                        }
+                        break;
+                    case 'archivo':
+                        if ((url[4] === 'archivo' || url[4] === 'archivo#') && url[5] == null) {
+                            paginator = new paginadorEntradas(data, 8, 'contPaginacion', 'paginador');
                             paginator.mostrarEntradas();
                         }
                         break;
@@ -41,7 +55,7 @@ window.cambio = cambio; //las funciones dentro de modulos solo son visibles en e
 
 class paginadorEntradas extends paginador {
 
-    constructor(lista, filas, tipo, nomContenedor, nomContenedorPaginador) {
+    constructor(lista, filas, nomContenedor = 'contPaginacion', nomContenedorPaginador = 'contPaginacion') {
         super(lista, filas, document.getElementById(nomContenedorPaginador));
         this.tipo = tipo;
         this.nomContenedor = nomContenedor;
@@ -60,7 +74,8 @@ class paginadorEntradas extends paginador {
                     contenedor.appendChild(this.Basica(e));
                     break;
                 case 'tabla':
-                    contenedor.appendChild(this.Tabla(e));
+                case 'archivo':
+                    contenedor.appendChild(this.Tabla(e, this.tipo === 'tabla' ? 0 : 1));
                     break;
                 case 'busqueda':
                     contenedor.appendChild(this.Busqueda(e));
@@ -119,7 +134,7 @@ class paginadorEntradas extends paginador {
         return carta;
     }
 
-    Tabla(element) {
+    Tabla(element, arch) {
         let tr = document.createElement("tr");
         let titulo = document.createElement("td");
         titulo.title = element.titulo;
@@ -127,7 +142,9 @@ class paginadorEntradas extends paginador {
         ['text-decoration-none', 'text-white'].forEach(className => {
             enlaceTitulo.classList.add(className);
         });
-        paths('entrada', function (data) { enlaceTitulo.href = data + "/" + element.url; });
+        paths('entrada', function (data) {
+            enlaceTitulo.href = data + "/" + element.url;
+        });
         titulo.appendChild(enlaceTitulo);
         let parrafoTitulo = document.createElement("p");
         ['lt-linea-200', 'mb-0', 'text-start'].forEach(className => {
@@ -147,7 +164,9 @@ class paginadorEntradas extends paginador {
         tr.appendChild(activa);
         let formActivar = document.createElement("form");
         formActivar.method = "POST";
-        paths('activar', function (data) { formActivar.action = data; });
+        paths('activar', function (data) {
+            formActivar.action = data;
+        });
         activa.appendChild(formActivar);
         let submitActiva = document.createElement("input");
         submitActiva.type = "submit";
@@ -188,7 +207,9 @@ class paginadorEntradas extends paginador {
         tr.appendChild(botonera);
         let formEditar = document.createElement("form");
         formEditar.method = "POST";
-        paths('editar', function (data) { formEditar.action = data; });
+        paths('editar', function (data) {
+            formEditar.action = data;
+        });
         botonera.appendChild(formEditar);
         let submitEditar = document.createElement("button");
         ['btn', 'btn-outline-light', 'mx-1'].forEach(className => {
@@ -206,7 +227,9 @@ class paginadorEntradas extends paginador {
         formEditar.appendChild(idEntrada2);
         let formArchivar = document.createElement("form");
         formArchivar.method = "POST";
-        paths('archivar', function (data) { formArchivar.action = data; });
+        paths('archivar', function (data) {
+            formArchivar.action = data;
+        });
         botonera.appendChild(formArchivar);
         let submitArchivar = document.createElement("button");
         ['btn', 'btn-outline-light', 'mx-1'].forEach(className => {
@@ -215,7 +238,7 @@ class paginadorEntradas extends paginador {
         submitArchivar.type = "submit";
         submitArchivar.name = "archive";
         submitArchivar.value = "archive";
-        submitArchivar.innerText = "Archivar";
+        submitArchivar.innerText = arch == 0 ? 'Archivar' : 'Restaurar';
         let idEntrada3 = document.createElement("input");
         idEntrada3.type = "hidden";
         idEntrada3.name = "IdEntrada";
@@ -240,7 +263,9 @@ class paginadorEntradas extends paginador {
                 if (status === 'success' && (data.mod == 1 || data.adm == 1)) {
                     let formBloquear = document.createElement("form");
                     formBloquear.method = "POST";
-                    paths('bloquear', function (data) { formBloquear.action = data; });
+                    paths('bloquear', function (data) {
+                        formBloquear.action = data;
+                    });
                     botonera.appendChild(formBloquear);
                     let submitBloquear = document.createElement("input");
                     submitBloquear.type = "submit";
@@ -253,10 +278,13 @@ class paginadorEntradas extends paginador {
                     bloqueo.name = "bloqueo";
                     if (element.bloqueada) {
                         submitBloquear.value = "Bloqueada";
+                        submitBloquear.title = "Esta entrada incumple las normas de la comunidad.";
+                        /*Rellenar aquí cuales fueron las faltas.*/
                         submitBloquear.classList.add("red");
                         bloqueo.value = "0";
                     } else {
                         submitBloquear.value = "Activa";
+                        submitBloquear.title = "Esta entrada cumple con las normas de la comunidad.";
                         submitBloquear.classList.add("green");
                         bloqueo.value = "1";
                     }
@@ -275,7 +303,9 @@ class paginadorEntradas extends paginador {
                     if (data.adm == 1) {
                         let formBorrar = document.createElement("form");
                         formBorrar.method = "POST";
-                        paths('borrar', function (data) { formEditar.action = data; });
+                        paths('borrar', function (data) {
+                            formBorrar.action = data;
+                        });
                         formBorrar.onsubmit = "return confirm('Confirma que deseas borrar esta entrada');";
                         botonera.appendChild(formBorrar);
                         let submitBorrar = document.createElement("button");
@@ -318,7 +348,9 @@ class paginadorEntradas extends paginador {
             enlace.classList.add(className);
         });
         enlace.role = "button";
-        paths('entrada', function (data) { enlace.href = data + '/' + element.url; });
+        paths('entrada', function (data) {
+            enlace.href = data + '/' + element.url;
+        });
         cHeader.appendChild(enlace);
         let divInterno = document.createElement("div");
         ['d-flex', 'flex-wrap'].forEach(className => {
@@ -346,10 +378,10 @@ class paginadorEntradas extends paginador {
 }
 
 function paths(ruta, callback) {
-    $.post("http://localhost:8080/blog/actions/getPaths.php",{
+    $.post("http://localhost:8080/blog/actions/getPaths.php", {
         type: ruta
-    }, function(data, status) {
-        if(status === 'success')
+    }, function (data, status) {
+        if (status === 'success')
             callback(data);
     });
 }

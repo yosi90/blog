@@ -3,7 +3,6 @@
 class purifier
 {
     const PREG_STR = '/[^a-zA-Z0-9\-\_\¿\?\¡\+\$\€\[\]\{\}\(\)\s\:\.\,\;\@\#\|\"\!\^\*\'\<\>\&\á\é\í\ó\ú\Á\É\Í\Ó\Ú\ç\Ç\ü\Ü]/';
-    // const PREG_STR2 = '/[^\p{Latin}0-9\s\{\}\?\'\"\$\€\&\¿\?\!\¡\(\)\/\\\=\*\´\@\#\%\+\-\_\<\>\,\;\.\:\s]/';
     const PREG_MAIL = '/[^a-zA-Z0-9\-\_\.\@]/';
 
     public static function purifier($value, $type)

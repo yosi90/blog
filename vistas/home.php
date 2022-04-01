@@ -67,7 +67,7 @@ include_once 'plantillas/documento-declaracion.inc.php';
         </div>
     </div>
 </div>
-<input id="tipoEntradas" type="hidden" value="recientes">
+<input id="tipo" type="hidden" value="reciente">
 <script type="module" src="<?php echo CLASES; ?>paginadorEntradas.js"></script>
 <?php
 include_once 'plantillas/documento-cierre.inc.php';

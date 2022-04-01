@@ -34,7 +34,7 @@ switch ($type) {
         break;
     case 'borrar':
         if (controlSesion::sesion_iniciada())
-            if (S_SESSION['administrador'] == 1)
+            if ($_SESSION['administrador'] == 1)
                 echo RUTA_BORRAR_ENTRADA ?? 'empty';
         break;
     default:

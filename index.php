@@ -128,7 +128,7 @@ if ($partes_ruta[0] == 'blog') {
             $url = $partes_ruta[2];
             conexion::abrir_conexion();
             $entrada = RepositorioEntrada::entrada_existe(conexion::obtener_conexion(), $url);
-            if ($entrada != null) {
+            if ($entrada != null && (($entrada->getArchivada() == 0 && $entrada->getBloqueada() == 0) || (controlsesion::sesion_iniciada() && $entrada->getIdAutor() == $_SESSION['id_usuario']))) {
                 $autor = repositoriousuario::obtener_usuario_id(conexion::obtener_conexion(), $entrada->getAutor());
                 $comentarios = RepositorioComentarios::getComments(conexion::obtener_conexion(), $entrada->getId_entrada());
                 $entradas_azar = repositorioentrada::entradasAleatorias(conexion::obtener_conexion(), 3);

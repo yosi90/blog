@@ -42,5 +42,5 @@
         </div>
     </div>
 </div>
-<input id="tipoEntradas" type="hidden" value="tabla">
+<input id="tipo" type="hidden" value="tabla">
 <script type="module" src="<?php echo CLASES; ?>paginadorEntradas.js"></script>
