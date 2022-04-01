@@ -1,6 +1,6 @@
 import paginador from './paginador.js';
 
-let tipo = $('#tipo').val();
+let tipo = $('#tipoE').val();
 let filtro = $('#filtro').val() ?? '';
 let paginator;
 
@@ -23,7 +23,7 @@ jQuery(document).ready(function () {
                         break;
                     case 'tabla':
                         if ((url[4] === 'entradas' || url[4] === 'entradas#') && url[5] == null) {
-                            paginator = new paginadorEntradas(data, 8, 'contPaginacion', 'paginador');
+                            paginator = new paginadorEntradas(data, 8, 'contPaginacionE', 'paginadorE');
                             paginator.mostrarEntradas();
                         }
                         break;
@@ -35,7 +35,7 @@ jQuery(document).ready(function () {
                         break;
                     case 'archivo':
                         if ((url[4] === 'archivo' || url[4] === 'archivo#') && url[5] == null) {
-                            paginator = new paginadorEntradas(data, 8, 'contPaginacion', 'paginador');
+                            paginator = new paginadorEntradas(data, 8, 'contPaginacionE', 'paginadorE');
                             paginator.mostrarEntradas();
                         }
                         break;
@@ -47,16 +47,16 @@ jQuery(document).ready(function () {
     );
 });
 
-function cambio(actual) {
+function cambioE(actual) {
     paginator.pagina = actual;
     paginator.mostrarEntradas();
 }
-window.cambio = cambio; //las funciones dentro de modulos solo son visibles en el modulo. por eso esta línea es requerida.
+window.cambioE = cambioE; //las funciones dentro de modulos solo son visibles en el modulo. por eso esta línea es requerida.
 
 class paginadorEntradas extends paginador {
 
-    constructor(lista, filas, nomContenedor = 'contPaginacion', nomContenedorPaginador = 'contPaginacion') {
-        super(lista, filas, document.getElementById(nomContenedorPaginador));
+    constructor(lista, filas, nomContenedor = 'contPaginacionE', nomContenedorPaginador = 'contPaginacionE') {
+        super(lista, filas, document.getElementById(nomContenedorPaginador), 'cambioE');
         this.tipo = tipo;
         this.nomContenedor = nomContenedor;
         this.nomContenedorPaginador = nomContenedorPaginador;
@@ -84,12 +84,11 @@ class paginadorEntradas extends paginador {
                     break;
             }
         });
-        if (this.lista.length > this.filas) {
-            let contenedorPaginacion = document.getElementById(this.nomContenedorPaginador);
-            if (this.nomContenedor != this.nomContenedorPaginador)
-                contenedorPaginacion.innerHTML = "";
+        let contenedorPaginacion = document.getElementById(this.nomContenedorPaginador);
+        if (this.nomContenedor != this.nomContenedorPaginador)
+            contenedorPaginacion.innerHTML = "";
+        if (this.lista.length > this.filas)
             this.crearPaginador();
-        }
     }
 
     Basica(element) {
@@ -303,10 +302,11 @@ class paginadorEntradas extends paginador {
                     if (data.adm == 1) {
                         let formBorrar = document.createElement("form");
                         formBorrar.method = "POST";
+                        formBorrar.id = "borrar";
                         paths('borrar', function (data) {
                             formBorrar.action = data;
                         });
-                        formBorrar.onsubmit = "return confirm('Confirma que deseas borrar esta entrada');";
+                        formBorrar.setAttribute('onsubmit', "return confirm('Confirma que deseas borrar esta entrada');");
                         botonera.appendChild(formBorrar);
                         let submitBorrar = document.createElement("button");
                         submitBorrar.type = "submit";

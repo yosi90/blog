@@ -48,7 +48,7 @@
                                 <?php echo ' ' . $_SESSION['nombre_usuario'] ?>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark text-small mt-3" aria-labelledby="ddu">
-                                <li><a class="dropdown-item" href="#">Perfil</a></li>
+                                <li><a class="dropdown-item" href="<?php echo RUTA_PERFIL ?>">Perfil</a></li>
                                 <li><a class="dropdown-item" href="#">Opciones</a></li>
                                 <li>
                                     <hr class="dropdown-divider">

@@ -8,6 +8,7 @@ define("SERVIDOR", "http://localhost:8080/blog");
 define("INDEX", SERVIDOR."/index");
 define("RUTA_REGISTRO", SERVIDOR."/registro");
 define("RUTA_REGISTRO_CORRECTO", SERVIDOR."/registro-correcto");
+define("RUTA_PERFIL", SERVIDOR."/perfil");
 define("RUTA_LOGIN", SERVIDOR."/login");
 define("RUTA_LOGOUT", SERVIDOR."/logout");
 define("RUTA_ENTRADAS", SERVIDOR."/entradas");

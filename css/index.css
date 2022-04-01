@@ -8,15 +8,6 @@ body {
   overflow: overlay;
 }
 
-.logo {
-  position: absolute;
-  top: 70px;
-  right: 20px;
-  height: 14vh;
-  width: 15vw;
-  z-index: 100;
-}
-
 .fz-jumbo {
   font-size: calc(2vw + 30px);
 }

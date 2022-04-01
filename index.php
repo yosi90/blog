@@ -1,16 +1,15 @@
 <?php
 
 require_once 'vendor/autoload.php';
-
-include_once 'app/config.inc.php';
-include_once 'app/Conexion.inc.php';
-include_once 'app/usuario.inc.php';
-include_once 'app/entrada.inc.php';
-include_once 'app/comentario.inc.php';
-include_once 'app/RepositorioUsuario.inc.php';
-include_once 'app/RepositorioEntrada.inc.php';
-include_once 'app/RepositorioComentarios.inc.php';
-include_once 'app/controlsesion.inc.php';
+require_once 'app/config.inc.php';
+require_once 'app/Conexion.inc.php';
+require_once 'app/usuario.inc.php';
+require_once 'app/entrada.inc.php';
+require_once 'app/comentario.inc.php';
+require_once 'app/RepositorioUsuario.inc.php';
+require_once 'app/RepositorioEntrada.inc.php';
+require_once 'app/RepositorioComentario.inc.php';
+require_once 'app/controlsesion.inc.php';
 
 //Primero destruimos variables de sesión que no deben existir fuera de su entorno
 try{
@@ -33,6 +32,9 @@ if ($partes_ruta[0] == 'blog') {
                 break;
             case 'autores':
                 $ruta_elegida = 'vistas/autores.php';
+                break;
+            case 'perfil':
+                $ruta_elegida = 'vistas/perfil.php';
                 break;
             case 'login':
                 $ruta_elegida = 'vistas/login.php';
@@ -130,7 +132,7 @@ if ($partes_ruta[0] == 'blog') {
             $entrada = RepositorioEntrada::entrada_existe(conexion::obtener_conexion(), $url);
             if ($entrada != null && (($entrada->getArchivada() == 0 && $entrada->getBloqueada() == 0) || (controlsesion::sesion_iniciada() && $entrada->getIdAutor() == $_SESSION['id_usuario']))) {
                 $autor = repositoriousuario::obtener_usuario_id(conexion::obtener_conexion(), $entrada->getAutor());
-                $comentarios = RepositorioComentarios::getComments(conexion::obtener_conexion(), $entrada->getId_entrada());
+                $comentarios = RepositorioComentario::getComments(conexion::obtener_conexion(), $entrada->getId_entrada());
                 $entradas_azar = repositorioentrada::entradasAleatorias(conexion::obtener_conexion(), 3);
                 $ruta_elegida = 'vistas/entrada.php';
             }

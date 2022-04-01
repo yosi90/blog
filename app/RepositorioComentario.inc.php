@@ -1,9 +1,10 @@
 <?php
-include_once 'config.inc.php';
-include_once 'conexion.inc.php';
-include_once 'purificador.inc.php';
+require_once 'config.inc.php';
+require_once 'conexion.inc.php';
+require_once 'comentario.inc.php';
+require_once 'purificador.inc.php';
 
-class RepositorioComentarios
+class RepositorioComentario
 {
     public static function insertar_comentario($conexion, $texto, $idAutor, $id_entrada)
     {
@@ -86,6 +87,24 @@ class RepositorioComentarios
             }
         }
         return $total;
+    }
+
+    public static function getCountFiltered($conexion, $filtro)
+    {
+        if (isset($conexion)) {
+            try {
+                $sql = 'SELECT count(id_comentario) as cantidad FROM comentarios WHERE texto like :filtro and bloqueado = 0 ORDER BY fecha';
+                $sentencia = $conexion->prepare($sql);
+                $sentencia->bindParam(':filtro', $filtro, PDO::PARAM_STR);
+                $sentencia->execute();
+                $resultado = $sentencia->fetchAll();
+                if (count($resultado))
+                    return $resultado[0]['cantidad'];
+            } catch (PDOException $ex) {
+                print 'ERROR: ' . $ex->getMessage();
+            }
+        }
+        return 0;
     }
 
     public static function obtenerFiltrados($conexion, $filtro)

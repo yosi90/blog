@@ -7,7 +7,7 @@ include_once 'app/entrada.inc.php';
 include_once 'app/comentario.inc.php';
 include_once 'app/usuario.inc.php';
 include_once 'app/RepositorioEntrada.inc.php';
-include_once 'app/RepositorioComentarios.inc.php';
+include_once 'app/RepositorioComentario.inc.php';
 ?>
 <div class="container py-4">
     <div class="row">

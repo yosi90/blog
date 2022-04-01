@@ -12,6 +12,8 @@ if ($type == "") {
 }
 require_once '../app/Conexion.inc.php';
 require_once '../app/RepositorioEntrada.inc.php';
+require_once '../app/RepositorioComentario.inc.php';
+require_once '../app/RepositorioUsuario.inc.php';
 require_once '../app/controlsesion.inc.php';
 conexion::abrir_conexion();
 switch ($type) {
@@ -20,6 +22,12 @@ switch ($type) {
         break;
     case 'busqueda':
         $records = RepositorioEntrada::obtenerFiltradas(Conexion::obtener_conexion(), "%" . $filtro . "%");
+        break;
+    case 'busquedaC':
+        $records = RepositorioComentario::obtenerFiltrados(Conexion::obtener_conexion(), "%" . $filtro . "%");
+        break;
+    case 'busquedaU':
+        $records = RepositorioUsuario::obtenerFiltrados(Conexion::obtener_conexion(), "%" . $filtro . "%");
         break;
     case 'tabla':
         if (controlSesion::sesion_iniciada())

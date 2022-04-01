@@ -2,7 +2,6 @@
 $titulo = 'Troubles time';
 include_once 'plantillas/documento-declaracion.inc.php';
 ?>
-<img class="logo" src="img/logoSF.png">
 <div class="container">
     <div class="row">
         <div class="col-12">
@@ -21,7 +20,7 @@ include_once 'plantillas/documento-declaracion.inc.php';
                     </p>
                     <button id="vistas" value="0" class="btn btn-no-shadow text-white p-1" title="Alternar vistas" onclick="alternarVistaEntradas()"></button>
                 </div>
-                <div id="contPaginacion" class="card-body bg-dark-light d-flex flex-wrap justify-content-around pt-0 pe-0 ps-0 pb-1"></div>
+                <div id="contPaginacionE" class="card-body bg-dark-light d-flex flex-wrap justify-content-around pt-0 pe-0 ps-0 pb-1"></div>
             </div>
         </div>
         <div class="col-md-3 mb-5">
@@ -67,7 +66,7 @@ include_once 'plantillas/documento-declaracion.inc.php';
         </div>
     </div>
 </div>
-<input id="tipo" type="hidden" value="reciente">
+<input id="tipoE" type="hidden" value="reciente">
 <script type="module" src="<?php echo CLASES; ?>paginadorEntradas.js"></script>
 <?php
 include_once 'plantillas/documento-cierre.inc.php';

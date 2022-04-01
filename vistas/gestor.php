@@ -10,7 +10,7 @@ switch ($gestor_actual)
         conexion::abrir_conexion();
         $entradas_activas = repositorioEntrada::entradas_usr(conexion::obtener_conexion(), $_SESSION['id_usuario'], 1);
         $entradas_inactivas = repositorioEntrada::entradas_usr(conexion::obtener_conexion(), $_SESSION['id_usuario'], 0);
-        $comentarios = repositorioComentarios::usr_comments(conexion::obtener_conexion(), $_SESSION['id_usuario']);
+        $comentarios = repositorioComentario::usr_comments(conexion::obtener_conexion(), $_SESSION['id_usuario']);
         include_once 'plantillas/gestor-generico.inc.php';
         conexion::cerrar_conexion();
         break;

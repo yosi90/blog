@@ -37,6 +37,9 @@ switch ($type) {
             if ($_SESSION['administrador'] == 1)
                 echo RUTA_BORRAR_ENTRADA ?? 'empty';
         break;
+    case 'autores':
+        echo RUTA_AUTORES ?? 'empty';
+        break;
     default:
         echo 'empty';
         break;

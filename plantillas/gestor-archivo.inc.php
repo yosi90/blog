@@ -26,10 +26,10 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody id="contPaginacion">
+                <tbody id="contPaginacionE">
                 </tbody>
             </table>
-            <div id="paginador" class="d-flex justify-content-center align-items-center bg-dark">
+            <div id="paginadorE" class="d-flex justify-content-center align-items-center bg-dark">
                 <div class="bg-dark text-white rounded my-1 p-5">
                     <h3 class="text-center">No tienes entradas archivadas</h3>
                 </div>
@@ -37,5 +37,5 @@
         </div>
     </div>
 </div>
-<input id="tipo" type="hidden" value="archivo">
+<input id="tipoE" type="hidden" value="archivo">
 <script type="module" src="<?php echo CLASES; ?>paginadorEntradas.js"></script>

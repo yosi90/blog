@@ -1,37 +1,73 @@
-<?php
-require_once 'paginador.inc.php';
-?>
-<script>
-    let listaComentarios = <?php echo $comentarios ?>;
+import paginador from './paginador.js';
 
-    function mostrarComentarios(rows, actual, tipo, contenedorelementos = "contPaginacion", contenedorPaginador = "contPaginacion") {
-        let contenedor = document.getElementById(contenedorelementos);
+let tipo = $('#tipoC').val();
+let filtro = $('#filtro').val() ?? '';
+let paginator;
+
+jQuery(document).ready(function () {
+    $.post("http://localhost:8080/blog/actions/getRecords.php", {
+            type: tipo,
+            filter: filtro
+        },
+        function (res, status) {
+            var data = JSON.parse(res);
+            if (status === 'success') {
+                let url = window.location.href.split('/');
+                url = url.filter(n => n);
+                debugger;
+                switch (tipo) {
+                    case 'busquedaC':
+                        if ((url[3] === 'buscar' || url[3] === 'buscar#') && url[4] == null) {
+                            paginator = new paginadorComentarios(data, 8);
+                            paginator.mostrarComentarios();
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+    );
+});
+
+function cambioC(actual) {
+    paginator.pagina = actual;
+    paginator.mostrarEntradas();
+}
+window.cambioC = cambioC; //las funciones dentro de modulos solo son visibles en el modulo. por eso esta línea es requerida.
+
+class paginadorComentarios extends paginador {
+
+    constructor(lista, filas, nomContenedor = 'contPaginacionC', nomContenedorPaginador = 'contPaginacionC') {
+        super(lista, filas, document.getElementById(nomContenedorPaginador), 'cambioC');
+        this.tipo = tipo;
+        this.nomContenedor = nomContenedor;
+        this.nomContenedorPaginador = nomContenedorPaginador;
+    }
+
+    mostrarComentarios() {
+        let contenedor = document.getElementById(this.nomContenedor);
         contenedor.innerHTML = "";
-        let start = rows * (actual - 1);
-        let end = start + rows;
-        let itemsPaginados = listaComentarios.slice(start, end);
+        let start = this.filas * (this.pagina - 1);
+        let end = start + this.filas;
+        let itemsPaginados = this.lista.slice(start, end);
         itemsPaginados.forEach(e => {
-            switch (tipo) {
-                case 'entrada':
-                    // contenedor.appendChild(Basico(e));
-                    break;
-                case 'busqueda':
-                    contenedor.appendChild(Busqueda(e));
+            switch (this.tipo) {
+                case 'busquedaC':
+                    contenedor.appendChild(this.Busqueda(e));
                     break;
                 default:
                     break;
             }
         });
-        if (listaComentarios.length > rows) {
-            let contenedorPaginacion = document.getElementById(contenedorPaginador);
-            if (contenedor != contenedorPaginacion)
-                contenedorPaginacion.innerHTML = "";
-            crearPaginador("mostrarComentarios", actual, listaComentarios, rows, tipo, contenedorelementos, contenedorPaginador, contenedorPaginacion);
-        }
+        let contenedorPaginacion = document.getElementById(this.nomContenedorPaginador);
+        if (this.nomContenedor != this.nomContenedorPaginador)
+            contenedorPaginacion.innerHTML = "";
+        if (this.lista.length > this.filas)
+            this.crearPaginador();
     }
 
-    function Busqueda(element) {
-        debugger;
+    Busqueda(element) {
         let card = document.createElement("div");
         ['card', 'flex-fill', 'controlTamaño', 'm-1', 'mw-100'].forEach(className => {
             card.classList.add(className);
@@ -46,7 +82,9 @@ require_once 'paginador.inc.php';
             formulario.classList.add(className);
         });
         formulario.method = "POST";
-        formulario.action = "<?php echo RUTA_ENTRADA . '/'?>" + element.urlEntrada;
+        paths('entrada', function (data) {
+            formulario.action = data + '/' + element.urlEntrada;
+        });
         cHeader.appendChild(formulario);
         let negrita = document.createElement("strong");
         ['d-flex', 'flex-fill'].forEach(className => {
@@ -80,4 +118,13 @@ require_once 'paginador.inc.php';
         formulario.appendChild(oculto);
         return card;
     }
-</script>
+}
+
+function paths(ruta, callback) {
+    $.post("http://localhost:8080/blog/actions/getPaths.php", {
+        type: ruta
+    }, function (data, status) {
+        if (status === 'success')
+            callback(data);
+    });
+}

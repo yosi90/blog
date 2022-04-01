@@ -1,6 +1,7 @@
 <?php
-include_once 'Conexion.inc.php';
-include_once 'purificador.inc.php';
+require_once 'Conexion.inc.php';
+require_once 'usuario.inc.php';
+require_once 'purificador.inc.php';
 
 class RepositorioUsuario
 {
@@ -92,7 +93,7 @@ class RepositorioUsuario
         $usuario = null;
         if (isset($conexion)) {
             try {
-                include_once 'usuario.inc.php';
+                require_once 'usuario.inc.php';
                 $sql = "SELECT * FROM usuarios WHERE correo = :correo";
                 $sentencia = $conexion->prepare($sql);
                 $sentencia->bindParam(':correo', $correo, PDO::PARAM_STR);
@@ -113,7 +114,7 @@ class RepositorioUsuario
         $usuario = null;
         if (isset($conexion)) {
             try {
-                include_once 'usuario.inc.php';
+                require_once 'usuario.inc.php';
                 $sql = "SELECT * FROM usuarios WHERE id_usuario = :id_usuario";
                 $sentencia = $conexion->prepare($sql);
                 $sentencia->bindParam(':id_usuario', $id_usuario, PDO::PARAM_STR);
@@ -127,6 +128,24 @@ class RepositorioUsuario
             }
         }
         return $usuario;
+    }
+
+    public static function getCountFiltered($conexion, $filtro)
+    {
+        if (isset($conexion)) {
+            try {
+                $sql = 'SELECT count(id_usuario) as cantidad FROM usuarios WHERE nombre like :filtro and bloqueado = 0 ORDER BY fecha_registro';
+                $sentencia = $conexion->prepare($sql);
+                $sentencia->bindParam(':filtro', $filtro, PDO::PARAM_STR);
+                $sentencia->execute();
+                $resultado = $sentencia->fetchAll();
+                if (count($resultado))
+                    return $resultado[0]['cantidad'];
+            } catch (PDOException $ex) {
+                print 'ERROR: ' . $ex->getMessage();
+            }
+        }
+        return 0;
     }
 
     public static function obtenerFiltrados($conexion, $filtro)
