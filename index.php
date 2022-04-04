@@ -12,11 +12,12 @@ require_once 'app/RepositorioComentario.inc.php';
 require_once 'app/controlsesion.inc.php';
 
 //Primero destruimos variables de sesión que no deben existir fuera de su entorno
-try{
+try {
     unset($_SESSION['entradaPrevia']);
-} catch (PDOException $ex){}
+} catch (PDOException $ex) {
+}
 
-$componentes_url = parse_url( urldecode($_SERVER['REQUEST_URI']));
+$componentes_url = parse_url(urldecode($_SERVER['REQUEST_URI']));
 $ruta = $componentes_url['path'];
 $partes_ruta = explode('/', $ruta);
 $partes_ruta = array_filter($partes_ruta);
@@ -34,7 +35,11 @@ if ($partes_ruta[0] == 'blog') {
                 $ruta_elegida = 'vistas/autores.php';
                 break;
             case 'perfil':
-                $ruta_elegida = 'vistas/perfil.php';
+                if (controlsesion::sesion_iniciada()) {
+                    $ruta_elegida = 'vistas/perfil.php';
+                } else {
+                    $ruta_elegida = 'vistas/home.php';
+                }
                 break;
             case 'login':
                 $ruta_elegida = 'vistas/login.php';
@@ -158,7 +163,7 @@ if ($partes_ruta[0] == 'blog') {
                     break;
             }
         }
-        if($partes_ruta[1] == 'rec-pass'){
+        if ($partes_ruta[1] == 'rec-pass') {
             $url_unica = $partes_ruta[2];
             $ruta_elegida = 'vistas/actPass.php';
         }

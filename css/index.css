@@ -296,6 +296,11 @@ body {
   background-color: rgba(55, 60, 65, 1) !important;
 }
 
+.bg-gray{
+  --bs-bg-opacity: 1;
+  background-color: rgba(96, 99, 103, 1) !important; 
+}
+
 .bs-s {
   border-style: solid;
 }
