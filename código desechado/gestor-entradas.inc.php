@@ -36,7 +36,7 @@
                         </tr>
                     </thead>
                     <tbody id="contPaginacion">
-                        <?php require_once 'plantillas/resultadoPaginacion.min.php'; ?>
+                        <?php require_once ROOT . 'plantillas/resultadoPaginacion.min.php'; ?>
                         <script>
                             mostrarLista(8, 1, 'tablaEntrada');
                         </script>

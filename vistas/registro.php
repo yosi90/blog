@@ -1,7 +1,7 @@
 <?php
-include_once 'plantillas/documento-declaracion.inc.php';
-include_once 'app/validadorRegistro.inc.php';
-include_once 'app/usuario.inc.php';
+require_once ROOT . 'plantillas/documento-declaracion.inc.php';
+require_once ROOT . 'app/usuarios/validadorRegistro.inc.php';
+require_once ROOT . 'app/usuarios/Usuario.inc.php';
 if (isset($_POST['submit'])) {
     conexion::abrir_conexion();
     $validador = new validadorRegistro($_POST['nombre'], $_POST['email'], $_POST['clave1'], $_POST['clave2'], conexion::obtener_conexion());
@@ -49,9 +49,9 @@ if (isset($_POST['submit'])) {
                     <form class="d-flex flex-row flex-wrap" method="POST" action="<?php echo RUTA_REGISTRO ?>">
                         <?php
                         if (isset($_POST['submit'])) {
-                            include_once 'plantillas/registro_validado.inc.php';
+                            require_once ROOT . 'plantillas/registro_validado.inc.php';
                         } else {
-                            include_once 'plantillas/registro_vacio.inc.php';
+                            require_once ROOT . 'plantillas/registro_vacio.inc.php';
                         }
                         ?>
                     </form>
@@ -61,5 +61,5 @@ if (isset($_POST['submit'])) {
     </div>
 </div>
 <?php
-include_once 'plantillas/documento-cierre.inc.php';
+require_once ROOT . 'plantillas/documento-cierre.inc.php';
 ?>

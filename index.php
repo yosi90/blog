@@ -1,15 +1,18 @@
 <?php
-
-require_once 'vendor/autoload.php';
-require_once 'app/config.inc.php';
-require_once 'app/Conexion.inc.php';
-require_once 'app/usuario.inc.php';
-require_once 'app/entrada.inc.php';
-require_once 'app/comentario.inc.php';
-require_once 'app/RepositorioUsuario.inc.php';
-require_once 'app/RepositorioEntrada.inc.php';
-require_once 'app/RepositorioComentario.inc.php';
-require_once 'app/controlsesion.inc.php';
+// \ini_set('display_errors', 'On');
+// \ini_set('html_errors', 'On');
+// \error_reporting(\E_ALL);
+// \chdir(__DIR__);
+require_once $_SERVER['DOCUMENT_ROOT'] . '/blog/vendor/autoload.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/blog/config/Config.inc.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/blog/config/Conexion.inc.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/blog/app/usuarios/Usuario.inc.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/blog/app/entradas/Entrada.inc.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/blog/app/comentarios/Comentario.inc.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/blog/app/usuarios/RepositorioUsuario.inc.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/blog/app/entradas/RepositorioEntrada.inc.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/blog/app/comentarios/RepositorioComentario.inc.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/blog/app/usuarios/Controlsesion.inc.php';
 
 //Primero destruimos variables de sesión que no deben existir fuera de su entorno
 try {
@@ -169,4 +172,4 @@ if ($partes_ruta[0] == 'blog') {
         }
     }
 }
-include_once $ruta_elegida;
+require_once ROOT . $ruta_elegida;

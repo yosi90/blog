@@ -1,5 +1,5 @@
 <?php
-include_once 'RepositorioUsuario.inc.php';
+require_once ROOT . 'app/usuarios/RepositorioUsuario.inc.php';
 
 class validadorRegistro
 {

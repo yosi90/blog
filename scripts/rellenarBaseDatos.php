@@ -1,12 +1,12 @@
 <?php
-include_once 'app/config.inc.php';
-include_once 'app/conexion.inc.php';
-include_once 'app/entrada.inc.php';
-include_once 'app/comentario.inc.php';
-include_once 'app/usuario.inc.php';
-include_once 'app/RepositorioUsuario.inc.php';
-include_once 'app/RepositorioEntrada.inc.php';
-include_once 'app/RepositorioComentarios.inc.php';
+require_once ROOT . 'config/Config.inc.php';
+require_once ROOT . 'config/Conexion.inc.php';
+require_once ROOT . 'app/entradas/Entrada.inc.php';
+require_once ROOT . 'app/comentarios/Comentario.inc.php';
+require_once ROOT . 'app/usuarios/Usuario.inc.php';
+require_once ROOT . 'app/usuarios/RepositorioUsuario.inc.php';
+require_once ROOT . 'app/entradas/RepositorioEntrada.inc.php';
+require_once ROOT . 'app/RepositorioComentarios.inc.php';
 
 $cantUsers = 100;
 $cantEntradas = 300;

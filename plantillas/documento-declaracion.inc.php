@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
 <?php
-include_once $_SERVER['DOCUMENT_ROOT'] . '/blog/app/Redireccion.inc.php';
-include_once $_SERVER['DOCUMENT_ROOT'] . '/blog/app/config.inc.php';
-include_once $_SERVER['DOCUMENT_ROOT'] . '/blog/app/controlsesion.inc.php';
+require_once ROOT . 'config/Redireccion.inc.php';
+require_once ROOT . 'app/usuarios/controlsesion.inc.php';
 ?>
 
 <head>
@@ -36,6 +35,6 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/blog/app/controlsesion.inc.php';
 <body>
     <canvas id="sakura"></canvas>
     <?php
-        include_once 'navbar.inc.php';
+        require_once $_SERVER['DOCUMENT_ROOT'] . '/blog/plantillas/navbar.inc.php';
     ?>
     <div class="pater">

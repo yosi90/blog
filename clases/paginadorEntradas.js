@@ -11,7 +11,7 @@ jQuery(document).ready(function () {
         },
         function (res, status) {
             var data = JSON.parse(res);
-            if (status === 'success' && filtro !== "" && data.length !== 0) {
+            if (status === 'success' && (tipo != 'busquedaE' || filtro !== "") && data.length !== 0) {
                 let url = window.location.href.split('/');
                 url = url.filter(n => n);
                 switch (tipo) {
@@ -27,7 +27,7 @@ jQuery(document).ready(function () {
                             paginator.mostrarEntradas();
                         }
                         break;
-                    case 'busqueda':
+                    case 'busquedaE':
                         if ((url[3] === 'buscar' || url[3] === 'buscar#') && url[4] == null) {
                             paginator = new paginadorEntradas(data, 8);
                             paginator.mostrarEntradas();
@@ -77,7 +77,7 @@ class paginadorEntradas extends paginador {
                 case 'archivo':
                     contenedor.appendChild(this.Tabla(e, this.tipo === 'tabla' ? 0 : 1));
                     break;
-                case 'busqueda':
+                case 'busquedaE':
                     contenedor.appendChild(this.Busqueda(e));
                     break;
                 default:

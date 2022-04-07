@@ -1,6 +1,6 @@
 <?php
 $titulo = "Troubles time - recuperar contraseña";
-include_once 'plantillas/documento-declaracion.inc.php';
+require_once ROOT . 'plantillas/documento-declaracion.inc.php';
 ?>
 <div class="container">
     <div class="row">
@@ -21,4 +21,4 @@ include_once 'plantillas/documento-declaracion.inc.php';
     </div>
 </div>
 <?php
-include_once 'plantillas/documento-cierre.inc.php';
+require_once ROOT . 'plantillas/documento-cierre.inc.php';

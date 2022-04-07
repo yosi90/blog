@@ -4,12 +4,12 @@ function error($msg)
     $response = array("success" => false, "message" => $msg);
     return json_encode($response);
 }
-require_once '../app/config.inc.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/blog/Config/Config.inc.php';
 $type = $_POST['type'];
 if ($type == "") {
     die(error('Error: no type'));
 }
-require_once '../app/controlsesion.inc.php';
+require_once ROOT . 'app/usuarios/Controlsesion.inc.php';
 switch ($type) {
     case 'entrada':
         $prueba = RUTA_ENTRADA;

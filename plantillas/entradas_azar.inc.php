@@ -1,5 +1,5 @@
 <?php
-require_once 'app/utilidades.inc.php';
+require_once ROOT . 'app/utilidades.inc.php';
 ?>
 
 <div class="card rounded-1">

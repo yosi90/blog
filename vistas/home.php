@@ -1,6 +1,6 @@
 <?php
 $titulo = 'Troubles time';
-include_once 'plantillas/documento-declaracion.inc.php';
+require_once ROOT . 'plantillas/documento-declaracion.inc.php';
 ?>
 <div class="container">
     <div class="row">
@@ -69,5 +69,5 @@ include_once 'plantillas/documento-declaracion.inc.php';
 <input id="tipoE" type="hidden" value="reciente">
 <script type="module" src="<?php echo CLASES; ?>paginadorEntradas.js"></script>
 <?php
-include_once 'plantillas/documento-cierre.inc.php';
+require_once ROOT . 'plantillas/documento-cierre.inc.php';
 ?>

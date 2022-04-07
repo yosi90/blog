@@ -1,7 +1,7 @@
 <?php
 header($_SERVER['SERVER_PROTOCOL'] . "404 Not Found", true, 404);
-include_once 'plantillas/documento-declaracion.inc.php';
-include_once 'app/largate.inc.php';
+require_once ROOT . 'plantillas/documento-declaracion.inc.php';
+require_once ROOT . 'app/largate.inc.php';
 ?>
 <div class="container pt-4">
     <div class="card bg-dark text-white">
@@ -27,4 +27,4 @@ include_once 'app/largate.inc.php';
     </div>
 </div>
 <?php
-include_once 'plantillas/documento-cierre.inc.php';
+require_once ROOT . 'plantillas/documento-cierre.inc.php';

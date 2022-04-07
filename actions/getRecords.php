@@ -10,17 +10,18 @@ $filtro = $_POST['filter'];
 if ($type == "") {
     die(error('Error: no type'));
 }
-require_once '../app/Conexion.inc.php';
-require_once '../app/RepositorioEntrada.inc.php';
-require_once '../app/RepositorioComentario.inc.php';
-require_once '../app/RepositorioUsuario.inc.php';
-require_once '../app/controlsesion.inc.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/blog/Config/Config.inc.php';
+require_once ROOT . 'config/Conexion.inc.php';
+require_once ROOT . 'app/entradas/RepositorioEntrada.inc.php';
+require_once ROOT . 'app/comentarios/RepositorioComentario.inc.php';
+require_once ROOT . 'app/usuarios/RepositorioUsuario.inc.php';
+require_once ROOT . 'app/usuarios/Controlsesion.inc.php';
 conexion::abrir_conexion();
 switch ($type) {
     case 'reciente':
         $records = repositorioEntrada::obtenerRecientes(Conexion::obtener_conexion());
         break;
-    case 'busqueda':
+    case 'busquedaE':
         $records = RepositorioEntrada::obtenerFiltradas(Conexion::obtener_conexion(), "%" . $filtro . "%");
         break;
     case 'busquedaC':
@@ -41,4 +42,4 @@ switch ($type) {
         break;
 }
 conexion::cerrar_conexion();
-echo json_encode($records) ?? die(error('Value not valid'));
+echo json_encode($records);

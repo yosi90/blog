@@ -1,8 +1,8 @@
 <?php
 $titulo = '¡Registro satisfactorio!';
-include_once $_SERVER['DOCUMENT_ROOT'] . '/blog/plantillas/documento-declaracion.inc.php';
-include_once $_SERVER['DOCUMENT_ROOT'] . '/blog/app/RepositorioUsuario.inc.php';
-include_once $_SERVER['DOCUMENT_ROOT'] . '/blog/app/Conexion.inc.php';
+require_once ROOT . $_SERVER['DOCUMENT_ROOT'] . '/blog/plantillas/documento-declaracion.inc.php';
+require_once ROOT . $_SERVER['DOCUMENT_ROOT'] . '/blog/app/usuarios/RepositorioUsuario.inc.php';
+require_once ROOT . $_SERVER['DOCUMENT_ROOT'] . '/blog/config/Conexion.inc.php';
 ?>
 <div class="container">
     <div class="row">
@@ -24,5 +24,5 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/blog/app/Conexion.inc.php';
     </div>
 </div>
 <?php
-include_once $_SERVER['DOCUMENT_ROOT'] . '/blog/plantillas/documento-cierre.inc.php';
+require_once ROOT . $_SERVER['DOCUMENT_ROOT'] . '/blog/plantillas/documento-cierre.inc.php';
 ?>

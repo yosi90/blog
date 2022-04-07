@@ -1,5 +1,5 @@
 <?php
-include_once 'recuperarPassword.inc.php';
+require_once ROOT . 'recuperarPassword.inc.php';
 class RepositorioRecuperarPassword
 {
 

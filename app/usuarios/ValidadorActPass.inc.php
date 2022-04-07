@@ -1,5 +1,5 @@
 <?php
-include_once 'RepositorioUsuario.inc.php';
+require_once ROOT . 'RepositorioUsuario.inc.php';
 
 class validadorActPass
 {

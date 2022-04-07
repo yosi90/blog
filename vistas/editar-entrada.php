@@ -1,11 +1,11 @@
 <?php
 $titulo = 'Troubles time - editando entrada';
-include_once 'plantillas/documento-declaracion.inc.php';
-include_once 'app/entrada.inc.php';
-include_once 'app/repositorioentrada.inc.php';
-include_once 'app/validadorEntradaEditada.inc.php';
-include_once 'app/repositoriousuario.inc.php';
-include_once 'app/Conexion.inc.php';
+require_once ROOT . 'plantillas/documento-declaracion.inc.php';
+require_once ROOT . 'app/entradas/Entrada.inc.php';
+require_once ROOT . 'app/entradas/RepositorioEntrada.inc.php';
+require_once ROOT . 'app/validadorEntradaEditada.inc.php';
+require_once ROOT . 'app/usuarios/RepositorioUsuario.inc.php';
+require_once ROOT . 'config/Conexion.inc.php';
 if (isset($_POST['submit'])) {
     $activa = 1;
     conexion::abrir_conexion();
@@ -27,7 +27,7 @@ if (isset($_POST['submit'])) {
     }
     conexion::cerrar_conexion();
 }
-include_once 'plantillas/pc_declare.inc.php';
+require_once ROOT . 'plantillas/pc_declare.inc.php';
 ?>
 <div class="card mt-5">
     <div class="card-header bg-dark text-white">
@@ -41,16 +41,16 @@ include_once 'plantillas/pc_declare.inc.php';
                 conexion::abrir_conexion();
                 $entrada = repositorioEntrada::getEntrada(conexion::obtener_conexion(), $idEntrada);
                 $_SESSION['entradaPrevia'] = $entrada;
-                include_once 'plantillas/form_editar_entrada.inc.php';
+                require_once ROOT . 'plantillas/form_editar_entrada.inc.php';
                 conexion::cerrar_conexion();
             } else if (isset($_POST['submit'])) {
-                include_once 'plantillas/form_editar_entrada_validado.inc.php';
+                require_once ROOT . 'plantillas/form_editar_entrada_validado.inc.php';
             }
             ?>
         </form>
     </div>
 </div>
 <?php
-include_once 'plantillas/pc_closing.inc.php';
-include_once 'plantillas/documento-cierre.inc.php';
+require_once ROOT . 'plantillas/pc_closing.inc.php';
+require_once ROOT . 'plantillas/documento-cierre.inc.php';
 ?>

@@ -2,7 +2,7 @@
 $titulo = 'Troubles time - Buscador';
 $filtro = "";
 $entradas = $comentarios = $autores = 0;
-include_once 'plantillas/documento-declaracion.inc.php';
+require_once ROOT . 'plantillas/documento-declaracion.inc.php';
 if (isset($_POST['texto']) && !empty($_POST['texto'])) {
     $filtro = $_POST['texto'];
     conexion::abrir_conexion();
@@ -99,9 +99,9 @@ if ($comentarios !== 0)
     echo '<script type="text/javascript">toggle("chbComentarios", "comentarios");</script>';
 if ($autores !== 0)
     echo '<script type="text/javascript">toggle("chbAutores", "autores");</script>';
-include_once 'plantillas/documento-cierre.inc.php';
+require_once ROOT . 'plantillas/documento-cierre.inc.php';
 ?>
-<input id="tipoE" type="hidden" value="busqueda">
+<input id="tipoE" type="hidden" value="busquedaE">
 <input id="tipoC" type="hidden" value="busquedaC">
 <input id="tipoU" type="hidden" value="busquedaU">
 <input id="filtro" type="hidden" value="<?php echo $filtro ?>">

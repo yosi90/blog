@@ -1,6 +1,6 @@
 <?php
-include_once 'RepositorioUsuario.inc.php';
-include_once 'usuario.inc.php';
+require_once ROOT . 'app/usuarios/RepositorioUsuario.inc.php';
+require_once ROOT . 'app/usuarios/Usuario.inc.php';
 
 class validadorlogin
 {

@@ -2,12 +2,12 @@
 if (isset($entrada)) {
     $titulo = 'Troubles time' . $entrada->getTitulo();
 }
-include_once 'plantillas/documento-declaracion.inc.php';
-include_once 'app/entrada.inc.php';
-include_once 'app/comentario.inc.php';
-include_once 'app/usuario.inc.php';
-include_once 'app/RepositorioEntrada.inc.php';
-include_once 'app/RepositorioComentario.inc.php';
+require_once ROOT . 'plantillas/documento-declaracion.inc.php';
+require_once ROOT . 'app/entradas/Entrada.inc.php';
+require_once ROOT . 'app/comentarios/Comentario.inc.php';
+require_once ROOT . 'app/usuarios/Usuario.inc.php';
+require_once ROOT . 'app/entradas/RepositorioEntrada.inc.php';
+require_once ROOT . 'app/comentarios/RepositorioComentario.inc.php';
 ?>
 <div class="container py-4">
     <div class="row">
@@ -81,7 +81,7 @@ include_once 'app/RepositorioComentario.inc.php';
     <div class="row d-flex bg-dark-light translucido">
         <?php
         if (count($comentarios) > 0) {
-            include_once 'plantillas/comentarios_entrada.inc.php';
+            require_once ROOT . 'plantillas/comentarios_entrada.inc.php';
         } else {
         ?>
             <button class="btn btn-outline-light flex-fill rosa m-3" type="button" data-bs-toggle="collapse" data-bs-target="#comentarios" aria-expanded="false" aria-controls="comentarios">
@@ -93,7 +93,7 @@ include_once 'app/RepositorioComentario.inc.php';
     </div>
     <div class="row mt-3">
         <?php
-        include_once 'plantillas/entradas_azar.inc.php';
+        require_once ROOT . 'plantillas/entradas_azar.inc.php';
         ?>
     </div>
 </div>
@@ -107,5 +107,5 @@ if (isset($_POST['busqueda'])) {
         scroll("'.$_POST['posicion'].'");
         </script>';
 }
-include_once 'plantillas/documento-cierre.inc.php';
+require_once ROOT . 'plantillas/documento-cierre.inc.php';
 ?>

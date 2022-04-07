@@ -1,7 +1,7 @@
 <?php
-include_once 'app/Conexion.inc.php';
-include_once 'app/RepositorioRecuperarPassword.inc.php';
-include_once 'app/validadorActPass.inc.php';
+require_once ROOT . 'config/Conexion.inc.php';
+require_once ROOT . 'app/RepositorioRecuperarPassword.inc.php';
+require_once ROOT . 'app/validadorActPass.inc.php';
 conexion::abrir_conexion();
 $peticion = RepositorioRecuperarPassword::peticionPorUrl(conexion::obtener_conexion(), $url_unica);
 if (isset($_POST['submit'])) {
@@ -33,7 +33,7 @@ if (isset($_POST['submit'])) {
 }
 conexion::cerrar_conexion();
 $titulo = 'Troubles time - Actualizar contraseña';
-include_once 'plantillas/documento-declaracion.inc.php';
+require_once ROOT . 'plantillas/documento-declaracion.inc.php';
 ?>
 <div class="container">
     <div class="row">
@@ -47,9 +47,9 @@ include_once 'plantillas/documento-declaracion.inc.php';
                     <form class="d-flex flex-row flex-wrap w-100" role="form" method="post" action="<?php echo RUTA_URL_REC . '/' . $url_unica ?>">
                         <?php
                         if (isset($_POST['submit'])) {
-                            include_once 'plantillas/form_act_pass_validado.inc.php';
+                            require_once ROOT . 'plantillas/form_act_pass_validado.inc.php';
                         } else {
-                            include_once 'plantillas/form_act_pass_vacio.inc.php';
+                            require_once ROOT . 'plantillas/form_act_pass_vacio.inc.php';
                         }
                         ?>
                     </form>
@@ -59,5 +59,5 @@ include_once 'plantillas/documento-declaracion.inc.php';
     </div>
 </div>
 <?php
-include_once 'plantillas/documento-cierre.inc.php';
+require_once ROOT . 'plantillas/documento-cierre.inc.php';
 ?>

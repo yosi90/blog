@@ -1,7 +1,7 @@
 <?php
-include_once 'app/controlsesion.inc.php';
-include_once 'app/redireccion.inc.php';
-include_once 'app/config.inc.php';
+require_once ROOT . 'app/usuarios/Controlsesion.inc.php';
+require_once ROOT . 'config/Redireccion.inc.php';
+require_once ROOT . 'config/Config.inc.php';
 
 controlsesion::cerrar_sesion();
 redireccion::redirigir(SERVIDOR);

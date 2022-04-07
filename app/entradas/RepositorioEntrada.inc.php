@@ -1,8 +1,8 @@
 <?php
-include_once 'config.inc.php';
-include_once 'conexion.inc.php';
-include_once 'entrada.inc.php';
-include_once 'purificador.inc.php';
+require_once ROOT . 'config/Config.inc.php';
+require_once ROOT . 'config/Conexion.inc.php';
+require_once ROOT . 'app/entradas/entrada.inc.php';
+require_once ROOT . 'app/purificador.inc.php';
 
 class repositorioEntrada
 {
@@ -78,7 +78,7 @@ class repositorioEntrada
             try {
                 $sql = 'SELECT e.id_entrada, u.nombre, ue.id_usuario, e.url, e.titulo, e.texto, e.fecha, e.activa, e.archivada, e.bloqueada' .
                     ' FROM entradas e INNER JOIN usuario_entradas ue on e.id_entrada = ue.id_entrada inner join usuarios u on ue.id_usuario = u.id_usuario' .
-                    ' WHERE (texto like :filtro or titulo like :filtro) and (activa = 1 and archivada = 0 and bloqueada = 0) ORDER BY fecha';
+                    ' WHERE (texto like :filtro or titulo like :filtro) and (activa = 1 and archivada = 0 and bloqueada = 0) ORDER BY fecha DESC';
                 $sentencia = $conexion->prepare($sql);
                 $sentencia->bindParam(':filtro', $filtro, PDO::PARAM_STR);
                 $sentencia->execute();

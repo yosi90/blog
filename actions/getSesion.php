@@ -9,7 +9,8 @@ $type = $_POST['type'];
 if ($type == "") {
     die(error('Error: no type'));
 }
-require_once '../app/controlsesion.inc.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/blog/Config/Config.inc.php';
+require_once ROOT . 'app/usuarios/Controlsesion.inc.php';
 if (controlSesion::sesion_iniciada())
     switch ($type) {
         case 'priv':

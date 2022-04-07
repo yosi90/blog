@@ -1,6 +1,6 @@
 <?php
-include_once 'plantillas/documento-declaracion.inc.php';
-include_once 'app/usuario.inc.php';
+require_once ROOT . 'plantillas/documento-declaracion.inc.php';
+require_once ROOT . 'app/usuarios/Usuario.inc.php';
 ?>
 <div class="container">
     <div class="row">
@@ -27,4 +27,4 @@ include_once 'app/usuario.inc.php';
 </div>
 <script type="text/javascript" src="<?php echo JS ?>/perfil.js"></script>
 <?php
-include_once 'plantillas/documento-cierre.inc.php';
+require_once ROOT . 'plantillas/documento-cierre.inc.php';

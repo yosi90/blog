@@ -1,10 +1,10 @@
         </div>
         <?php
-            include_once 'footer.inc.php';
+            require_once ROOT . 'plantillas/footer.inc.php';
         ?>
     </body>
     <?php
-        include_once 'sakuraScript.inc.php';
+        require_once ROOT . 'plantillas/sakuraScript.inc.php';
     ?>
 
 </html>

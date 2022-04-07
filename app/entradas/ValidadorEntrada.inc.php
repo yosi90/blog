@@ -1,5 +1,5 @@
 <?php
-include_once 'repositorioentrada.inc.php';
+require_once ROOT . 'repositorioentrada.inc.php';
 abstract class validadorEntrada
 {
     protected $aviso_inicio = "<br><div class='alert alert-danger' role='alert'>";

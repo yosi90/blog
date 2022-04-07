@@ -1,7 +1,7 @@
 <?php
 $titulo = "Login";
-include_once 'plantillas/documento-declaracion.inc.php';
-include_once 'app/validadorLogin.inc.php';
+require_once ROOT . 'plantillas/documento-declaracion.inc.php';
+require_once ROOT . 'app/usuarios/ValidadorLogin.inc.php';
 
 if (controlsesion::sesion_iniciada()) {
     redireccion::redirigir(SERVIDOR);
@@ -52,4 +52,4 @@ if (isset($_POST['login'])) {
     </div>
 </div>
 <?php
-include_once 'plantillas/documento-cierre.inc.php';
+require_once ROOT . 'plantillas/documento-cierre.inc.php';

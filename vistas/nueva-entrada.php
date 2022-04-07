@@ -3,12 +3,12 @@
 use phpDocumentor\Reflection\PseudoTypes\HtmlEscapedString;
 
 $titulo = 'Nueva entrada';
-include_once 'plantillas/documento-declaracion.inc.php';
-include_once 'app/entrada.inc.php';
-include_once 'app/repositorioentrada.inc.php';
-include_once 'app/validadorEntradaNueva.inc.php';
-include_once 'app/repositoriousuario.inc.php';
-include_once 'app/Conexion.inc.php';
+require_once ROOT . 'plantillas/documento-declaracion.inc.php';
+require_once ROOT . 'app/entradas/Entrada.inc.php';
+require_once ROOT . 'app/entradas/RepositorioEntrada.inc.php';
+require_once ROOT . 'app/validadorEntradaNueva.inc.php';
+require_once ROOT . 'app/usuarios/RepositorioUsuario.inc.php';
+require_once ROOT . 'config/Conexion.inc.php';
 if (isset($_POST['submit'])) {
     $activa = 1;
     conexion::abrir_conexion();
@@ -24,7 +24,7 @@ if (isset($_POST['submit'])) {
     }
     conexion::cerrar_conexion();
 }
-include_once 'plantillas/pc_declare.inc.php';
+require_once ROOT . 'plantillas/pc_declare.inc.php';
 ?>
 <div class="card mt-5">
     <div class="card-header bg-dark text-white">
@@ -34,14 +34,14 @@ include_once 'plantillas/pc_declare.inc.php';
         <form class="d-flex flex-row flex-wrap" method="POST" action="<?php echo RUTA_NUEVA_ENTRADA; ?>">
             <?php
             if (isset($_POST['submit'])) {
-                include_once 'plantillas/form_nueva_entrada_validado.inc.php';
+                require_once ROOT . 'plantillas/form_nueva_entrada_validado.inc.php';
             } else {
-                include_once 'plantillas/form_nueva_entrada_vacio.inc.php';
+                require_once ROOT . 'plantillas/form_nueva_entrada_vacio.inc.php';
             }
             ?>
         </form>
     </div>
 </div>
 <?php
-include_once 'plantillas/pc_closing.inc.php';
-include_once 'plantillas/documento-cierre.inc.php';
+require_once ROOT . 'plantillas/pc_closing.inc.php';
+require_once ROOT . 'plantillas/documento-cierre.inc.php';

@@ -1,7 +1,7 @@
 <?php
-include_once 'app/Conexion.inc.php';
-include_once 'app/RepositorioUsuario.inc.php';
-include_once 'app/RepositorioRecuperarPassword.inc.php';
+require_once ROOT . 'config/Conexion.inc.php';
+require_once ROOT . 'app/usuarios/RepositorioUsuario.inc.php';
+require_once ROOT . 'app/RepositorioRecuperarPassword.inc.php';
 
 if (isset($_POST['correo'])) {
     conexion::abrir_conexion();

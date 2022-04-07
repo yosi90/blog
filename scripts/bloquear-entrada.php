@@ -1,8 +1,8 @@
 <?php
-include_once 'app/config.inc.php';
-include_once 'app/Conexion.inc.php';
-include_once 'app/RepositorioEntrada.inc.php';
-include_once 'app/redireccion.inc.php';
+require_once ROOT . 'config/Config.inc.php';
+require_once ROOT . 'config/Conexion.inc.php';
+require_once ROOT . 'app/entradas/RepositorioEntrada.inc.php';
+require_once ROOT . 'config/Redireccion.inc.php';
 if (isset($_POST['bloquear']) && $_SESSION['id_usuario'] == $_POST['IdAutor']) {
     $idEntrada = $_POST['IdEntrada'];
     conexion::abrir_conexion();

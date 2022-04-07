@@ -1,5 +1,7 @@
 <?php
 
+namespace app;
+
 use PHPMailer\PHPMailer\PHPMailer as Pedro;
 use PHPMailer\PHPMailer\SMTP;
 

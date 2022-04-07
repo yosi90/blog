@@ -1,4 +1,4 @@
 <?php
     $titulo = "Autores";
-    include_once 'plantillas/documento-declaracion.inc.php';
-    include_once 'plantillas/documento-cierre.inc.php';
+    require_once ROOT . 'plantillas/documento-declaracion.inc.php';
+    require_once ROOT . 'plantillas/documento-cierre.inc.php';
