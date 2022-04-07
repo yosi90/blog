@@ -1,8 +1,7 @@
 <?php
 $titulo = 'Troubles time - Buscador';
 $filtro = "";
-$entradas = "0";
-$comentarios = $autores = [];
+$entradas = $comentarios = $autores = 0;
 include_once 'plantillas/documento-declaracion.inc.php';
 if (isset($_POST['texto']) && !empty($_POST['texto'])) {
     $filtro = $_POST['texto'];
@@ -60,8 +59,8 @@ if (isset($_POST['texto']) && !empty($_POST['texto'])) {
                         </div>
                         <div id="contPaginacionE" class="card-body bg-dark-light text-white bs-s border-1 border-dark">
                             <?php
-                                if ($entradas === 0)
-                                    include 'plantillas/busquedaVacia.inc.php';
+                            if ($entradas === 0)
+                                include 'plantillas/busquedaVacia.inc.php';
                             ?>
                         </div>
                     </div>
@@ -71,8 +70,8 @@ if (isset($_POST['texto']) && !empty($_POST['texto'])) {
                         </div>
                         <div id="contPaginacionC" class="card-body bg-dark-light text-white bs-s border-1 border-dark">
                             <?php
-                                if ($comentarios === 0)
-                                    include 'plantillas/busquedaVacia.inc.php';
+                            if ($comentarios === 0)
+                                include 'plantillas/busquedaVacia.inc.php';
                             ?>
                         </div>
                     </div>
@@ -82,8 +81,8 @@ if (isset($_POST['texto']) && !empty($_POST['texto'])) {
                         </div>
                         <div id="contPaginacionU" class="card-body bg-dark-light text-white bs-s border-1 border-dark">
                             <?php
-                                if ($autores === 0)
-                                    include 'plantillas/busquedaVacia.inc.php';
+                            if ($autores === 0)
+                                include 'plantillas/busquedaVacia.inc.php';
                             ?>
                             <!-- ordenar según insignias, reputación o demás cosas que los diferencien entre ellos -->
                         </div>

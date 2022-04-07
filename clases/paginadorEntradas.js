@@ -11,7 +11,7 @@ jQuery(document).ready(function () {
         },
         function (res, status) {
             var data = JSON.parse(res);
-            if (status === 'success') {
+            if (status === 'success' && filtro !== "" && data.length !== 0) {
                 let url = window.location.href.split('/');
                 url = url.filter(n => n);
                 switch (tipo) {
