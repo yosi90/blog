@@ -6,7 +6,7 @@ require_once ROOT . 'app/comentarios/Comentario.inc.php';
 require_once ROOT . 'app/usuarios/Usuario.inc.php';
 require_once ROOT . 'app/usuarios/RepositorioUsuario.inc.php';
 require_once ROOT . 'app/entradas/RepositorioEntrada.inc.php';
-require_once ROOT . 'app/RepositorioComentarios.inc.php';
+require_once ROOT . 'app/comentarios/RepositorioComentario.inc.php';
 
 $cantUsers = 100;
 $cantEntradas = 300;
@@ -25,15 +25,16 @@ for ($entradas = 0; $entradas < $cantEntradas; $entradas++) {
     $titulo = Texto(10);
     $texto = TextoComentarios(rand(20, 1000));
     $autor = rand(1, $cantUsers);
-    $entrada = repositorioentrada::insertar_entrada(conexion::obtener_conexion(), Repositorioentrada::crearUrl($titulo), $titulo, $texto, 1, 0, 0, $autor);
+    $entrada = repositorioEntrada::insertar_entrada(conexion::obtener_conexion(), Repositorioentrada::crearUrl($titulo), $titulo, $texto, 1, 0, 0, $autor);
 }
 
 for ($comentarios = 0; $comentarios < $cantCometarios; $comentarios++) {
     $texto = TextoComentarios(rand(20, 1000));
     $entrada = rand(1, $cantEntradas);
     $autor = rand(1, $cantUsers);
-    repositoriocomentarios::insertar_comentario(conexion::obtener_conexion(), $texto, $autor, $entrada);
+    repositorioComentario::insertar_comentario(conexion::obtener_conexion(), $texto, $autor, $entrada);
 }
+conexion::cerrar_conexion();
 ?>
 <script>window.location.href = "<?php echo RUTA_ENTRADA . '/' . $entrada->getUrl(); ?>"</script>
 <?php
@@ -62,17 +63,6 @@ function TextoEmail($longitud)
 function TextoComentarios($longitud)
 {
     $caracteres = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_¿?¡+$€[]{}()1234567890 ';
-    $numero_caracteres = strlen($caracteres);
-    $string_aleatorio = '';
-    for ($i = 0; $i < $longitud; $i++) {
-        $string_aleatorio .= $caracteres[rand(0, $numero_caracteres - 1)];
-    }
-    return $string_aleatorio;
-}
-
-function NumerosRandom($longitud)
-{
-    $caracteres = '0123456789';
     $numero_caracteres = strlen($caracteres);
     $string_aleatorio = '';
     for ($i = 0; $i < $longitud; $i++) {

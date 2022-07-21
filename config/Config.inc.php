@@ -4,7 +4,7 @@ define('NOMBRE_USUARIO', 'root');
 define('PASSWORD', '');
 define('NOMBRE_DB', 'blog');
 
-define("ROOT", $_SERVER['DOCUMENT_ROOT'] . "/blog/");
+define("ROOT", $_SERVER['DOCUMENT_ROOT'] . "blog/");
 define("SERVIDOR", "http://" . $_SERVER['HTTP_HOST'] . "/blog");
 define("INDEX", SERVIDOR."/index");
 define("RUTA_REGISTRO", SERVIDOR."/registro");
@@ -41,7 +41,7 @@ define("VISTAS", SERVIDOR . "/vistas/");
 define("APP", SERVIDOR . "/app/");
 define("IMG", SERVIDOR . "/img/");
 define("CSS", SERVIDOR . "/css/");
-define("JS", SERVIDOR . "/js/");
+define("JS", SERVIDOR . "/js");
 define("CLASES", SERVIDOR . "/clases/");
-define("editor", SERVIDOR . "/libraries/ckeditor/");
+define("editor", SERVIDOR . "/libraries/ckeditor");
 ?>

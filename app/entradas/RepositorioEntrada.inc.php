@@ -1,8 +1,8 @@
 <?php
 require_once ROOT . 'config/Config.inc.php';
 require_once ROOT . 'config/Conexion.inc.php';
-require_once ROOT . 'app/entradas/entrada.inc.php';
-require_once ROOT . 'app/purificador.inc.php';
+require_once ROOT . 'app/entradas/Entrada.inc.php';
+require_once ROOT . 'app/Purificador.inc.php';
 
 class repositorioEntrada
 {

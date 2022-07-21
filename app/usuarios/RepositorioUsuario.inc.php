@@ -1,7 +1,7 @@
 <?php
 require_once ROOT . 'config/Conexion.inc.php';
-require_once ROOT . 'app/usuarios/usuario.inc.php';
-require_once ROOT . 'app/purificador.inc.php';
+require_once ROOT . 'app/usuarios/Usuario.inc.php';
+require_once ROOT . 'app/Purificador.inc.php';
 
 class RepositorioUsuario
 {
@@ -114,7 +114,7 @@ class RepositorioUsuario
         $usuario = null;
         if (isset($conexion)) {
             try {
-                require_once ROOT . 'app/usuarios/usuario.inc.php';
+                require_once ROOT . 'app/usuarios/Usuario.inc.php';
                 $sql = "SELECT * FROM usuarios WHERE id_usuario = :id_usuario";
                 $sentencia = $conexion->prepare($sql);
                 $sentencia->bindParam(':id_usuario', $id_usuario, PDO::PARAM_STR);

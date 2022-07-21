@@ -15,10 +15,8 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/blog/app/comentarios/RepositorioComen
 require_once $_SERVER['DOCUMENT_ROOT'] . '/blog/app/usuarios/Controlsesion.inc.php';
 
 //Primero destruimos variables de sesión que no deben existir fuera de su entorno
-try {
+if (isset($_SESSION['entradaPrevia']))
     unset($_SESSION['entradaPrevia']);
-} catch (PDOException $ex) {
-}
 
 $componentes_url = parse_url(urldecode($_SERVER['REQUEST_URI']));
 $ruta = $componentes_url['path'];
@@ -45,7 +43,8 @@ if ($partes_ruta[0] == 'blog') {
                 }
                 break;
             case 'login':
-                $ruta_elegida = 'vistas/login.php';
+                if (!controlsesion::sesion_iniciada())
+                    $ruta_elegida = 'vistas/login.php';
                 break;
             case 'logout':
                 if (controlsesion::sesion_iniciada()) {
@@ -55,10 +54,12 @@ if ($partes_ruta[0] == 'blog') {
                 }
                 break;
             case 'registro':
-                $ruta_elegida = 'vistas/registro.php';
+                if (!controlsesion::sesion_iniciada())
+                    $ruta_elegida = 'vistas/registro.php';
                 break;
             case 'recuperar-password':
-                $ruta_elegida = 'vistas/recuperar-password.php';
+                if (!controlsesion::sesion_iniciada())
+                    $ruta_elegida = 'vistas/recuperar-password.php';
                 break;
             case 'url-usr':
                 $ruta_elegida = 'scripts/url-usr.php';

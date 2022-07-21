@@ -6,7 +6,7 @@ $titulo = 'Nueva entrada';
 require_once ROOT . 'plantillas/documento-declaracion.inc.php';
 require_once ROOT . 'app/entradas/Entrada.inc.php';
 require_once ROOT . 'app/entradas/RepositorioEntrada.inc.php';
-require_once ROOT . 'app/validadorEntradaNueva.inc.php';
+require_once ROOT . 'app/entradas/validadorEntradaNueva.inc.php';
 require_once ROOT . 'app/usuarios/RepositorioUsuario.inc.php';
 require_once ROOT . 'config/Conexion.inc.php';
 if (isset($_POST['submit'])) {

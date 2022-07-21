@@ -1,6 +1,6 @@
 <?php
-require_once ROOT . 'repositorioentrada.inc.php';
-require_once ROOT . 'validadorEntrada.inc.php';
+require_once ROOT . 'app/entradas/repositorioentrada.inc.php';
+require_once ROOT . 'app/entradas/validadorEntrada.inc.php';
 class validadorEntradaNueva extends validadorEntrada
 {
     public function __construct($titulo, $texto, $url, $conexion)

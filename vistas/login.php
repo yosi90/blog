@@ -1,11 +1,7 @@
 <?php
-$titulo = "Login";
+$titulo = "Troubles Time - Login";
 require_once ROOT . 'plantillas/documento-declaracion.inc.php';
 require_once ROOT . 'app/usuarios/ValidadorLogin.inc.php';
-
-if (controlsesion::sesion_iniciada()) {
-    redireccion::redirigir(SERVIDOR);
-}
 
 if (isset($_POST['login'])) {
     conexion::abrir_conexion();
@@ -14,7 +10,7 @@ if (isset($_POST['login'])) {
         controlsesion::iniciar_sesion($validador->obtener_usuario()->getid(), $validador->obtener_usuario()->getnombre(), $validador->obtener_usuario()->getMod(), $validador->obtener_usuario()->getAdm());
         ?>
         <script>
-            window.location.href = "<?php echo SERVIDOR ?>"
+            window.location.href = "<?php echo SERVIDOR; ?>"
         </script>
         <?php
     }

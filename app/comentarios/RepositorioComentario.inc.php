@@ -2,7 +2,7 @@
 require_once ROOT . 'config/Config.inc.php';
 require_once ROOT . 'config/Conexion.inc.php';
 require_once ROOT . 'app/comentarios/Comentario.inc.php';
-require_once ROOT . 'app/purificador.inc.php';
+require_once ROOT . 'app/Purificador.inc.php';
 
 class RepositorioComentario
 {
@@ -49,7 +49,7 @@ class RepositorioComentario
         $comentarios = array();
         if (isset($conexion)) {
             try {
-                require_once 'comentario.inc.php';
+                require_once ROOT . 'app/comentarios/Comentario.inc.php';
                 $sql = 'SELECT c.id_comentario, u.nombre, uc.id_usuario, e.titulo, ec.id_entrada, e.url, c.texto, c.fecha, ec.indice'.
                 ' FROM comentarios c inner join usuario_comentarios uc on c.id_comentario = uc.id_comentario inner join usuarios u on uc.id_usuario = u.id_usuario inner join entrada_comentarios ec on c.id_comentario = ec.id_comentario inner join entradas e on ec.id_entrada = e.id_entrada'.
                 ' WHERE ec.id_entrada = :id_entrada';

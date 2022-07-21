@@ -1,5 +1,6 @@
 <?php
-require_once ROOT . 'app/utilidades.inc.php';
+use app\Utils;
+require_once ROOT . 'app/Utils.inc.php';
 ?>
 
 <div class="card rounded-1">
@@ -24,7 +25,7 @@ require_once ROOT . 'app/utilidades.inc.php';
                     </div>
                     <div class="card-body d-flex flex-column bg-dark-light">
                         <p class="text-justify lt-10">
-                            <?php echo utilidades::truncateText(nl2br($entrada_actual->getTexto()), 0); ?>
+                            <?php echo Utils::truncateText(nl2br($entrada_actual->getTexto()), 0); ?>
                         </p>
                         <a class="btn btn-outline-light rosa fz-sm-texto align-self-center mt-auto" role="button" href="<?php echo RUTA_ENTRADA . '/' . $entrada_actual->getUrl() ?>">
                             <b>Parece interesante..</b>
