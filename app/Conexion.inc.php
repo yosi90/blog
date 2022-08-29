@@ -6,7 +6,7 @@ class conexion
     {
         if (!isset(self::$conexion)) {
             try {
-                include_once 'config.inc.php';
+                require_once 'config.inc.php';
                 self::$conexion = new PDO('mysql:host=' . NOMBRE_SERVIDOR . '; dbname=' . NOMBRE_DB, NOMBRE_USUARIO, PASSWORD);
                 self::$conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 self::$conexion->exec("SET CHARACTER SET utf8");

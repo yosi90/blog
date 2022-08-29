@@ -30,7 +30,6 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/blog/app/controlsesion.inc.php';
     <script type="text/javascript" src="<?php echo editor; ?>styles.js"></script>
     <script type="text/javascript" src="<?php echo editor; ?>/adapters/jquery.js"></script>
     <script defer type="text/javascript" src="<?php echo JS; ?>/fondo.js"></script>
-    <script defer type="text/javascript" src="<?php echo JS; ?>/alternarVistas.js"></script>
 </head>
 
 <body>

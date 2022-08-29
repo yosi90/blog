@@ -1,7 +1,11 @@
 <?php
-include_once 'app/Conexion.inc.php';
-include_once 'app/RepositorioUsuario.inc.php';
-include_once 'app/RepositorioRecuperarPassword.inc.php';
+require_once 'app/Conexion.inc.php';
+require_once 'app/RepositorioUsuario.inc.php';
+require_once 'app/RepositorioRecuperarPassword.inc.php';
+require_once 'src/Mailer.php';
+require_once 'src/Utils.php';
+
+use src\Utils;
 
 if (isset($_POST['correo'])) {
     conexion::abrir_conexion();
@@ -10,47 +14,19 @@ if (isset($_POST['correo'])) {
     if (isset($usuario)) {
         $peticion = RepositorioRecuperarPassword::existePeticion(conexion::obtener_conexion(), $usuario->getId());
         if ($peticion == 'bloqueado') {
-?>
-            <script>
-                alert("Demasiados intentos seguidos, inténtalo de nuevo mañana");
-                window.location.href = "<?php echo SERVIDOR ?>"
-            </script>
-        <?php
+            echo '<script>alert("Demasiados intentos seguidos, inténtalo de nuevo mañana");window.location.href = "' . SERVIDOR . '"</script>';
         } else if ($peticion != false) {
-        ?>
-            <script>
-                window.location.href = "<?php echo RUTA_URL_REC . '/' . $peticion->getUrl() ?>"
-            </script>
-        <?php
+            echo '<script>window.location.href = "' . RUTA_URL_REC . '/' . $peticion->getUrl() . '"</script>';
         } else {
-            $urlRandom = hash('sha256', TextoRandom(rand(0, 40)) . $usuario->getNombre());
+            $urlRandom = hash('sha256', Utils::TextoRandom(rand(0, 40)) . $usuario->getNombre());
             $peticion = RepositorioRecuperarPassword::generarPeticion(conexion::obtener_conexion(), $usuario->getId(), $urlRandom);
-            /*Enviamos correo electrónico*/
-        ?>
-            <script>
-                alert("Se ha enviado un correo electrónico con instrucciones a la dirección solicitada");
-                window.location.href = "<?php echo SERVIDOR ?>"
-            </script>
-        <?php
+            if ($peticion) {
+                new Mailer($email, $usuario->getNombre(), 'Enlace de recuperación de contraseña', $urlRandom, 'rec');
+                echo '<script>alert("Se ha enviado un correo electrónico con instrucciones a la dirección solicitada");window.location.href = "' . SERVIDOR . '"</script>';
+            } else
+                echo '<script>alert("Ha ocurrido un error al generar la petición");window.location.href = "' . SERVIDOR . '"</script>';
         }
-    } else {
-        ?>
-        <script>
-            alert("Ese correo no figura en la base de datos");
-            window.location.href = "<?php echo RUTA_RECUPERAR_PASS ?>"
-        </script>
-<?php
-    }
+    } else
+        echo '<script>alert("Ese correo no figura en la base de datos");window.location.href = "' . RUTA_RECUPERAR_PASS . '"</script>';
     conexion::cerrar_conexion();
-}
-
-function TextoRandom($longitud)
-{
-    $caracteres = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
-    $numero_caracteres = strlen($caracteres);
-    $string_aleatorio = '';
-    for ($i = 0; $i < $longitud; $i++) {
-        $string_aleatorio .= $caracteres[rand(0, $numero_caracteres - 1)];
-    }
-    return $string_aleatorio;
 }

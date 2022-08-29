@@ -14,8 +14,8 @@ class validadorEntradaNueva extends validadorEntrada
         $this->titulo = $titulo;
         if (!$this->variable_iniciada($titulo)) {
             return "Debes escribir un título";
-        } else if (strlen($titulo) > 80) {
-            return "El titulo no puede tener mas de 80 caracteres";
+        } else if (strlen($titulo) > 150) {
+            return "El titulo no puede tener mas de 150 caracteres";
         } else if (repositorioentrada::titulo_existe($conexion, $titulo)) {
             return "Titulo ya usado";
         }else if (repositorioentrada::urlCoincide($conexion, $url)) {

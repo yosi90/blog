@@ -74,7 +74,7 @@
                 } else {
                 ?>
                     <a href="<?php echo RUTA_LOGIN ?>" class="btn btn-outline-light me-2">Login</a>
-                    <a href="<?php echo RUTA_REGISTRO; ?>" class="btn btn-outline-light rosa">Registro</a>
+                    <a href="<?php echo RUTA_REGISTRO ?>" class="btn btn-outline-light rosa">Registro</a>
                 <?php
                 }
                 ?>

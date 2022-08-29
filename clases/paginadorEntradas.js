@@ -3,7 +3,6 @@ import paginador from './paginador.js';
 let tipo = $('#tipoE').val();
 let filtro = $('#filtro').val() ?? '';
 let paginator;
-
 jQuery(document).ready(function () {
     $.post("http://localhost:8080/blog/actions/getRecords.php", {
             type: tipo,
@@ -11,7 +10,7 @@ jQuery(document).ready(function () {
         },
         function (res, status) {
             var data = JSON.parse(res);
-            if (status === 'success' && filtro !== "" && data.length !== 0) {
+            if (status === 'success' && (tipo !== 'busqueda' || filtro !== "") && data.length !== 0) {
                 let url = window.location.href.split('/');
                 url = url.filter(n => n);
                 switch (tipo) {

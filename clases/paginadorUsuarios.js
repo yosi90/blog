@@ -31,7 +31,7 @@ jQuery(document).ready(function () {
 
 function cambioU(actual) {
     paginator.pagina = actual;
-    paginator.mostrarEntradas();
+    paginator.mostrarUsuarios();
 }
 window.cambioU = cambioU; //las funciones dentro de modulos solo son visibles en el modulo. por eso esta línea es requerida.
 

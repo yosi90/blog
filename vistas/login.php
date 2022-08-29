@@ -1,22 +1,30 @@
 <?php
-$titulo = "Login";
-include_once 'plantillas/documento-declaracion.inc.php';
-include_once 'app/validadorLogin.inc.php';
+
+$titulo = "Troubles Time - Login";
+require_once 'plantillas/documento-declaracion.inc.php';
+require_once 'app/validadorLogin.inc.php';
+require_once 'app/redireccion.inc.php';
 
 if (controlsesion::sesion_iniciada()) {
     redireccion::redirigir(SERVIDOR);
 }
 
-if (isset($_POST['login'])) {
+if (isset($_POST['enviar'])) {
+    require_once 'app/RepositorioActivarUsuario.inc.php';
+    require_once 'src/Mailer.php';
+    conexion::abrir_conexion();
+    $usuario = RepositorioUsuario::obtener_usuario_email(conexion::obtener_conexion(), $_POST['correo']);
+    $peticion = RepositorioActivarUsuario::peticionPorUsr(conexion::obtener_conexion(), $usuario->getId());
+    new Mailer($usuario->getEmail(), $usuario->getNombre(), 'Enlace de activación de cuenta', $peticion->getUrl(), 'act');
+    $_SESSION['usuario'] = $usuario;
+    echo '<script>window.location.href = "' . RUTA_REGISTRO_CORRECTO . '"</script>';
+    conexion::cerrar_conexion();
+} else if (isset($_POST['login'])) {
     conexion::abrir_conexion();
     $validador = new validadorLogin($_POST['correo'], $_POST['clave'], conexion::obtener_conexion());
     if ($validador->obtener_error() === '' && !is_null($validador->obtener_usuario())) {
         controlsesion::iniciar_sesion($validador->obtener_usuario()->getid(), $validador->obtener_usuario()->getnombre(), $validador->obtener_usuario()->getMod(), $validador->obtener_usuario()->getAdm());
-        ?>
-        <script>
-            window.location.href = "<?php echo SERVIDOR ?>"
-        </script>
-        <?php
+        echo '<script>window.location.href = "' . SERVIDOR . '"</script>';
     }
     conexion::cerrar_conexion();
 }

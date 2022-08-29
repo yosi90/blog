@@ -31,11 +31,11 @@ switch ($type) {
         break;
     case 'tabla':
         if (controlSesion::sesion_iniciada())
-            $records = repositorioEntrada::entradasUsuario(conexion::obtener_conexion(), $_SESSION['id_usuario'], 0, 0);
+            $records = repositorioEntrada::entradasUsuario(conexion::obtener_conexion(), $_SESSION['id_usuario'], 0, 1);
         break;
     case 'archivo':
         if (controlSesion::sesion_iniciada())
-            $records = repositorioEntrada::entradasUsuario(conexion::obtener_conexion(), $_SESSION['id_usuario'], 1, 0);
+            $records = repositorioEntrada::entradasUsuario(conexion::obtener_conexion(), $_SESSION['id_usuario'], 1, 1);
         break;
     default:
         break;

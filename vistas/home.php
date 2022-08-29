@@ -66,6 +66,7 @@ include_once 'plantillas/documento-declaracion.inc.php';
         </div>
     </div>
 </div>
+<script type="text/javascript" src="<?php echo JS; ?>/alternarVistas.js"></script>
 <input id="tipoE" type="hidden" value="reciente">
 <script type="module" src="<?php echo CLASES; ?>paginadorEntradas.js"></script>
 <?php

@@ -14,8 +14,7 @@ require_once 'app/controlsesion.inc.php';
 //Primero destruimos variables de sesión que no deben existir fuera de su entorno
 try {
     unset($_SESSION['entradaPrevia']);
-} catch (PDOException $ex) {
-}
+} catch (PDOException $ex){}
 
 $componentes_url = parse_url(urldecode($_SERVER['REQUEST_URI']));
 $ruta = $componentes_url['path'];
@@ -54,8 +53,14 @@ if ($partes_ruta[0] == 'blog') {
             case 'registro':
                 $ruta_elegida = 'vistas/registro.php';
                 break;
+            case 'registro-correcto':
+                $ruta_elegida = 'vistas/registro-correcto.php';
+                break;
             case 'recuperar-password':
                 $ruta_elegida = 'vistas/recuperar-password.php';
+                break;
+            case 'url-act':
+                $ruta_elegida = 'scripts/url-act.php';
                 break;
             case 'url-usr':
                 $ruta_elegida = 'scripts/url-usr.php';
@@ -166,6 +171,9 @@ if ($partes_ruta[0] == 'blog') {
         if ($partes_ruta[1] == 'rec-pass') {
             $url_unica = $partes_ruta[2];
             $ruta_elegida = 'vistas/actPass.php';
+        } else if ($partes_ruta[1] == 'act-acc') {
+            $url_unica = $partes_ruta[2];
+            $ruta_elegida = 'scripts/activar-cuenta.php';
         }
     }
 }

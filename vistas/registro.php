@@ -1,19 +1,37 @@
 <?php
-include_once 'plantillas/documento-declaracion.inc.php';
-include_once 'app/validadorRegistro.inc.php';
-include_once 'app/usuario.inc.php';
+require_once 'plantillas/documento-declaracion.inc.php';
+require_once 'app/validadorRegistro.inc.php';
+require_once 'app/usuario.inc.php';
+require_once 'app/RepositorioActivarUsuario.inc.php';
+require_once 'src/Mailer.php';
+require_once 'src/Utils.php';
+
+use src\Utils;
+
 if (isset($_POST['submit'])) {
     conexion::abrir_conexion();
     $validador = new validadorRegistro($_POST['nombre'], $_POST['email'], $_POST['clave1'], $_POST['clave2'], conexion::obtener_conexion());
     if ($validador->registro_valido()) {
         $usuario = new usuario('', $validador->obtener_nombre(), $validador->obtener_email(), password_hash($validador->obtener_clave(), PASSWORD_DEFAULT), '', '', 0, 0);
-        $usuario_insertado = RepositorioUsuario::insertar_usuario(conexion::obtener_conexion(), $usuario);
-        if ($usuario_insertado) {
-?>
-            <script>
-                window.location.href = "<?php echo RUTA_LOGIN ?>"
-            </script>
-<?php
+        $exito = RepositorioUsuario::insertar_usuario(conexion::obtener_conexion(), $usuario);
+        if ($exito) {
+            $usuario = RepositorioUsuario::obtener_usuario_email(conexion::obtener_conexion(), $usuario->getEmail());
+            $peticion = RepositorioActivarUsuario::existePeticion(conexion::obtener_conexion(), $usuario->getId());
+            if ($peticion) {
+                $peticion = RepositorioActivarUsuario::peticionPorUsr(conexion::obtener_conexion(), $usuario->getId());
+                new Mailer($usuario->getEmail(), $usuario->getNombre(), 'Enlace de activación de cuenta', $peticion->getUrl(), 'act');
+                $_SESSION['usuario'] = $usuario;
+                echo '<script>window.location.href = "' . RUTA_REGISTRO_CORRECTO . '"</script>';
+            } else {
+                $urlRandom = hash('sha256', Utils::TextoRandom(rand(0, 40)) . $usuario->getNombre());
+                $peticion = RepositorioActivarUsuario::generarPeticion(conexion::obtener_conexion(), $usuario->getId(), $urlRandom);
+                if ($peticion) {
+                    new Mailer($usuario->getEmail(), $usuario->getNombre(), 'Enlace de activación de cuenta', $urlRandom, 'act');
+                    $_SESSION['usuario'] = $usuario;
+                    echo '<script>window.location.href = "' . RUTA_REGISTRO_CORRECTO . '"</script>';
+                } else
+                    echo '<script>alert("Ha ocurrido un error al generar la activación");window.location.href = "' . SERVIDOR . '"</script>';
+            }
         }
     }
     conexion::cerrar_conexion();

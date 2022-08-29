@@ -33,6 +33,7 @@ define("RUTA_GESTOR_COMENTARIOS_USR", RUTA_GESTOR_ADM."/comentarios-usuario");
 define("RUTA_RECUPERAR_PASS", SERVIDOR."/recuperar-password");
 define("RUTA_URL_USR", SERVIDOR."/url-usr");
 define("RUTA_URL_REC", SERVIDOR."/rec-pass");
+define("RUTA_URL_ACT", SERVIDOR."/act-acc");
 define("RUTA_BUSQUEDA", SERVIDOR."/buscar");
 
 define("PLANTILLAS", SERVIDOR . "/plantillas/");

@@ -13,7 +13,7 @@ include_once 'plantillas/documento-declaracion.inc.php';
                 <div class="card-body text-white d-flex flex-row flex-wrap">
                     <form class="d-flex flex-row flex-wrap w-100" role="form" method="post" action="<?php echo RUTA_URL_USR ?>">
                         <input type="email" name="correo" id="correo" class="textbox form-control mt-1" placeholder="Introduce el Email con el que te registraste" required="true" autofocus="true">
-                        <button type="submit" name="login" id="login" class="btn btn-outline-light form-control mt-3 flex-fill">Siguiente</button>
+                        <button type="submit" name="login" id="login" class="btn btn-outline-light form-control mt-3 flex-fill">Recuperar</button>
                     </form>
                 </div>
             </div>

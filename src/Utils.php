@@ -21,4 +21,15 @@ class Utils
 
         return $content != strip_tags($content);
     }
+
+    public static function TextoRandom($longitud)
+    {
+        $caracteres = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+        $numero_caracteres = strlen($caracteres);
+        $string_aleatorio = '';
+        for ($i = 0; $i < $longitud; $i++) {
+            $string_aleatorio .= $caracteres[rand(0, $numero_caracteres - 1)];
+        }
+        return $string_aleatorio;
+    }
 }

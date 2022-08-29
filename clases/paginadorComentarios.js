@@ -32,7 +32,7 @@ jQuery(document).ready(function () {
 
 function cambioC(actual) {
     paginator.pagina = actual;
-    paginator.mostrarEntradas();
+    paginator.mostrarComentarios();
 }
 window.cambioC = cambioC; //las funciones dentro de modulos solo son visibles en el modulo. por eso esta línea es requerida.
 

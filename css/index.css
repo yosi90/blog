@@ -328,8 +328,8 @@ body {
 }
 
 .tabla thead {
-  border-bottom-style: solid;
-  border-bottom-color: rgb(255, 255, 255);
+  border-bottom-style: solid !important;
+  border-bottom-color: rgb(255, 255, 255) !important;
 }
 
 .tabla td {
@@ -353,6 +353,10 @@ div.cke {
   color: rgb(255, 255, 255);
   font-weight: bold;
   min-width: 100.55px;
+}
+
+.btnmimic:hover {
+  transform: scale(110%);
 }
 
 .red {
