@@ -296,9 +296,9 @@ body {
   background-color: rgba(55, 60, 65, 1) !important;
 }
 
-.bg-gray{
+.bg-gray {
   --bs-bg-opacity: 1;
-  background-color: rgba(96, 99, 103, 1) !important; 
+  background-color: rgba(96, 99, 103, 1) !important;
 }
 
 .bs-s {
@@ -386,4 +386,19 @@ div.cke {
 .navigation a:hover {
   background-color: lightgrey;
   color: black !important;
+}
+
+.active {
+  background-color: rgba(55, 60, 65, 1) !important;
+}
+
+#check-ok {
+  position: absolute;
+  top: -70px;
+  left: -70px;
+
+  max-width: 20vw;
+  max-height: 20vw;
+
+  transform: rotate(-20deg);
 }
