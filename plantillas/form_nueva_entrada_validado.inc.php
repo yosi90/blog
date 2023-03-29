@@ -16,7 +16,7 @@
             <button type="submit" class="btn btn-outline-light flex-fill" name="submit">Publicar entrada</button>
         </div>
         <div class="col-md-2 d-flex pe-0">
-            <button type="reset" class="btn btn-outline-light flex-fill rosa">Reiniciar</button>
+            <button type="reset" class="btn btn-outline-light flex-fill bg-rosa">Reiniciar</button>
         </div>
     </div>
 </div>

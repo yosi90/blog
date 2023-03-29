@@ -5,7 +5,7 @@ let filtro = $('#filtro').val() ?? '';
 let paginator;
 
 jQuery(document).ready(function () {
-    $.post("http://localhost:8080/blog/actions/getRecords.php", {
+    $.post("http://localhost/blog/actions/getRecords.php", {
             type: tipo,
             filter: filtro
         },
@@ -118,7 +118,7 @@ class paginadorUsuarios extends paginador {
 }
 
 function paths(ruta, callback) {
-    $.post("http://localhost:8080/blog/actions/getPaths.php", {
+    $.post("http://localhost/blog/actions/getPaths.php", {
         type: ruta
     }, function (data, status) {
         if (status === 'success')

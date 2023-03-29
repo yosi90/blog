@@ -42,11 +42,11 @@
                                     <?php
                                     if ($entrada_actual->getActiva() == 0) {
                                     ?>
-                                        <div class="btnmimic red mx-1"><strong>Borrador</strong></div>
+                                        <div class="btnmimic bg-red mx-1"><strong>Borrador</strong></div>
                                     <?php
                                     } else {
                                     ?>
-                                        <div class="btnmimic green mx-1"><strong>Activa</strong></div>
+                                        <div class="btnmimic bg-green mx-1"><strong>Activa</strong></div>
                                     <?php
                                     }
                                     ?>

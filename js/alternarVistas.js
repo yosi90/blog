@@ -1,7 +1,7 @@
 var boton;
 
 window.onload = function () {
-    if (document.URL == "http://localhost:8080/blog/") {
+    if (document.URL == "http://localhost/blog/") {
         boton = document.getElementById('vistas');
         crearSVG();
     }

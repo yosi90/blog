@@ -20,10 +20,10 @@ class Mailer
         $mail->Subject = $asunto;
         switch ($tipo) {
             case 'act':
-                $mail->Body = 'http://localhost:8080/blog/act-acc/' . $url;
+                $mail->Body = 'http://localhost/blog/act-acc/' . $url;
                 break;
             case 'rec':
-                $mail->Body = 'http://localhost:8080/blog/rec-pass/' . $url;
+                $mail->Body = 'http://localhost/blog/rec-pass/' . $url;
                 break;
             default:
                 break;

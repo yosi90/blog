@@ -1,4 +1,4 @@
-<button class="btn btn-outline-light flex-fill rosa m-3" type="button" name="desplegarComentarios" id="desplegarComentarios" data-bs-toggle="collapse" data-bs-target="#comentarios" aria-expanded="false" aria-controls="comentarios">
+<button class="btn btn-outline-light flex-fill bg-rosa m-3" type="button" name="desplegarComentarios" id="desplegarComentarios" data-bs-toggle="collapse" data-bs-target="#comentarios" aria-expanded="false" aria-controls="comentarios">
     <i class="fas fa-comments fa-lg"></i>&nbsp;Comentarios&nbsp;(<?php echo count($comentarios) ?>)
 </button>
 <div id="comentarios" class="collapse" >

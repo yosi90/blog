@@ -25,7 +25,7 @@ conexion::cerrar_conexion();
         <div class="col-md-12">
             <div class="card mt-5">
                 <div class="card-header text-white bg-dark m-5">
-                    <h1 class="text-center fw-bold">
+                    <h1 class="text-center fw-bold p-4 mb-0">
                         <script defer src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
                         <lottie-player id="check-ok" src="<?php echo IMG ?>/check-ok.json" background="transparent" speed="0.7" style="width: 300px; height: 300px;" autoplay></lottie-player>
                         Registro correcto

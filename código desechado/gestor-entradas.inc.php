@@ -6,7 +6,7 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <a href="<?php echo RUTA_NUEVA_ENTRADA; ?>" class="btn btn-outline-light rosa d-flex flex-fill justify-content-center" id="b_ent">Nueva entrada</a>
+            <a href="<?php echo RUTA_NUEVA_ENTRADA; ?>" class="btn btn-outline-light bg-rosa d-flex flex-fill justify-content-center" id="b_ent">Nueva entrada</a>
         </div>
     </div>
     <div class="row">

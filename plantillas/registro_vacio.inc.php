@@ -3,4 +3,4 @@
 <input type="password" class="form-control textbox mt-1" placeholder="Contraseña" maxlength="25" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="La contraseña debe contener al menos un número, una letra minúscula, una letra mayúscula y al menos 8 caracteres." required="true" name="clave1">
 <input type="password" class="form-control textbox mt-1" placeholder="Repite la contraseña" maxlength="25" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="La contraseña debe contener al menos un número, una letra minúscula, una letra mayúscula y al menos 8 caracteres." required="true" name="clave2">
 <button type="submit" class="btn btn-outline-light me-2 mt-3 flex-fill" name="submit">Aceptar</button>
-<button type="reset" class="btn btn-outline-light rosa mt-3">Limpiar formulario</button>
+<button type="reset" class="btn btn-outline-light bg-rosa mt-3">Limpiar formulario</button>

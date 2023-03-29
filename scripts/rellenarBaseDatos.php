@@ -6,7 +6,7 @@ include_once 'app/comentario.inc.php';
 include_once 'app/usuario.inc.php';
 include_once 'app/RepositorioUsuario.inc.php';
 include_once 'app/RepositorioEntrada.inc.php';
-include_once 'app/RepositorioComentarios.inc.php';
+include_once 'app/RepositorioComentario.inc.php';
 
 $cantUsers = 100;
 $cantEntradas = 300;
@@ -32,7 +32,7 @@ for ($comentarios = 0; $comentarios < $cantCometarios; $comentarios++) {
     $texto = TextoComentarios(rand(20, 1000));
     $entrada = rand(1, $cantEntradas);
     $autor = rand(1, $cantUsers);
-    repositoriocomentarios::insertar_comentario(conexion::obtener_conexion(), $texto, $autor, $entrada);
+    RepositorioComentario::insertar_comentario(conexion::obtener_conexion(), $texto, $autor, $entrada);
 }
 ?>
 <script>window.location.href = "<?php echo RUTA_ENTRADA . '/' . $entrada->getUrl(); ?>"</script>

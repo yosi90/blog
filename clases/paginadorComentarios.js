@@ -5,13 +5,12 @@ let filtro = $('#filtro').val() ?? '';
 let paginator;
 
 jQuery(document).ready(function () {
-    $.post("http://localhost:8080/blog/actions/getRecords.php", {
+    $.post("http://localhost/blog/actions/getRecords.php", {
             type: tipo,
             filter: filtro
         },
         function (res, status) {
             var data = JSON.parse(res);
-            debugger;
             if (status === 'success' && filtro !== "" && data.length !== 0) {
                 let url = window.location.href.split('/');
                 url = url.filter(n => n);
@@ -121,7 +120,7 @@ class paginadorComentarios extends paginador {
 }
 
 function paths(ruta, callback) {
-    $.post("http://localhost:8080/blog/actions/getPaths.php", {
+    $.post("http://localhost/blog/actions/getPaths.php", {
         type: ruta
     }, function (data, status) {
         if (status === 'success')

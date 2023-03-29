@@ -4,7 +4,7 @@ let tipo = $('#tipoE').val();
 let filtro = $('#filtro').val() ?? '';
 let paginator;
 jQuery(document).ready(function () {
-    $.post("http://localhost:8080/blog/actions/getRecords.php", {
+    $.post("http://localhost/blog/actions/getRecords.php", {
             type: tipo,
             filter: filtro
         },
@@ -106,6 +106,7 @@ class paginadorEntradas extends paginador {
             enlace.classList.add(className);
         });
         enlace.setAttribute("role", "button");
+        debugger;
         enlace.setAttribute("href", '/blog/entrada/' + element.url); //URL
         cabeceraCarta.appendChild(enlace);
         let container = document.createElement("div");
@@ -136,6 +137,8 @@ class paginadorEntradas extends paginador {
         let tr = document.createElement("tr");
         let titulo = document.createElement("td");
         titulo.title = element.titulo;
+        titulo.setAttribute('scope', 'row');
+        titulo.setAttribute('data-label', 'Título');
         let enlaceTitulo = document.createElement("a");
         ['text-decoration-none', 'text-white'].forEach(className => {
             enlaceTitulo.classList.add(className);
@@ -145,13 +148,14 @@ class paginadorEntradas extends paginador {
         });
         titulo.appendChild(enlaceTitulo);
         let parrafoTitulo = document.createElement("p");
-        ['lt-linea-200', 'mb-0', 'text-start'].forEach(className => {
+        ['ms-md-0', 'ms-1', 'mb-0', 'w-100'].forEach(className => {
             parrafoTitulo.classList.add(className);
         });
         parrafoTitulo.innerText = element.titulo;
         enlaceTitulo.appendChild(parrafoTitulo);
         tr.appendChild(titulo);
         let fecha = document.createElement("td");
+        fecha.setAttribute('data-label', 'Fecha');
         fecha.innerText = (new Date(element.fecha)).toLocaleDateString('es-es', {
             day: '2-digit',
             month: 'long',
@@ -159,6 +163,7 @@ class paginadorEntradas extends paginador {
         });
         tr.appendChild(fecha);
         let activa = document.createElement("td");
+        activa.setAttribute('data-label', 'Estado');
         tr.appendChild(activa);
         let formActivar = document.createElement("form");
         formActivar.method = "POST";
@@ -177,11 +182,11 @@ class paginadorEntradas extends paginador {
         activo.name = "activo";
         if (element.activa) {
             submitActiva.value = "Publicada";
-            submitActiva.classList.add("green");
+            submitActiva.classList.add("bg-green");
             activo.value = "0";
         } else {
             submitActiva.value = "Borrador";
-            submitActiva.classList.add("red");
+            submitActiva.classList.add("bg-red");
             activo.value = "1";
         }
         let idEntrada = document.createElement("input");
@@ -197,20 +202,25 @@ class paginadorEntradas extends paginador {
         formActivar.appendChild(idEntrada);
         formActivar.appendChild(idAutor);
         let cantComent = document.createElement("td");
+        cantComent.setAttribute('data-label', 'Comentarios');
         cantComent.innerText = element.cantComentarios;
         tr.appendChild(cantComent);
         let botonera = document.createElement("td");
-        botonera.classList.add("d-flex");
-        botonera.classList.add("justify-content-center");
+        botonera.setAttribute('data-label', 'Acciones');
         tr.appendChild(botonera);
+        let contBotonera = document.createElement("div");
+        ['d-flex', 'justify-content-lg-center', 'mt-xl-0', 'mt-2'].forEach(className => {
+            contBotonera.classList.add(className);
+        });
+        botonera.appendChild(contBotonera);
         let formEditar = document.createElement("form");
         formEditar.method = "POST";
         paths('editar', function (data) {
             formEditar.action = data;
         });
-        botonera.appendChild(formEditar);
+        contBotonera.appendChild(formEditar);
         let submitEditar = document.createElement("button");
-        ['btn', 'btn-outline-light', 'mx-1'].forEach(className => {
+        ['btn', 'btn-outline-light', 'mx-md-1'].forEach(className => {
             submitEditar.classList.add(className);
         });
         submitEditar.type = "submit";
@@ -228,9 +238,9 @@ class paginadorEntradas extends paginador {
         paths('archivar', function (data) {
             formArchivar.action = data;
         });
-        botonera.appendChild(formArchivar);
+        contBotonera.appendChild(formArchivar);
         let submitArchivar = document.createElement("button");
-        ['btn', 'btn-outline-light', 'mx-1'].forEach(className => {
+        ['btn', 'btn-outline-light', 'mx-md-1'].forEach(className => {
             submitArchivar.classList.add(className);
         });
         submitArchivar.type = "submit";
@@ -253,7 +263,7 @@ class paginadorEntradas extends paginador {
         archivo.name = "archivo";
         archivo.value = "1";
         formArchivar.appendChild(archivo);
-        $.post("http://localhost:8080/blog/actions/getSesion.php", {
+        $.post("http://localhost/blog/actions/getSesion.php", {
                 type: 'priv'
             },
             function (res, status) {
@@ -264,11 +274,11 @@ class paginadorEntradas extends paginador {
                     paths('bloquear', function (data) {
                         formBloquear.action = data;
                     });
-                    botonera.appendChild(formBloquear);
+                    contBotonera.appendChild(formBloquear);
                     let submitBloquear = document.createElement("input");
                     submitBloquear.type = "submit";
                     submitBloquear.name = "bloquear";
-                    ['btnmimic', 'mx-1'].forEach(className => {
+                    ['btnmimic', 'mx-md-1'].forEach(className => {
                         submitBloquear.classList.add(className);
                     });
                     let bloqueo = document.createElement("input");
@@ -278,12 +288,12 @@ class paginadorEntradas extends paginador {
                         submitBloquear.value = "Bloqueada";
                         submitBloquear.title = "Esta entrada incumple las normas de la comunidad.";
                         /*Rellenar aquí cuales fueron las faltas.*/
-                        submitBloquear.classList.add("red");
+                        submitBloquear.classList.add("bg-red");
                         bloqueo.value = "0";
                     } else {
                         submitBloquear.value = "Activa";
                         submitBloquear.title = "Esta entrada cumple con las normas de la comunidad.";
-                        submitBloquear.classList.add("green");
+                        submitBloquear.classList.add("bg-green");
                         bloqueo.value = "1";
                     }
                     let idEntrada4 = document.createElement("input");
@@ -306,12 +316,12 @@ class paginadorEntradas extends paginador {
                             formBorrar.action = data;
                         });
                         formBorrar.setAttribute('onsubmit', "return confirm('Confirma que deseas borrar esta entrada');");
-                        botonera.appendChild(formBorrar);
+                        contBotonera.appendChild(formBorrar);
                         let submitBorrar = document.createElement("button");
                         submitBorrar.type = "submit";
                         submitBorrar.name = "delete";
                         submitBorrar.innerText = "Borrar";
-                        ['btn', 'btn-outline-light', 'mx-1'].forEach(className => {
+                        ['btn', 'btn-outline-light', 'mx-md-1'].forEach(className => {
                             submitBorrar.classList.add(className);
                         });
                         let idEntrada5 = document.createElement("input");
@@ -377,7 +387,7 @@ class paginadorEntradas extends paginador {
 }
 
 function paths(ruta, callback) {
-    $.post("http://localhost:8080/blog/actions/getPaths.php", {
+    $.post("http://localhost/blog/actions/getPaths.php", {
         type: ruta
     }, function (data, status) {
         if (status === 'success')

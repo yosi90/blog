@@ -6,29 +6,19 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <a href="<?php echo RUTA_NUEVA_ENTRADA; ?>" class="btn btn-outline-light rosa d-flex flex-fill justify-content-center" id="b_ent">Nueva entrada</a>
+            <a href="<?php echo RUTA_NUEVA_ENTRADA; ?>" class="btn btn-outline-light bg-rosa d-flex flex-fill justify-content-center" id="b_ent">Nueva entrada</a>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12 translucido">
-            <table class="table table-striped tabla bg-dark rounded mt-1 mb-0">
+            <table class="table table-striped tabla rounded mt-1 mb-0">
                 <thead>
                     <tr>
-                        <th>
-                            Título
-                        </th>
-                        <th>
-                            Fecha
-                        </th>
-                        <th>
-                            Estado
-                        </th>
-                        <th>
-                            Comentarios
-                        </th>
-                        <th class="text-center">
-                            Acciones
-                        </th>
+                        <th scope="col">Título</th>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col">Comentarios</th>
+                        <th scope="col" class="text-center">Acciones</th>
                     </tr>
                 </thead>
                 <tbody id="contPaginacionE">

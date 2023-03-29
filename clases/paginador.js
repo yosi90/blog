@@ -22,32 +22,27 @@ export class paginador {
         paginador.id = "navigation";
         strong.appendChild(paginador);
         let cantPag = Math.ceil(this.lista.length / this.filas);
-        if (cantPag > 8)
-            paginador.appendChild(this.crearEnlace('<', this.pagina != 1));
-        paginador.appendChild(this.crearEnlace(1, this.pagina != 1));
-        var start, end;
-        if (this.pagina < 5 && cantPag > 8) {
-            start = 2;
-            end = 6;
-        } else if (this.pagina + 3 >= cantPag && cantPag > 8) {
-            start = cantPag - 4;
-            end = cantPag;
-        } else if (cantPag <= 8) {
-            start = 2;
-            end = cantPag;
-        } else {
-            start = this.pagina - 2;
-            end = this.pagina + 3;
+        if (cantPag > 8 && this.pagina != 1) {
+            if (this.pagina > 3)
+                paginador.appendChild(this.crearEnlace('<<'));
+            paginador.appendChild(this.crearEnlace('<'));
         }
-        if (cantPag > 8 && this.pagina >= 5)
-            paginador.appendChild(this.crearEnlace('...', false));
-        for (var i = start; i < end; i++)
+        var start = 1, end = cantPag;
+        if (this.pagina < 4 && cantPag > 8)
+            end = 4;
+        else if (this.pagina + 2 >= cantPag && cantPag > 8)
+            start = cantPag - 3;
+        else if (cantPag > 8) {
+            start = this.pagina - 2;
+            end = this.pagina + 2;
+        }
+        for (var i = start; i <= end; i++)
             paginador.appendChild(this.crearEnlace(i, this.pagina != i));
-        if (cantPag > 8 && this.pagina < (cantPag - 3))
-            paginador.appendChild(this.crearEnlace('...', false));
-        paginador.appendChild(this.crearEnlace(cantPag, this.pagina != cantPag));
-        if (cantPag > 8)
-            paginador.appendChild(this.crearEnlace('>', this.pagina != cantPag));
+        if (cantPag > 8 && this.pagina != cantPag) {
+            paginador.appendChild(this.crearEnlace('>'));
+            if (this.pagina < cantPag - 2)
+                paginador.appendChild(this.crearEnlace('>>'));
+        }
     }
 
     crearEnlace(pagina, darPropiedades = true) {
@@ -55,25 +50,30 @@ export class paginador {
         ['rounded', 'btn', 'm-1', 'px-2', 'py-1'].forEach(className => {
             enlace.classList.add(className);
         });
-        if (darPropiedades && pagina != "<" && pagina != ">") {
-            enlace.href = "#";
-            enlace.setAttribute('onclick', this.funcCambio + '(' + pagina + ');');
-            ['rosa', 'text-white'].forEach(className => {
-                enlace.classList.add(className);
-            });
+        if (pagina === "<<") {
+            enlace = this.darAtributos(enlace, 1);
+        } else if (pagina === ">>") {
+            enlace = this.darAtributos(enlace, Math.ceil(this.lista.length / this.filas));
+        } else if (darPropiedades && pagina != "<" && pagina != ">") {
+            enlace = this.darAtributos(enlace, pagina);
         } else if (darPropiedades) {
-            enlace.href = "#";
+            enlace = this.darAtributos(enlace);
             enlace.setAttribute('onclick', this.funcCambio + '(' + (pagina == '<' ? (this.pagina - 1) : (this.pagina + 1)) + ');');
-            ['rosa', 'text-white'].forEach(className => {
+        } else
+            ['d-inline-flex', 'justify-content-center', 'align-items-center', 'bg-rosa-fuerte', 'border', 'border-white', 'text-white'].forEach(className => {
                 enlace.classList.add(className);
             });
-        } else if (pagina != "<" && pagina != ">" && pagina != "...")
-            ['rosaFuerte', 'bs-s', 'bc-white', 'b-2', 'bw-2', 'text-white'].forEach(className => {
-                enlace.classList.add(className);
-            });
-        else
-            enlace.classList.add('deshabilitado');
         enlace.innerHTML = pagina;
+        return enlace;
+    }
+
+    darAtributos(enlace, pagina, click = true) {
+        enlace.href = "#";
+        if (click)
+            enlace.setAttribute('onclick', this.funcCambio + '(' + pagina + ');');
+        ['d-inline-flex', 'justify-content-center', 'align-items-center', 'bg-rosa', 'text-white', 'fw-bolder'].forEach(className => {
+            enlace.classList.add(className);
+        });
         return enlace;
     }
 }

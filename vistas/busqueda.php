@@ -48,7 +48,7 @@ if (isset($_POST['texto']) && !empty($_POST['texto'])) {
                                 <input type="checkbox" id="chbAutores" name="autores" onclick="toggle('chbAutores', 'autores')" <?php echo $autores !== 0 ? 'checked' : '' ?>>
                                 <span class="slider round"></span>
                             </label>
-                            <input type="submit" name="buscar" class="btn btn-outline-light rosa buscar my-1" value="Buscar">
+                            <input type="submit" name="buscar" class="btn btn-outline-light bg-rosa buscar my-1" value="Buscar">
                         </div>
                     </form>
                 </div>

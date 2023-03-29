@@ -14,7 +14,7 @@
             <button type="submit" class="btn btn-outline-light flex-fill" name="submit">Editar entrada</button>
         </div>
         <div class="col-md-2 d-flex pe-0">
-            <a class="btn btn-outline-light flex-fill rosa" role="button" href="<?php echo RUTA_GESTOR_ENTRADAS ?>">Cancelar</a>
+            <a class="btn btn-outline-light flex-fill bg-rosa" role="button" href="<?php echo RUTA_GESTOR_ENTRADAS ?>">Cancelar</a>
         </div>
     </div>
 </div>

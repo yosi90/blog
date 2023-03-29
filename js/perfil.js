@@ -11,7 +11,6 @@ $('[id^="bPerfil"]').click(function () {
     if (!this.classList.contains('active')) {
         e = document.querySelector('.active');
         e.classList.remove('active');
-        debugger;
         switch (e.id) {
             case 'bPerfil1':
                 $('#public').toggleClass('d-flex');

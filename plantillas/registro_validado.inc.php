@@ -15,4 +15,4 @@ $validador->mostrar_error_clave1();
 $validador->mostrar_error_clave2();
 ?>
 <button type="submit" class="btn btn-outline-light me-2 mt-3 flex-fill" name="submit">Aceptar</button>
-<button type="reset" class="btn btn-outline-light rosa mt-3">Limpiar formulario</button>
+<button type="reset" class="btn btn-outline-light bg-rosa mt-3">Limpiar formulario</button>

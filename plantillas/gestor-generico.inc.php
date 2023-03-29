@@ -1,11 +1,11 @@
 <div class="container">
-    <div class="row">
+    <div id="jumbotron" class="row">
         <div class="col-12">
             <div class="d-flex justify-content-center p-1 bg-dark translucido text-white jumbo fz-jumbo my-1">General</div>
         </div>
     </div>
     <div class="row text-center">
-        <div class="col-md-4 gg-elemento" id="g-e">
+        <div id="g-e" class="col-lg-4 gg-elemento">
             <div class="card">
                 <div class="card-header bg-dark text-white">
                     <h2><i class="far fa-clipboard"></i></h2>
@@ -20,7 +20,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4 gg-elemento" id="g-c">
+        <div id="g-c" class="col-lg-4 mt-lg-0 mt-3 gg-elemento">
             <div class="card">
                 <div class="card-header bg-dark text-white">
                     <h2><i class="fas fa-comments"></i></h2>
@@ -32,7 +32,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4 gg-elemento" id="g-f">
+        <div id="g-f" class="col-lg-4 my-lg-0 my-3 gg-elemento">
             <div class="card">
                 <div class="card-header bg-dark text-white">
                     <h2><i class="fas fa-star"></i></h2>

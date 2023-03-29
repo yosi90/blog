@@ -1,0 +1,165 @@
+@import 'variables';
+@import 'yosiFramework';
+@import 'tablaResponsive';
+@import 'circular-FA';
+@import 'imports';
+@import 'material';
+@import 'sidebar';
+
+body {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    font-family: 'Montserrat Alternates', sans-serif;
+    overflow: overlay;
+}
+
+#sakura {
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 0;
+    margin: 0;
+}
+
+#navegador {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 100;
+}
+
+.jumbo {
+    font-family: 'Redressed', cursive;
+    border-top-left-radius: 50%;
+    border-top-right-radius: 50%;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.pater {
+    position: relative;
+    min-height: calc(100vh - 142px);
+    /*72px navbar + 70px footer*/
+    margin-top: 72px;
+    z-index: 10;
+}
+
+.row>.card {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.card {
+    border: none;
+    opacity: 0.9;
+}
+
+.card-header {
+    word-wrap: anywhere;
+}
+
+.btn-primary {
+    border-color: transparent !important;
+}
+
+.piePagina {
+    flex-flow: column;
+    flex: 0 1 50px;
+    margin-top: 10px;
+    padding: 0.5em;
+    color: whitesmoke;
+    font-weight: bold;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    opacity: 96%;
+    margin: 0 10vw;
+}
+
+.piePagina .social-icons {
+    text-align: right;
+    margin-top: 6px;
+}
+
+.piePagina .copyrightText {
+    text-align: left;
+    margin-top: 14px;
+    margin-left: 15px;
+}
+
+.translucido {
+    opacity: 0.9;
+}
+
+.tabla {
+
+    thead {
+        border-bottom-style: solid !important;
+        border-bottom-color: rgb(255, 255, 255) !important;
+    }
+
+    th,
+    td {
+        text-align: center;
+        color: rgb(255, 255, 255) !important;
+    }
+}
+
+.tabla td {
+    background-color: rgba(35, 40, 45, 1) !important;
+}
+
+tr td {
+    vertical-align: middle;
+}
+
+div.cke {
+    flex: 1 1 auto !important;
+    border-radius: .25rem;
+}
+
+.btnmimic:hover {
+    transform: scale(110%);
+}
+
+.navigation a {
+    font-size: small;
+    width: 30px;
+    height: 25px;
+}
+
+.navigation a:hover {
+    background-color: lightgrey;
+    color: black !important;
+}
+
+.active {
+    background-color: $gris !important;
+}
+
+#check-ok {
+    position: absolute;
+    top: -70px;
+    left: -10px;
+
+    width: 400px;
+    height: 400px;
+
+    transform: rotate(-20deg);
+}
+
+.p-control li {
+    border-radius: 3px;
+    --bs-bg-opacity: 1;
+    color: rgb(255, 255, 255);
+    background-color: rgba(35, 40, 45, 1);
+    padding: .5rem !important;
+    margin: 1rem !important;
+}
+
+.p-control>a {
+    text-decoration: none;
+}
+
+@import 'mediaQ';

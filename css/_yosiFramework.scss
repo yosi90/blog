@@ -1,0 +1,193 @@
+/*Fuentes   Fuentes   Fuentes   Fuentes   Fuentes   Fuentes   Fuentes   Fuentes   Fuentes   Fuentes   Fuentes   Fuentes   Fuentes   Fuentes   Fuentes   Fuentes   Fuentes   Fuentes   Fuentes   Fuentes   Fuentes   Fuentes   */
+
+.fz-jumbo {
+    font-size: calc(2vw + 30px);
+}
+
+.fz-titulo {
+    font-size: calc(1vw + 20px);
+}
+
+.fz-subtitulo {
+    font-size: calc(.6vw + 10px);
+}
+
+.fz-texto {
+    font-size: calc(.4vw + 10px);
+}
+
+.fz-sm-texto {
+    font-size: calc(.2vw + 10px);
+}
+
+.z-titulo {
+    width: calc(1.8vw + 20px);
+    height: calc(1.8vw + 20px);
+}
+
+.z-subtitulo {
+    width: calc(.8vw + 15px);
+    height: calc(.8vw + 15px);
+}
+
+/*Formateo de parrafos   Formateo de parrafos   Formateo de parrafos   Formateo de parrafos   Formateo de parrafos   Formateo de parrafos   Formateo de parrafos   Formateo de parrafos   Formateo de parrafos   Formateo de parrafos   Formateo de parrafos*/
+
+.lt-10,
+.lt-3,
+.lt-2 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}
+
+.lt-10 {
+    -webkit-line-clamp: 10;
+    line-clamp: 10;
+}
+
+.lt-3 {
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+}
+
+.lt-2 {
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+}
+
+@mixin ltBase {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.lt-1 {
+    @include ltBase;
+    -webkit-line-clamp: 2;
+}
+
+.lt-linea-200 {
+    @include ltBase;
+    max-width: 350px;
+}
+
+.lt-linea-100 {
+    @include ltBase;
+    max-width: 175px;
+}
+
+/*Colores   Colores   Colores   Colores   Colores   Colores   Colores   Colores   Colores   Colores   Colores   Colores   Colores   Colores   Colores   Colores   Colores   Colores   Colores   Colores   Colores   Colores   Colores   Colores   Colores   Colores*/
+
+/* ---- Backgrounds ---- */
+
+.bg-dark-light {
+    --bs-bg-opacity: 1;
+    background-color: rgba(55, 60, 65, 1) !important;
+}
+
+.bg-gray {
+    --bs-bg-opacity: 1;
+    background-color: rgba(96, 99, 103, 1) !important;
+}
+
+.bg-rosa {
+    background-color: $rosa !important;
+}
+
+.bg-rosa-fuerte {
+    background-color: $rosa-fuerte !important;
+}
+
+.bg-red {
+  background-color: crimson !important;
+}
+
+.bg-green {
+  background-color: green !important;
+}
+
+.deshabilitado {
+    background-color: darkgray !important;
+}
+
+.deshabilitado:hover {
+    cursor: default !important;
+    background-color: darkgray !important;
+}
+
+/* ---- Font colours ---- */
+
+.text-pink {
+    color: $rosa !important;
+}
+
+.text-pink:hover {
+    color: $rosa-flojo !important;
+}
+
+.link-pink {
+    color: $rosa !important;
+}
+
+.link-pink:hover {
+    color: $rosa-flojo !important;
+}
+
+/*Límites tamaño   Límites tamaño   Límites tamaño   Límites tamaño   Límites tamaño   Límites tamaño   Límites tamaño   Límites tamaño   Límites tamaño   Límites tamaño   Límites tamaño   Límites tamaño   Límites tamaño   Límites tamaño*/
+
+.mw-100 {
+    min-width: 95%;
+}
+
+.mw-75 {
+    max-width: 75%;
+}
+
+.mw-50 {
+    max-width: 48%;
+    min-width: 40%;
+}
+
+.mw-35 {
+    max-width: 35%;
+}
+
+.mw-25 {
+    max-width: 23%;
+}
+
+.mh-75 {
+    max-height: 75vh;
+}
+
+.mh-50 {
+    max-height: 48vh;
+}
+
+.mh-35 {
+    max-height: 35vh;
+}
+
+.mh-25 {
+    max-height: 23vh;
+}
+
+/*Bordes   Bordes   Bordes   Bordes   Bordes   Bordes   Bordes   Bordes   Bordes   Bordes   Bordes   Bordes   Bordes   Bordes   Bordes   Bordes   Bordes   Bordes   Bordes   Bordes   Bordes   Bordes   Bordes   Bordes   Bordes*/
+
+.bs-s {
+    border-style: solid;
+}
+
+.bw-2 {
+    border-width: .2rem .2rem;
+}
+
+.bc-dark {
+    border-color: #adb5bd;
+}
+
+.bc-white {
+    border-color: gainsboro;
+}

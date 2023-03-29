@@ -6,7 +6,7 @@
     </div>
     <div class="row">
         <div class="col-md-12 translucido">
-            <table class="table table-striped tabla bg-dark rounded my-1">
+            <table class="table table-striped tabla rounded mt-1 mb-0">
                 <thead>
                     <tr>
                         <th>
@@ -26,10 +26,9 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody id="contPaginacionE">
-                </tbody>
+                <tbody id="contPaginacionE"></tbody>
             </table>
-            <div id="paginadorE" class="d-flex justify-content-center align-items-center bg-dark">
+            <div id="paginadorE" class="d-flex justify-content-center align-items-center bg-dark pt-3">
                 <div class="bg-dark text-white rounded my-1 p-5">
                     <h3 class="text-center">No tienes entradas archivadas</h3>
                 </div>

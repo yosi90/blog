@@ -1,0 +1,135 @@
+table {
+    border-collapse: collapse;
+
+    caption {
+        font-size: 1.5em;
+        margin: .5em 0 .75em;
+    }
+
+    th:first-child {
+        width: 100%;
+    }
+
+    th:nth-child(2) {
+        min-width: 190px;
+    }
+
+    tr {
+        padding: .35em 0;
+    }
+
+    th,
+    td {
+        padding: .625em;
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+
+    .table > :not(:first-child) {
+        border-top: 0 !important;
+    }
+
+    table {
+        border: 0;
+
+        thead {
+            border: none;
+            clip: rect(0 0 0 0);
+            height: 1px;
+            margin: -1px;
+            overflow: hidden;
+            padding: 0;
+            position: absolute;
+            width: 1px;
+        }
+
+        td {
+            text-align: end !important;
+            display: block;
+            font-size: .8em;
+            text-align: right;
+
+            a {
+                display: flex;
+            }
+        }
+
+        td::before {
+            content: attr(data-label);
+            float: left;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        td:last-child {
+            // display: flex;
+            // flex-flow: column wrap;
+
+            border-bottom: 0;
+
+            div {
+                justify-content: end !important;
+            }
+        }
+
+        tr {
+            display: block;
+        }
+
+        tr:last-child {
+            padding-bottom: 0;
+        }
+
+        caption {
+            font-size: 1.3em;
+        }
+    }
+}
+
+@media screen and (max-width: 767px) {
+    table {
+
+        td:last-child {
+            display: flex;
+            flex-flow: column wrap;
+
+            div {
+                justify-content: space-around !important;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 500px) {
+    table {
+
+        button,
+        input {
+            font-size: small !important;
+        }
+
+        td:first-child {
+            display: flex;
+            flex-flow: column wrap;
+
+            p {
+                text-align: start;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 478px) {
+    table td:last-child div {
+        flex-flow: column nowrap;
+
+        button, input {
+            width: 100%;
+
+            margin-bottom: 0.25em;
+        }
+    }
+}

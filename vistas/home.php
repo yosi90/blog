@@ -3,13 +3,18 @@ $titulo = 'Troubles time';
 include_once 'plantillas/documento-declaracion.inc.php';
 ?>
 <div class="container">
-    <div class="row">
+    <div id="jumbotron" class="row">
         <div class="col-12">
             <div class="d-flex justify-content-center p-3 mt-5 mb-1 bg-dark translucido text-white jumbo fz-jumbo">Troubles time</div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-9 mb-5">
+    <div id="crearEntrada" class="row d-none mb-4">
+        <div class="col-12 d-flex">
+            <a href="<?php echo RUTA_NUEVA_ENTRADA; ?>" class="btn btn-outline-light bg-rosa flex-fill">Nueva entrada</a>
+        </div>
+    </div>
+    <div id="entradas" class="row">
+        <div class="col-lg-9 mb-5">
             <div class="card op-90">
                 <div class="card-header d-flex align-items-center bg-dark text-white py-2 ps-3 pe-4 fz-titulo">
                     <p class="flex-fill mb-0">
@@ -23,14 +28,14 @@ include_once 'plantillas/documento-declaracion.inc.php';
                 <div id="contPaginacionE" class="card-body bg-dark-light d-flex flex-wrap justify-content-around pt-0 pe-0 ps-0 pb-1"></div>
             </div>
         </div>
-        <div class="col-md-3 mb-5">
+        <div class="col-lg-3 mb-5">
             <?php
             if (controlSesion::sesion_iniciada()) {
             ?>
-                <div class="row">
+                <div id="crearEntrada2" class="row">
                     <div class="col-12">
                         <div class="d-flex bg-dark text-white rounded mb-1">
-                            <a href="<?php echo RUTA_NUEVA_ENTRADA; ?>" class="btn btn-outline-light rosa flex-fill">Nueva entrada</a>
+                            <a href="<?php echo RUTA_NUEVA_ENTRADA; ?>" class="btn btn-outline-light bg-rosa flex-fill">Nueva entrada</a>
                         </div>
                     </div>
                 </div>
